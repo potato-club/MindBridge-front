@@ -6,7 +6,7 @@
     text-align: center;
     width: 100%;
     margin-top: 10%;
-    margin-bottom: 15%;
+    margin-bottom: 50px;
     
 }
 
@@ -18,8 +18,10 @@
 .wrapper_main{
     display: flex;             /* Flexbox 컨테이너로 설정 */
     justify-content: center;
-    margin-top:5%;
-    width: 100%;
+    margin: 10px auto;
+    width: 90%;
+    max-width: 400px;
+    min-width: 320px;
 }
 
 .idBox{
