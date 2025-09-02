@@ -1,0 +1,79 @@
+.title{
+    color: #1A1E20;
+    font-weight: bold;
+    font-size: 20px;
+
+    text-align: center;
+    width: 100%;
+    margin-top: 10%;
+    margin-bottom: 15%;
+    
+}
+
+.bodyText{
+    color:black;
+
+}
+
+.wrapper_main{
+    display: flex;             /* Flexbox 컨테이너로 설정 */
+    justify-content: center;
+    margin-top:5%;
+    width: 100%;
+}
+
+.idBox{
+    color: #52585E;
+
+    border-color: none;
+    border-radius: 12px;
+    background-color: #F8FAFB;
+    
+    width: 258px;
+    height: 47px;
+    padding-left: 15px;
+}
+
+.idBox:focus,
+.passwordBox:focus{
+    outline: none;
+    border: 1px solid #888e93;
+}
+
+.passwordBox{
+    color: #52585E;
+
+    border-color: none;
+    border-radius: 12px;
+    background-color: #F8FAFB;
+
+
+    width: 362px;
+    height: 47px;
+    padding-left: 15px;
+}
+
+.doubleButton{
+    color: #5ACBFB;
+    text-align: center;
+
+    border: solid 1px #5ACBFB;
+    border-radius: 12px;
+
+    width: 98px;
+    height: 47px;
+    margin-left: 10px;
+}
+
+.nextButton{
+    text-align: center;
+    font-weight: bold;
+
+    border:none;
+    border-radius: 12px;
+    background-color: #5ACBFB;
+
+    width: 370px;
+    height: 55px;
+    margin-top: 20%;
+}
