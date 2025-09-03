@@ -1,12 +1,20 @@
 'use client';
-import {useEffect} from "react";
+
+import { useEffect } from "react";
 import styles from "./SignUpForm.module.css";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 
 
 
 const SignUpForm = () => {
+    const router = useRouter();
+
+
+    const handleNext = () => {
+        router.push('/signup/signup2');
+    }
+    
 
     return (
         <>
@@ -59,7 +67,7 @@ const SignUpForm = () => {
                 
 
                 <div className={styles.bottomButtonBox}>
-                    <button className={styles.nextButton}>다음으로</button>
+                    <button type="button" onClick={handleNext} className={styles.nextButton}>다음으로</button>
                 </div>
             </div>
             </form>
