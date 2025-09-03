@@ -5,44 +5,67 @@
 
     text-align: center;
     width: 100%;
-    margin-top: 10%;
-    margin-bottom: 50px;
-    
+    margin-top: 15%;
+    margin-bottom: 10%;
 }
 
 .bodyText{
     color:black;
-
+    margin-bottom: 10px;
 }
 
+/* div */
 .wrapper_main{
     display: flex;             /* Flexbox 컨테이너로 설정 */
     justify-content: center;
-    margin: 10px auto;
+    flex-direction: column;
+    margin: auto;
+
     width: 90%;
     max-width: 400px;
     min-width: 320px;
+
+    gap: 12px;
 }
 
-.idBox{
+.oButton{
+    align-items: center;
+}
+
+.xButton{
+    align-items: center;
+}
+
+.bottomButtonBox{
+    margin-top: 40%;
+    margin-bottom: 6%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+}
+
+
+/* 박스 */
+.buttonOBox{
     color: #52585E;
 
     border-color: none;
     border-radius: 12px;
     background-color: #F8FAFB;
     
-    width: 258px;
+    width: 65%;
     height: 47px;
     padding-left: 15px;
 }
 
-.idBox:focus,
-.passwordBox:focus{
+.buttonOBox:focus,
+.buttonXBox:focus{
     outline: none;
     border: 1px solid #888e93;
 }
 
-.passwordBox{
+.buttonXBox{
     color: #52585E;
 
     border-color: none;
@@ -50,19 +73,22 @@
     background-color: #F8FAFB;
 
 
-    width: 362px;
+    width: 100%;
     height: 47px;
     padding-left: 15px;
 }
 
+/* 버튼 */
 .doubleButton{
+    font: 70%;
+    font-weight: bold;
     color: #5ACBFB;
     text-align: center;
 
     border: solid 1px #5ACBFB;
     border-radius: 12px;
 
-    width: 98px;
+    width: 30%;
     height: 47px;
     margin-left: 10px;
 }
@@ -75,7 +101,7 @@
     border-radius: 12px;
     background-color: #5ACBFB;
 
-    width: 370px;
+    width: 100%;
     height: 55px;
-    margin-top: 20%;
 }
+
