@@ -24,7 +24,6 @@ const SignUpForm = () => {
 
     return (
         <>
-            <header className={styles.title}>회원가입</header>
             <form>
                 <div className={styles.wrapper_main}>
                     <div className={styles.oButton}>

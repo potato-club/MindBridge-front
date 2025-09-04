@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect,useState } from "react";
+import { useEffect,useState,ChangeEvent } from "react";
 import styles from "../signup/SignUpForm.module.css";
 import { useRouter } from "next/navigation";
 
@@ -13,6 +13,7 @@ const genderOptions = [
 
     const SignUpForm2 = () => {
 
+        const [birth, setBirth] = useState('');
         const [nickname, setNickname] = useState('');
         const [gender, setGender] = useState('');
         const [age, setAge] = useState('');
@@ -23,11 +24,26 @@ const genderOptions = [
         // 여기에 서버로 데이터를 전송하는 로직을 추가합니다.
     };
 
+    const currentYear = new Date().getFullYear();
+
+    const yearOptions = [];
+
+    for (let year = currentYear; year >=currentYear - 100; year--){
+        yearOptions.push(
+            <option key={year} value={year}>
+                {year}년
+            </option>
+        );
+    }
+
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        setBirth(e.target.value);
+    };
+
         return (
             <>
-                <header className={styles.title}>회원가입</header>
                 <form onSubmit={handleSubmit}>
-                    <div className={styles.wrapper_main}>
+                    <div className={styles.wrapper_main2}>
                         <div className={styles.oButton}>
                             <p className={styles.bodyText}>닉네임</p>
                             <div className={styles.inpuBoxWrapper}>
@@ -64,17 +80,22 @@ const genderOptions = [
                         
 
                     
-                        <div className={styles.xButton}>
-                            <p className={styles.bodyText}>나이</p>
-                            <input type="text" 
-                            className={styles.buttonXBox}
-                            placeholder="비밀번호를 다시 입력해주세요.">
-                        </input>
-                        </div>
+                       {/* 출생년도 섹션 */}
+                <div className={styles.xButton}>
+                    <p className={styles.bodyText}>나이</p>
+                    <select
+                        value={birth}
+                        onChange={(e) => setBirth(e.target.value)}
+                        className={`${styles.selectBox} ${styles.dropBox}`}
+                    >
+                        <option value="" disabled>-- 태어난 년도를 선택해주세요. --</option>
+                        {yearOptions}
+                    </select>
+                </div>
                         
                     
 
-                    <div className={styles.bottomButtonBox}>
+                    <div className={styles.bottomButtonBox2}>
                         <button type="button" className={styles.nextButton}>가입하기</button>
                     </div>
                 </div>
