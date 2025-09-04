@@ -4,6 +4,8 @@ import { useEffect,useState,ChangeEvent } from "react";
 import styles from "../signup/SignUpForm.module.css";
 import { useRouter } from "next/navigation";
 
+
+
 const genderOptions = [
     { value: 'male', label: '  남성' },
     { value: 'female', label: '  여성'},
