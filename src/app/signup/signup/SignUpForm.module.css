@@ -76,7 +76,6 @@
   max-width: 400px;
   width: 90%;
   height: 55px;
-
 } 
 
 
@@ -117,21 +116,82 @@
     margin-left: 1%;
 }
 
-.selectBox{
-    font-size: 15px;
-    color: #52585E;
-    border: solid 1px #EAEBEF ;
-    border-radius: 12px;
-    background-color: none;
 
-    width: 234px;
-    height: 47px;
-    padding: 5px;
+/* ================================================================ */
+/* ▼▼▼ 기존 .selectBox, .dropBox 삭제 후 아래 코드로 교체 ▼▼▼ */
+/* ================================================================ */
+
+.customDropdown {
+  position: relative;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1px solid #EAEBEF; /* 기존 selectBox의 border 스타일 적용 */
 }
 
-.dropBox{
-
+.dropdownHeader {
+  padding: 0 15px; /* 기존 buttonOBox의 padding-left 적용 */
+  height: 47px; /* 기존 selectBox의 height 적용 */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.placeholder {
+  color: #52585E; /* 기존 selectBox의 color 적용 */
+  font-size: 15px; /* 기존 selectBox의 font-size 적용 */
+}
+
+.selectedValue {
+  color: #1A1E20; /* 선택되었을 때의 색상 */
+  font-size: 15px;
+}
+
+.arrowIcon {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #888;
+  transition: transform 0.2s ease-in-out;
+}
+
+.arrowIcon.open {
+  transform: rotate(180deg);
+}
+
+.dropdownOptions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #EAEBEF;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.optionItem {
+  padding: 12px 15px;
+  font-size: 15px;
+  color: #52585E;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.optionItem:hover {
+  background-color: #F8FAFB; /* 기존 buttonOBox의 background-color 적용 */
+}
+
+/* ================================================================ */
+/* ▲▲▲ 여기까지 교체 ▲▲▲ */
+/* ================================================================ */
+
 
 /* 버튼 */
 .doubleButton{
@@ -161,4 +221,3 @@
     cursor: pointer;
     text-align: center;
 }
-
