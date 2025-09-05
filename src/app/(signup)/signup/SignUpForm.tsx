@@ -18,7 +18,7 @@ const SignUpForm = () => {
 
 
     const handleNext = () => {
-        router.push('/signup/signup2');
+        router.push('/signup2');
     }
     
 

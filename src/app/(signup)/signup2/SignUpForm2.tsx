@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react"; // useRef를 import에 추가합니다.
+import { useEffect, useState, useRef } from "react";
 import styles from "../signup/SignUpForm.module.css";
 import { useRouter } from "next/navigation";
 
@@ -43,7 +43,6 @@ const CustomDropdown = ({ options, value, onChange, placeholder }: CustomDropdow
   }, []);
 
   return (
-    // CSS는 기존 SignUpForm.module.css 파일을 사용합니다.
     <div className={styles.customDropdown} ref={dropdownRef}>
       <div className={styles.dropdownHeader} onClick={() => setIsOpen(!isOpen)}>
         <span className={selectedOption ? styles.selectedValue : styles.placeholder}>
@@ -80,57 +79,66 @@ const genderOptions = [
 ];
 
 const SignUpForm2 = () => {
-    const [birth, setBirth] = useState<string | number>(''); // 타입을 string | number로 변경
+    const [birth, setBirth] = useState<string | number>('');
     const [nickname, setNickname] = useState('');
     const [gender, setGender] = useState('');
-    const [age, setAge] = useState(''); // 이 상태는 현재 사용되지 않지만 그대로 둡니다.
+    const [email, setEmail] = useState('');
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("제출 데이터:", { nickname, gender, age: birth }); // age 대신 birth 값을 사용하도록 수정
+        console.log("제출 데이터:", { email, nickname, gender, age: birth });
     };
 
-    // ▼▼▼ yearOptions를 <option> 태그가 아닌 객체 배열로 변경합니다. ▼▼▼
     const currentYear = new Date().getFullYear();
-    const yearOptions: Option[] = []; // 타입 명시
+    const yearOptions: Option[] = [];
     for (let year = currentYear; year >= currentYear - 100; year--){
         yearOptions.push(
-            { value: year, label: `${year}년` } // 객체 형태로 push
+            { value: year, label: `${year}년` }
         );
     }
-    // ▲▲▲ 여기까지 변경 ▲▲▲
 
-    // 이 함수는 더 이상 필요 없으므로 삭제하거나 주석 처리합니다.
-    // const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    //     setBirth(e.target.value);
-    // };
 
     return (
         <>
             <form onSubmit={handleSubmit}>
                 <div className={styles.wrapper_main2}>
-                    {/* 닉네임 섹션 (변경 없음) */}
+                    {/* 이메일 입력란 */}
+                    <div className={styles.oButton}>
+                        <p className={styles.bodyText}>이메일</p>
+                        <div className={styles.inpuBoxWrapper}>
+                            <input
+                                type="email"
+                                name="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={styles.buttonOBox}
+                                placeholder="이메일을 입력해주세요."
+                            />
+                        </div>
+                    </div>
+
+                    {/* 닉네임 섹션 */}
                     <div className={styles.oButton}>
                         <p className={styles.bodyText}>닉네임</p>
                         <div className={styles.inpuBoxWrapper}>
-                            <input type="text"
+                            <input
+                                type="text"
                                 name="nickname"
                                 value={nickname}
-                                onChange={(e) => setNickname(e.target.value)} // onChange 추가
+                                onChange={(e) => setNickname(e.target.value)}
                                 className={styles.buttonOBox}
-                                placeholder="닉네임을 입력해주세요.">
-                            </input>
+                                placeholder="닉네임을 입력해주세요."
+                            />
                             <button type="button" className={styles.doubleButton}>중복 확인</button>
                         </div>
                     </div>
 
-                    {/* 성별 섹션 (변경 없음) */}
+                    {/* 성별 섹션 */}
                     <div className={styles.xButton}>
                         <p className={styles.bodyText}>성별</p>
-                        <div className={styles.xButton}>
+                        <div>
                             {genderOptions.map((option) => (
-                                <label key={option.value}
-                                       className={styles.radioBox}>
+                                <label key={option.value} className={styles.radioBox}>
                                     <input
                                         type="radio"
                                         name="gender"
@@ -145,7 +153,7 @@ const SignUpForm2 = () => {
                         </div>
                     </div>
 
-                    {/* ▼▼▼ 출생년도 섹션을 CustomDropdown으로 교체합니다. ▼▼▼ */}
+                    {/* 출생년도 드롭다운 */}
                     <div className={styles.xButton}>
                         <p className={styles.bodyText}>나이</p>
                         <CustomDropdown
@@ -155,9 +163,8 @@ const SignUpForm2 = () => {
                             placeholder="태어난 년도를 선택해주세요."
                         />
                     </div>
-                    {/* ▲▲▲ 여기까지 교체 ▲▲▲ */}
 
-                    {/* 가입하기 버튼 (변경 없음) */}
+                    {/* 가입하기 버튼 */}
                     <div className={styles.bottomButtonBox2}>
                         <button type="submit" className={styles.nextButton}>가입하기</button>
                     </div>
