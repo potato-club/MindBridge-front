@@ -38,15 +38,16 @@
     /*이미지 가져올시 추가 */
 }
 
-.UserId, .UserPassword {
+.UserId input, .UserPassword input {
     display: flex;
     /* flex-direction: column; */
     margin: 10px 0;
     text-align: left;
-    width: 362x;
+    width: 370px;
     height: 55px;
+    padding: 12px;
     color: gray;
-    border-radius: 10%;
+    /* border-radius: 8%; */
 }
 
 .LoginButton {
@@ -66,6 +67,11 @@
     color: #ffffff;
 }
 
+/* .LoginButton hover {
+  color: #99a0a8;
+}  */
+
+
 
 
 
@@ -73,7 +79,8 @@
 .LoginFooter {
     display: flex;
     justify-content: space-between;
-    width: 354px;
+    width: 370px;
+    padding: auto;
     margin-top: 10px;
     height: 17px;
     font-size: 13px;
@@ -86,7 +93,7 @@
     font-size: 13px;
     color: gray;
     text-decoration: none;
-    padding: 5px 5px;
+    padding: 5px 5px 5px 5px;
 }
 
 .FindIdAndPassword {
