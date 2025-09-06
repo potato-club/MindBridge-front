@@ -1,0 +1,110 @@
+/* 전체 컨테이너 */
+.Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: column;
+    width: 402px;
+    height: 874px;
+    /* 휴대폰 기종에 따라 다르게 설정 */
+    margin: auto;
+    border-radius: 30%;
+    background-color: #ffffff;
+    /* font-family: 'Noto Sans KR', sans-serif; */
+}
+
+
+/* 로고 */
+.LoginAndAppName {
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    width: 132px;
+    height: 132px;
+    margin: auto;
+    text-align: column;
+    margin-bottom: 20px;
+    color: #161515;
+}
+
+
+
+.AppName ,.AppDescription {
+    font-size: 10px;
+    font-weight: 700;
+    color: #161515;
+    text-align: center;
+    /*이미지 가져올시 추가 */
+}
+
+.UserId, .UserPassword {
+    display: flex;
+    /* flex-direction: column; */
+    margin: 10px 0;
+    text-align: left;
+    width: 362x;
+    height: 55px;
+    color: gray;
+    border-radius: 10%;
+}
+
+.LoginButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 370px;
+    height: 55px;
+    background-color: #5acbfb;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.LoginButtonText {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+
+
+
+/* 하단 영역 */ 
+.LoginFooter {
+    display: flex;
+    justify-content: space-between;
+    width: 354px;
+    margin-top: 10px;
+    height: 17px;
+    font-size: 13px;
+    color: #686870;
+    text-align: center;
+    
+}
+
+.FindIdAndPassword, .SignUp {
+    font-size: 13px;
+    color: gray;
+    text-decoration: none;
+    padding: 5px 5px;
+}
+
+.FindIdAndPassword {
+    text-align: left;
+}
+/* 회원가입 */
+.SignUp {
+    text-align: right;
+}
+
+/*
+
+
+.Sign-Up a:hover {
+  color: #4a90e2;
+} 
+*/
+
+
+
+
