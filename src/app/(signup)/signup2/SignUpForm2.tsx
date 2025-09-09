@@ -81,12 +81,86 @@ const genderOptions = [
 const SignUpForm2 = () => {
     const [birth, setBirth] = useState<string | number>('');
     const [nickname, setNickname] = useState('');
+    const [nicknameError, setNicknameError] = useState('');
+    const [isNicknameChecked, setIsNicknameChecked] = useState(false);
+    const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(false);
     const [gender, setGender] = useState('');
     const [email, setEmail] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const router = useRouter();
+
+    // 닉네임 유효성 검사
+    const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setNickname(value);
+        setIsNicknameChecked(false);
+
+        // 한글, 영문, 숫자 2~10자
+        if (!/^[가-힣a-zA-Z0-9]{2,10}$/.test(value)) {
+            setNicknameError('닉네임은 한글, 영문, 숫자 2~10자여야 합니다.');
+        } else {
+            setNicknameError('');
+        }
+    };
+
+    // 닉네임 중복확인
+    const handleCheckNickname = async () => {
+        if (nicknameError || !nickname) return;
+        try {
+            // 실제 API 주소로 변경 필요
+            const res = await fetch(`/api/check-nickname?nickname=${encodeURIComponent(nickname)}`);
+            const data = await res.json();
+            setIsNicknameChecked(true);
+            setIsNicknameDuplicate(data.isDuplicate); // 백엔드 응답에 맞게 수정
+        } catch {
+            setNicknameError('중복 확인 중 오류가 발생했습니다.');
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("제출 데이터:", { email, nickname, gender, age: birth });
+
+        // 유효성 검사
+        if (nicknameError || !nickname || !isNicknameChecked || isNicknameDuplicate) {
+            alert('닉네임을 올바르게 입력하고 중복 확인을 해주세요.');
+            return;
+        }
+        if (!email) {
+            alert('이메일을 입력해주세요.');
+            return;
+        }
+        if (!gender) {
+            alert('성별을 선택해주세요.');
+            return;
+        }
+        if (!birth) {
+            alert('출생년도를 선택해주세요.');
+            return;
+        }
+
+        // 실제 회원가입 API 호출
+        try {
+            const res = await fetch('/api/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    nickname,
+                    gender,
+                    birth,
+                }),
+            });
+            if (res.ok) {
+                alert('회원가입이 완료되었습니다!');
+                // 원하는 페이지로 이동
+                // router.push('/login');
+            } else {
+                const data = await res.json();
+                alert(data.message || '회원가입에 실패했습니다.');
+            }
+        } catch {
+            alert('회원가입 요청 중 오류가 발생했습니다.');
+        }
     };
 
     const currentYear = new Date().getFullYear();
@@ -96,7 +170,6 @@ const SignUpForm2 = () => {
             { value: year, label: `${year}년` }
         );
     }
-
 
     return (
         <>
@@ -125,12 +198,24 @@ const SignUpForm2 = () => {
                                 type="text"
                                 name="nickname"
                                 value={nickname}
-                                onChange={(e) => setNickname(e.target.value)}
+                                onChange={handleNicknameChange}
                                 className={styles.buttonOBox}
                                 placeholder="닉네임을 입력해주세요."
                             />
-                            <button type="button" className={styles.doubleButton}>중복 확인</button>
+                            <button
+                                type="button"
+                                className={styles.doubleButton}
+                                onClick={handleCheckNickname}
+                                disabled={!!nicknameError || !nickname}
+                            >중복 확인</button>
                         </div>
+                        {nicknameError && <div style={{ color: 'red', marginTop: '5px', fontSize: 10 }}>{nicknameError}</div>}
+                        {isNicknameChecked && !isNicknameDuplicate && !nicknameError && (
+                            <div style={{ color: 'green', marginTop: '5px', fontSize: 10 }}>사용 가능한 닉네임입니다.</div>
+                        )}
+                        {isNicknameChecked && isNicknameDuplicate && !nicknameError && (
+                            <div style={{ color: 'red', marginTop: '5px', fontSize: 10 }}>이미 사용 중인 닉네임입니다.</div>
+                        )}
                     </div>
 
                     {/* 성별 섹션 */}
