@@ -1,99 +1,108 @@
+.Form {
+    background-color: #161515;
+}
+
 /* 전체 컨테이너 */
 .Container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: column;
-    width: 402px;
-    height: 874px;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
     /* 휴대폰 기종에 따라 다르게 설정 */
     margin: auto;
-    border-radius: 30%;
+    border-radius: 30px;
     background-color: #ffffff;
+    box-sizing: border-box;
+    /* border-color: #161515; */
     /* font-family: 'Noto Sans KR', sans-serif; */
 }
 
 
 /* 로고 */
 .LoginAndAppName {
-    padding: 40px;
+    padding: 20px;
     border-radius: 16px;
     text-align: center;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    width: 132px;
-    height: 132px;
+
+    width: 30vw;
+    height: 30vw;
+    max-width: 150px;
+    max-height: 150px;
+
     margin: auto;
-    text-align: column;
     margin-bottom: 20px;
     color: #161515;
 }
 
 
 
-.AppName ,.AppDescription {
-    font-size: 10px;
+.AppName ,
+.AppDescription {
+    font-size: clamp(12px, 3vw, 18px);
     font-weight: 700;
     color: #161515;
     text-align: center;
     /*이미지 가져올시 추가 */
 }
 
-.UserId input, .UserPassword input {
-    display: flex;
+.UserId input, 
+.UserPassword input {
+    display: block;
     /* flex-direction: column; */
     margin: 10px 0;
-    text-align: left;
-    width: 370px;
-    height: 55px;
-    padding: 12px;
+    width: 90%;
+    max-width: 370px;
+    min-width: 350px;
+    height: 52px;
+    padding: px;
     color: gray;
-    /* border-radius: 8%; */
+
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-sizing: border-box;
 }
 
-.LoginButton {
+.LoginButton button{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 370px;
+    width: 80%;
+    max-width: 370px;
+    min-width: 350px;
     height: 55px;
     background-color: #5acbfb;
     border-radius: 8px;
     cursor: pointer;
+    border: none;
 }
 
 .LoginButtonText {
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
     font-weight: 600;
     color: #ffffff;
 }
-
-/* .LoginButton hover {
-  color: #99a0a8;
-}  */
-
-
-
-
 
 /* 하단 영역 */ 
 .LoginFooter {
     display: flex;
     justify-content: space-between;
-    width: 370px;
-    padding: auto;
+    width: 80%;
+    max-width: 370px;
+    min-width: 220px;
     margin-top: 10px;
-    height: 17px;
     font-size: 13px;
     color: #686870;
-    text-align: center;
-    
 }
 
 .FindIdAndPassword, .SignUp {
     font-size: 13px;
     color: gray;
     text-decoration: none;
-    padding: 5px 5px 5px 5px;
+    padding: 5px;
 }
 
 .FindIdAndPassword {

@@ -5,39 +5,6 @@ import { useRouter } from "next/navigation";
 import styles from "./Login.module.css";
 
 
-/* API 음,,, 백엔드랑 연동해야함 
-import NextAuth from "next-auth/next";
-import CredentialsProvider from "next-auth/providers/credentials";
-
-const handler = NextAuth({
-    providers: [
-        CredentialsProvider({
-            name: "credentials",
-
-            /* 로그인 폼에서 입력한 값을 받아옴 
-            credentials: {
-                userId: { label: "userId", type: "text" },
-                userPassword: { label: "userPassword", type: "password" },
-            },  
-
-            /* 로그인 처리 
-            async authorize(credentials, req) {
-                /* DB 연동 음,,,,, 왓 이즈 백엔드API요청,,,ㅜㅜ
-
-                if (user) {
-                    return user;
-                } else {
-                    return null;
-                }
-            },
-        }),
-    ],
-});    
-
-export {handle as GET, handler as POST};
-*/
-
-
 /* 로그인 폼 */
 const LoginForm = () => {
     const [userId, setUserId] = useState("");
@@ -45,27 +12,38 @@ const LoginForm = () => {
 
     const router = useRouter();
 
-    const handleCudmit = async (e) => {
-        e.prevenDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        const result = await signIn("credentials", {
-            redirect: false,
-            userId, 
-            userPassword,
-        });
+        try {
+            // 백엔드 API 로그인 요청이랄까...
+            const response = await fetch("백엔드 주소?",{
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: userId, password: userPassword }),
+        }); 
 
-        if (result.ok) {
-            router.push("/메인페이지"); /* 메인페이지 경로로 변경해야한다ㅡ,,, */
-        } else {
-            alert("로그인 실패");
-            router.push("/Login");
+        if (!response.ok) {
+            throw new Error("로그인 실패"); 
+        }
+
+            const data = await response.json();
+            const accessToken = data.accessToken;
+
+            // 로컬 스토리지에 토큰 저장(아마도,,)
+            localStorage.setItem("accessToken", accessToken);
+
+            router.push("/Main"); // 메인페이지 연동해야함.
+        } catch (err) {
+            console.error(err);
+            alert("아이디와 비밀번호를 확인해주세요.");
         }
     };
 
     return (
         <>
             <header className={styles.header}>로그인</header>
-            <form>
+            <form className={styles.Form} onSubmit={handleSubmit}>
                 <div className={styles.Container}>
 
                     {/* 어플명 or 로고 + 설명 */}
@@ -104,18 +82,20 @@ const LoginForm = () => {
                     {/* 하단 영역 */}
                     <div className={styles.LoginFooter}>
                         {/* 아이디/비밀번호 찾기 */}
+                        {/* 페이지 이동 구현 중 */}
                         <div className={styles.FindIdAndPassword}>
-                            아이디/비밀번호 찾기
+                            <button type="button"
+                            onClick={() => router.push("/findidandpw")}> 
+                                아이디/비밀번호 찾기
+                            </button>
                         </div>
 
                         {/* 회원가입 */}
                         <div className={styles.SignUp}>
-                            회원가입
+                            <button type="button"
+                            onClick={() => router.push("/회원가입 페이지")}>회원가입</button>
                         </div>
                     </div>
-
-                    
-
                 </div>
             </form>
         </>
