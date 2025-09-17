@@ -1,0 +1,166 @@
+/* 전체 페이지 레이아웃 */
+.pageWrapper {
+  padding-bottom: 80px; /* BottomNav 높이만큼 여백 확보 */
+}
+
+/* '게시판' 제목 스타일 */
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: black;
+
+  padding: 20px;
+  margin: 0;
+}
+
+/* --- 검색창 --- */
+.searchContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f3f4f6; /* 약간 더 밝은 회색 */
+  padding: 8px 16px;
+  margin: 0 16px 16px 16px;
+  border-radius: 30px;
+  height: 48px;
+}
+
+.searchInput {
+  flex-grow: 1;
+  background: transparent; /* 배경 투명하게 */
+  border: none;
+  outline: none;
+  color: black;
+  font-size: 16px;
+  width: 100%;
+}
+
+.searchInput::placeholder {
+  color: #9ca3af; /* 플레이스홀더 색상 변경 */
+}
+
+/* 검색 버튼은 아이콘만 보이도록 처리 */
+.searchButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- 카테고리 --- */
+.categoryContainer {
+  overflow-x: auto; /* 가로 스크롤 가능하도록 */
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+/* 스크롤바 숨기기 */
+.categoryContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.categoryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* 가로 정렬 */
+  gap: 0.5rem;
+  white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.categoryItem {
+  border: none;
+  border-radius: 50px;
+  background-color: #f3f4f6;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+  padding: 8px 16px; /* 내부 여백 조정 */
+  flex-shrink: 0; /* 아이템이 줄어들지 않도록 */
+}
+
+.categoryItem:hover {
+  background-color: #e5e7eb;
+}
+
+/* 활성화된 카테고리 스타일 */
+.categoryItem.active {
+  background-color: #3BC4FF; /* 원하는 활성 색상으로 변경 */
+  color: white;
+  border-color: #3BC4FF;
+}
+
+
+
+/* --- 게시물 목록 --- */
+.postList {
+  padding: 0 16px;
+}
+
+.postItem {
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.postTitle {
+  color: #212528;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.postContent {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+  
+  /* 내용이 길 경우 ... 처리 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.postMeta {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  gap: 8px;
+}
+
+.postStats {
+  margin-left: auto; /* 오른쪽 끝으로 밀기 */
+  display: flex;
+  gap: 8px;
+}
+
+
+/* --- 글쓰기 버튼 --- */
+.fab {
+  position: fixed;
+  bottom: 80px; /* BottomNav 위로 */
+  right: 16px;
+  width: 100px;
+  height: 44px;
+
+  border-radius: 22px;
+  background-color: #3BC4FF; /* 파란색 배경 */
+  color: white;
+
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
