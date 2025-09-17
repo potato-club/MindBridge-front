@@ -1,10 +1,8 @@
-/* 전체 컴포넌트의 위치와 여백을 관리하는 wrapper */
 .wrapper {
-  padding: 0 16px; /* 전체 페이지 좌우 여백과 맞춤 */
-  margin-bottom: 16px; /* 컴포넌트 하단 여백 */
+  padding: 0 16px;
+  margin-bottom: 16px;
 }
 
-/* 회색 박스 스타일 (기존 container) */
 .container {
   border-radius: 15px;
   background-color: #F8FAFB;
@@ -12,7 +10,6 @@
   position: relative;
 }
 
-/* 제목(헤더) 스타일 */
 .header {
   display: flex;
   align-items: center;
@@ -20,7 +17,7 @@
   font-size: 1rem;
   font-weight: bold;
   color: #212528;
-  margin-bottom: 12px; /* 제목과 회색 박스 사이의 간격 */
+  margin-bottom: 12px;
 }
 
 .header p {
@@ -29,6 +26,7 @@
 
 .carousel {
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
 .carousel::-webkit-scrollbar {
@@ -37,7 +35,6 @@
 
 .slideContainer {
   display: flex;
-  transition: transform 0.4s ease-in-out;
 }
 
 .slide {
@@ -45,10 +42,11 @@
   flex-shrink: 0;
   cursor: pointer;
   padding: 8px 0;
+  scroll-snap-align: start;
 }
 
 .postTitle {
-  margin: 0 0 8px 0; /* 좌측 여백 제거 */
+  margin: 0 0 8px 0;
   font-size: 1.125rem;
   font-weight: 600;
   color: #212528;
@@ -61,14 +59,24 @@
   display: flex;
   align-items: center;
   font-size: 0.875rem;
-  color: #848C95;
+
+  color: #899197;
   gap: 8px;
 }
 
 .postStats {
   margin-left: auto;
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 4px;
+}
+
+.postStats p {
+    margin: 0 8px 0 0;
+}
+
+.postStats p:last-child {
+    margin-right: 0;
 }
 
 .dotsContainer {
@@ -85,11 +93,11 @@
   border-radius: 50%;
   background-color: #ccc;
   cursor: pointer;
-  transition: background-color 0.3s, width 0.3s;
+  transition: all 0.3s ease;
 }
 
 .activeDot {
-  width: 12px;
-  border-radius: 3px;
+  width: 16px;
+  border-radius: 4px;
   background-color: #333;
 }

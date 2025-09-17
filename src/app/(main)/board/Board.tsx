@@ -8,7 +8,6 @@ import Searchbox from "../components/Searchbox";
 import PopularPosts from "./popularPost/PopularPost"; 
 import { Post } from "./popularPost/post";
 
-// ❗️요청하신 8개 카테고리 목록으로 수정
 const categories = [
   { id: 'all', name: '전체' },
   { id: 'free', name: '자유' },
@@ -23,12 +22,12 @@ const categories = [
 
 // API 연동 전 사용할 가짜(mock) 데이터 (author, content 추가)
 const allPosts: Post[] = [
-    { id: 4, title: '감자 샀는데 고구마가 왔다', author: '홍길동', likes: 36, views: 1, comments: 14, createdAt: '2025-09-16', content: '분명 감자를 주문했는데...'},
-    { id: 1, title: '프로젝트가 너무 어려워요', author: '홍길동', likes: 0, views: 1, comments: 1, createdAt: '2025.09.15', content: '지금 하는 프로젝트가 너무 어려워요ㅠㅠㅠㅠ'},
-    { id: 2, title: '프로젝트가 너무 쉬워용', author: '홍길동', likes: 0, views: 1, comments: 1, createdAt: '2025.09.15', content: '지금 하는 프로젝트가 너무 쉬워용'},
-    { id: 3, title: '프로젝트가 너무 쉬워용', author: '홍길동', likes: 0, views: 1, comments: 1, createdAt: '2025.09.15', content: '지금 하는 프로젝트가 너무 쉬워용'},
-    { id: 5, title: '리액트 질문 있습니다', author: '김코딩', likes: 60, views: 150, comments: 5, createdAt: '2025-09-14' },
-    { id: 6, title: '자바스크립트 꿀팁', author: '박해커', likes: 60, views: 150, comments: 5, createdAt: '2025-09-13' },
+    { id: 4, title: '감자 샀는데 고구마가 왔다', author: '홍길동', likes: 36, views: 1, comments: 14, createdAt: '09.16', content: '분명 감자를 주문했는데...'},
+    { id: 1, title: '프로젝트가 너무 어려워요', author: '홍길동', likes: 0, views: 1, comments: 1, createdAt: '09.15', content: '지금 하는 프로젝트가 너무 어려워요ㅠㅠㅠㅠ'},
+    { id: 2, title: '프로젝트가 너무 쉬워용', author: '홍길동', likes: 0, views: 1, comments: 1, createdAt: '09.15', content: '지금 하는 프로젝트가 너무 쉬워용'},
+    { id: 3, title: '프로젝트가 너무 쉬워용', author: '홍길동', likes: 0, views: 1, comments: 1, createdAt: '09.15', content: '지금 하는 프로젝트가 너무 쉬워용'},
+    { id: 5, title: '리액트 질문 있습니다', author: '김코딩', likes: 60, views: 150, comments: 5, createdAt: '09.14' },
+    { id: 6, title: '자바스크립트 꿀팁', author: '박해커', likes: 60, views: 150, comments: 5, createdAt: '09.13' },
 ];
 
 // 인기 게시물 3개를 계산하는 함수
@@ -119,12 +118,12 @@ const Board = () => {
               <span>{post.createdAt}</span>
               <div className={styles.postStats}>
                
-                  <Image src="/images/main/show.png" alt="조회수" width={16} height={8}/> <p>{post.views}</p>
+                  <Image src="/images/board/show.png" alt="조회수" width={16} height={8}/> <p>{post.views}</p>
                 
-                  <Image src="/images/main/like.png" alt="조회수" width={1} height={8}/> 
+                  <Image src="/images/board/like.png" alt="조회수" width={16} height={8}/> 
                   <p>{post.likes}</p>
                 
-                  <Image src="/images/main/comment.png" alt="조회수" width={16} height={8}/> 
+                  <Image src="/images/board/comment.png" alt="조회수" width={16} height={8}/> 
                   <p>{post.comments}</p>
               </div>
             </div>
