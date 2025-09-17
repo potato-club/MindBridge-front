@@ -34,6 +34,35 @@ const FindIdForm = () => {
             alert("서버 오류가 발생했습니다.");
         }
     };
+
+    /* 인증번호 확인 */
+    const handleVerifyCode = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    // api요청
+    try {
+        const res = await fetch("/api/veify-code", {
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+            body: JSON.stringify
+        ({
+            phone: userPhoneNumber,
+            code: userVerificationCode,
+        });
+            const res = await fetch("/api/verify-code", {
+            }),
+      });
+      if (res.ok) {
+        alert("인증이 완료되었습니다 ✅");
+      } else {
+        alert("인증번호가 올바르지 않습니다 ❌");
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("서버 오류가 발생했습니다.");
+    }
+  };
+
     
     /* 아이디 찾기 */
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -118,7 +147,7 @@ const FindIdForm = () => {
                         <button 
                         type="button"
                         className={styles.sendButton}
-                        onClick={handleSendCode}
+                        onClick={handleVerifyCode}
                         >
                             인증확인
                         </button>
