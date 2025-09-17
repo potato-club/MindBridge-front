@@ -52,9 +52,8 @@ const FindIdForm = () => {
 
             if (res.ok) {
                 const data = await res.json();
-                setUserId(data.userId);
-                alert(`당신의 아이디는 ${data.userId} 입니다.`);
-                router.push("/login");
+                // IDCheck 페이지로 userId 전달.
+                router.push(`/IDCheck?userId=${encodeURIComponent(data.userId)}`);
             } else {
                 alert("아이디 찾기에 실패했습니다.");
             }
@@ -75,6 +74,7 @@ const FindIdForm = () => {
                 
                     {/* 이름입력 */}
                     <div className={styles.UserName}>
+                        <p>이름</p>
                         <input 
                         type="text" 
                         value={userName}
@@ -83,8 +83,9 @@ const FindIdForm = () => {
                         />
                     </div>
 
-                    {/* 휴대폰 번호 + 인증번호 발송 버튼*/}
+                    {/* 전화번호 + 인증번호 발송 버튼*/}
                     <div className={styles.UserPhoneNumber}>
+                        <p>전화번호</p>
                         <input 
                         type="tel"
                         pattern="[0-9]*"
@@ -99,19 +100,28 @@ const FindIdForm = () => {
                         className={styles.sendButton}
                         onClick={handleSendCode}
                         >
-                            인증번호 발송
+                            인증요청
                         </button>
                     </div>
                     
                     {/* 인증번호 입력 */}
                     <div className={styles.UserVerificationCode}>
+                        <p>인증번호</p>
                         <input 
-                            type="number"
+                            type="text"
                             inputMode="numeric"
                             value={userVerificationCode}
                             onChange={(e) => setUserVerificationCode(e.target.value)}
                             placeholder="인증번호를 입력해주세요." 
                         />
+
+                        <button 
+                        type="button"
+                        className={styles.sendButton}
+                        onClick={handleSendCode}
+                        >
+                            인증확인
+                        </button>
                     </div>
 
                     {/* 제출 버튼 */}
