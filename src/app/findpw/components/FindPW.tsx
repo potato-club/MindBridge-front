@@ -137,7 +137,7 @@ const FindPWForm = () => {
                         <button 
                             type="button"
                             className={styles.sendButton}
-                            onClick={handleSendCode}
+                            onClick={handleVerifyCode}
                             >
                                 인증확인
                         </button>

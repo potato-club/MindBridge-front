@@ -9,7 +9,6 @@ const FindIdForm = () => {
     const [userName, setUserName] = useState("");
     const [userPhoneNumber, setUserPhoneNumber] = useState("");
     const [userVerificationCode, setUserVerificationCode] = useState("");
-    const [userId, setUserId] = useState("");
 
 
     const router = useRouter();
@@ -40,28 +39,27 @@ const FindIdForm = () => {
     e.preventDefault();
     // api요청
     try {
-        const res = await fetch("/api/veify-code", {
-            headers: { "Content-Type": "application/json" },
+        const res = await fetch("/api/verify-code", {
             method: "POST",
-            body: JSON.stringify
-        ({
-            phone: userPhoneNumber,
-            code: userVerificationCode,
-        });
-            const res = await fetch("/api/verify-code", {
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                phone: userPhoneNumber, 
+                code: userVerificationCode
             }),
-      });
-      if (res.ok) {
-        alert("인증이 완료되었습니다 ✅");
-      } else {
-        alert("인증번호가 올바르지 않습니다 ❌");
-      }
+        });
+
+        if (res.ok) {
+            alert("인증이 완료되었습니다 ✅");
+        } else {
+            alert("인증번호가 올바르지 않습니다 ❌");
+        }
 
     } catch (error) {
-      console.error(error);
-      alert("서버 오류가 발생했습니다.");
+        console.error(error);
+        alert("서버 오류가 발생했습니다.");
+    
     }
-  };
+};
 
     
     /* 아이디 찾기 */
