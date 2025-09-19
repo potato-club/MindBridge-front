@@ -58,6 +58,7 @@ const FindPWForm = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // 백엔드 api요쳥(인증번호 확인)
+
         try {
             const res = await fetch("/api/find-password", {
                 method: "POST",

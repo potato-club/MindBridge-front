@@ -28,11 +28,22 @@ const PWResetForm = () => {
 
     return (
         <>
-            <header className={styles.header}>비밀번호 변경</header>
+            <header className={styles.header}>
+                <button
+                    type="button"
+                    className={styles.backButton}
+                    onClick={() => router.push("/findpw")}
+                >
+                    &lt;
+                </button>
+
+                비밀번호 변경
+            </header>
+
             <form className={styles.Form} onSubmit={handleSubmit}>
                 <div className={styles.Container}>
-
-                    {/* 새 비밀번호 */}
+                    <div className={styles.PassWord}>
+                        {/* 새 비밀번호 */}
                     <div className={styles.PasswordField}>
                         <p className={styles.PasswordLabel}>새 비밀번호</p>
 
@@ -51,12 +62,16 @@ const PWResetForm = () => {
 
                         <input 
                             className={styles.PasswordInput}
-                            type="password"
+                            type="text"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder="비밀번호를 다시 입력하세요."
                         />
                     </div>
+                    </div>
+
+
+                    
 
                     {/* 확인버튼(로그인 창으로 넘어감.) */}
                     <button
