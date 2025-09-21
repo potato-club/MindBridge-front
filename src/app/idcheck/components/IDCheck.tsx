@@ -13,7 +13,16 @@ const IDCheckForm = () => {
 
   return (
     <>
-      <header className={styles.header}>아이디 확인</header>
+      <header className={styles.header}>
+        <button
+            type="button"
+            className={styles.backButton}
+            onClick={() => router.push("/findpw")}
+        >
+            &lt;
+        </button>
+        아이디 확인
+      </header>
       <form className={styles.Form}>
         <div className={styles.Container}>
           
