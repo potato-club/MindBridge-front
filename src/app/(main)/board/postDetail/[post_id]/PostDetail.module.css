@@ -1,0 +1,30 @@
+.top {
+    display : flex;
+    justify-content: space-between;
+    margin-top: 15%;
+    margin-left: 2%;
+    margin-right: 3%;
+
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.body{
+    align-items: center;
+    
+}
+
+.profile{
+    margin-top:10%;
+    margin-left: 6%;
+
+    width: 40%;
+    height: 80px;
+
+    background-color: #C4C4C4;
+}
+
+.nickname {
+
+}

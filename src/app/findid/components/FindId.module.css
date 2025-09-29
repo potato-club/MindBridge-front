@@ -1,0 +1,65 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    /* 휴대폰 기종에 따라 다르게 설정 */
+    margin: auto;
+    border-radius: 30px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    /* border-color: #161515; */
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* input {
+  /* width: 100%; 
+  /* padding: 12px 14px; 
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+} */
+
+/* input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0px 0px 4px rgba(74, 144, 226, 0.5);
+} */
+
+.UserPhoneNumber {
+  display: flex;
+  gap: 8px;
+}
+
+.sendButton,
+.submitButton {
+  padding: 12px 16px;
+  background-color: #4a90e2;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.sendButton:hover,
+.submitButton:hover {
+  background-color: #357ab7;
+}
