@@ -70,7 +70,7 @@ const PostDetail = () => {
                         <span className={styles.nickname}>닉네임</span>
 
                     </div>
-
+....
 
 
               </div>
