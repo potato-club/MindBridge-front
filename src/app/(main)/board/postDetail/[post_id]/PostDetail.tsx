@@ -67,8 +67,10 @@ const PostDetail = () => {
               <div 
                 className ={styles.body}>
                     <div className={styles.profile}>
-                        <span className={styles.nickname}>닉네임</span>
-
+                        <div className={styles.photo}></div>
+                        <div className={styles.nickname}>닉네임
+                            <div className={styles.date}>2023.08.21</div>
+                        </div>
                     </div>
 ....
 
