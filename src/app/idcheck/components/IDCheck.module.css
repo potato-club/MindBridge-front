@@ -1,97 +1,86 @@
+/* 중앙 카드 컨테이너 */
 
-/* 전체 폼 카드 
-.Form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 28px;
-}
-
-/* 중앙 카드 컨테이너 
 .Container {
-  width: 100%;
-  max-width: 480px;
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 28px;
-  box-shadow: 0 6px 20px rgba(20, 23, 28, 0.08);
-  border: 1px solid rgba(16,24,40,0.04);
-  box-sizing: border-box;
-  text-align: center;
-  margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* 휴대폰 기종에 따라 다르게 설정 */
+    border-radius: 30px;
+    background-color: #ffffff;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
-/* 헤더 타이틀 
-.header {
-  font-family: 'Noto Sans KR', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #111827;
-  margin: 12px 0 18px;
-  text-align: center;
+.header h1 {
+  display: none;
+}
+
+.img {
+  display: flex;
+    margin: auto;
+
+  width: 24px;
+  height: 24px;
 }
 
 /* 결과 문구 */
 .ResultText {
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 1rem;
-  color: #374151;
-  line-height: 1.6;
-  margin: 12px 0 20px;
-  word-break: keep-all;
+  width: 177px;
+  height: 62px; 
+
+  
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
 }
 
+
+
+.ResultText p {
+  color: #212528;
+  font-size: 20px;
+  font-weight: 500;
+}
 
 .ResultText strong {
-  color: #1e40af; /* 포인트 색 (블루) */
-  font-weight: 700;
+  color: #6868d5; /* 포인트 색 (블루) */
 }
 
-/* 에러/빈 상태 텍스트 (선택적) */
-.errorText {
-  color: #b91c1c;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
+
 
 /* 확인 버튼 */
+/* 버튼 */
 .submitButton {
-  display: inline-block;
-  padding: 12px 22px;
-  border-radius: 10px;
-  background-color: #2563eb;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 1rem;
+  position: fixed;
+  bottom: 20px;       /* 화면 하단에서 20px 위 */
+  left: 50%;          /* 가로 가운데 정렬 */
+  transform: translateX(-50%);
+  
+  width: 90%;         /* 버튼 너비 - 화면의 90% */
+  max-width: 400px;   /* 너무 넓어지지 않도록 제한 */
+  height: 55px;
+  
   border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #6868d5;
+  color: #fff;
   cursor: pointer;
-  transition: background-color 150ms ease, transform 80ms ease;
-  box-shadow: 0 6px 12px rgba(37,99,235,0.12);
+  transition: background 0.2s ease-in-out;
 }
 
-.submitButton:hover {
-  background-color: #1e40af;
-}
-
-.submitButton:active {
-  transform: translateY(1px) scale(0.995);
-}
 
 /* 반응형: 작은 화면에서는 패딩을 줄이고 카드 폭 맞춤 */
 @media (max-width: 480px) {
-  .Container {
+  /* .Container {
     padding: 18px;
     border-radius: 10px;
-  }
-
-  .headers {
-    font-size: 1.15rem;
-  }
-
-  .ResultText {
-    font-size: 0.95rem;
-  }
+  */
 
   .submitButton {
     width: 100%;
