@@ -1,0 +1,102 @@
+.header {
+    display: none;
+}
+
+/* 전체 컨테이너 */
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 사용자 정보 영역 */
+.UserInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.UserProfilePic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.UserName {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 마일리지 */
+.UserMileage {
+  width: 100%;
+  max-width: 400px;
+  background-color: #6868d5;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* 액션 리스트 */
+.UserActions {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.UserActionItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.UserActionItem:hover {
+  background-color: #fff;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* 로그아웃 */
+.Logout {
+  margin-top: 20px;
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 하단바 */
+.BottomBar {
+  margin-top: auto;
+  width: 100%;
+  max-width: 400px;
+  background-color: #eee;
+  padding: 15px;
+  text-align: center;
+  border-radius: 8px;
+}
