@@ -1,7 +1,4 @@
-// 파일: Board.tsx와 같은 폴더에 mockData.ts 파일 생성
 
-
-// post.ts
 
 // 게시물 데이터의 타입을 정의합니다.
 export interface Post {
