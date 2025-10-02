@@ -27,6 +27,8 @@ const PostDetail = () => {
         }
     }, [category, postId]);
 
+
+
     
     const currentCategoryKey = params.category; 
     
@@ -39,6 +41,7 @@ const PostDetail = () => {
 
     return(
     <>
+<div className={styles.page}> 
      <div 
         className={styles.top}>
             <Image 
@@ -65,18 +68,60 @@ const PostDetail = () => {
 
 
               <div 
-                className ={styles.body}>
+                className ={styles.body_top}>
                     <div className={styles.profile}>
                         <div className={styles.photo}></div>
-                        <div className={styles.nickname}>닉네임
+                        <div className={styles.nickname}>홍길동
                             <div className={styles.date}>2023.08.21</div>
                         </div>
                     </div>
-....
 
+        <div className={styles.body}>
+            <div className={styles.title}>게시글 제목</div>
+            <div className={styles.content}>
+                게시글 내용게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용
+            </div>
+
+            <div className={styles.body_bottom}>
+            <button className={styles.likeButton}>
+                <Image 
+                    src='/images/board/like.png'
+                    alt='좋아요 아이콘'
+                    width={20}
+                    height={18}
+                />
+                <p className={styles.likeCount}>12</p>
+            </button>
+
+            <button className={styles.bookmark}>
+                <Image 
+                    src='/images/board/Bookmark.png'
+                    alt='북마크 아이콘'
+                    width={23}
+                    height={20}
+                />
+            </button>
+            </div>
+        </div>
 
               </div>
     </div>
+    <hr className={styles.hr}></hr>
+
+    <div className={styles.commentPage}>
+        <div className={styles.comment_top}>
+            <span className={styles.comment_count}>
+                댓글 1
+            </span>
+        </div>
+
+        <div className={styles.comment_detail}>
+
+        </div>
+        
+    </div>
+
+</div>       
         
     </>
 );

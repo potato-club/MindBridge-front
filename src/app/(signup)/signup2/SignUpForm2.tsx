@@ -175,20 +175,7 @@ const SignUpForm2 = () => {
         <>
             <form onSubmit={handleSubmit}>
                 <div className={styles.wrapper_main2}>
-                    {/* 이메일 입력란 */}
-                    <div className={styles.oButton}>
-                        <p className={styles.bodyText}>이메일</p>
-                        <div className={styles.inpuBoxWrapper}>
-                            <input
-                                type="email"
-                                name="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className={styles.buttonOBox}
-                                placeholder="이메일을 입력해주세요."
-                            />
-                        </div>
-                    </div>
+                
 
                     {/* 닉네임 섹션 */}
                     <div className={styles.oButton}>

@@ -3,8 +3,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-// --- 아래 import 경로를 실제 파일 위치에 맞게 수정했습니다 ---
-import BottomNav from "./(main)/components/Bottom/BottomNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +30,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <BottomNav />
       </body>
     </html>
   );
