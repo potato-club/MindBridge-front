@@ -11,6 +11,7 @@ const FindPWForm = () => {
     const [userName, setUserName] = useState("");
     const [userPhoneNumber, setUserPhoneNumber] = useState("");
     const [userVerificationCode, setUserVerificationCode] = useState("");
+    const [verifyMessage, setVerifyMessage] = useState(""); // 인증 결과 메시지
 
     const router = useRouter();
 
@@ -45,9 +46,9 @@ const FindPWForm = () => {
                 });
                 
                 if (res.ok) {
-                    alert("인증이 완료되었습니다.");
+                    setVerifyMessage("인증이 완료되었습니다.");
                 } else {
-                    alert("인증번호가 올바르지 않습니다.");
+                    setVerifyMessage("인증번호가 올바르지 않습니다.");
                 }
             } catch (error) {
                 console.error(error);
@@ -154,6 +155,10 @@ const FindPWForm = () => {
                                 인증확인
                             </button>
                         </div>
+                        {/* 결과 메시지 */}
+                        {verifyMessage && (
+                            <p className={styles.VerifyMessage}>{verifyMessage}</p>
+                        )}
                     </div> 
 
 

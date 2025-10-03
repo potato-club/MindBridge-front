@@ -37,13 +37,17 @@
 }
 
 .UserName {
+  display: flex;
   justify-content: center;
+  align-items: center;
   max-width: 400px; 
   height: 47px;
   /* padding: 3vw;  */
   font-size: 0.95rem;
 
   color: #666e76;
+  background-color: #f2f4f5;
+
   /* border: 1px solid #ccc; */
   border-radius: 8px;
   outline: none;
@@ -68,6 +72,9 @@
   width: 100%;
   max-width: 400px;
   margin-bottom: 16px;
+  background-color: #f2f4f5;
+  border-radius: 8px;
+
 }
 
 .UserPhone {
@@ -113,6 +120,13 @@
   background-color: #6868d5;
   color: #fff;
 }
+
+.VerifyMessage {
+  margin-top: 8px;
+  font-size: 12px;        /* 화면 크기에 따라 줄어듦 */
+  color: #ff4d4f;
+}
+
 
 /* 버튼 */
 .submitButton {

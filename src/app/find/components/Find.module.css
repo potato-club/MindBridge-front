@@ -1,92 +1,94 @@
 /* 전체 컨테이너 */
 .Container {
-  padding: 20px;
+    padding: 20px;
 }
 
 /* 뒤로가기 버튼 */
 .backButton {
-  position: absolute;
-  left: 16px;
-  background: none;
-  border: none;
-  /* font-size: 22px; */
-  width: 24px;
+    position: absolute;
+    left: 16px;
+    background: none;
+    border: none;
+    /* font-size: 22px; */
+    width: 24px;
     height: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  color: #212528;
+    font-weight: bold;
+    cursor: pointer;
+    color: #212528;
 }
 
 .header {
-  justify-content: center;
-  display: flex;
-  font-size: 24px;
-  color: #1a1e20;
+    justify-content: center;
+    display: flex;
+    font-size: 24px;
+    color: #1a1e20;
 }
 
 /* 탭 버튼 영역 */
 .tabWrapper {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
 
-  max-width: 362px;
-  height: 52px;
-  background-color: #f2f4f5;
+    max-width: 362px;
+    height: 52px;
+    background-color: #f2f4f5;
 
-  border-radius: 12px;
+    border-radius: 12px;
 }
 
 .tab {
-  flex: 1;
-  display: flex; /* 추가 */
-  align-items: center;
-  justify-content: center;
-  padding: auto;
-  width: 70%;
-  max-width: 175px;
-  height: 47px;
-  margin: auto;
-  color: #1a1e20;
-  background-color: #f0f0f0;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
+    flex: 1;
+    display: flex;
+    /* 추가 */
+    align-items: center;
+    justify-content: center;
+    padding: auto;
+    width: 70%;
+    max-width: 175px;
+    height: 47px;
+    margin: auto;
+    color: #1a1e20;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
 .tab:hover {
-  background-color: #e5e5e5;
+    background-color: #e5e5e5;
 }
 
 .active {
-  background-color: #fff;
-  color: #1a1e20;
-  font-weight: bold;
+    background-color: #fff;
+    color: #1a1e20;
+    font-weight: bold;
 }
 
 /* 콘텐츠 영역 */
 .contentWrapper {
-  position: relative;
-  min-height: 250px; /* 콘텐츠 높이 확보 */
-  overflow: hidden;
+    position: relative;
+    min-height: 250px;
+    /* 콘텐츠 높이 확보 */
+    overflow: hidden;
 }
 
 /* 기본 콘텐츠 (숨겨짐) */
 .tabContent {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  /* position: absolute; */
-  width: 100%;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    /* position: absolute; */
+    width: 100%;
 }
 
 /* 활성화된 콘텐츠 */
 .tabContent.active {
-  opacity: 1;
-  transform: translateY(0);
-  position: relative;
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
 }
 
 /* .tabWrapper {

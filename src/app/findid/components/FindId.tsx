@@ -10,6 +10,7 @@ const FindIdForm = () => {
     const [userPhoneNumber, setUserPhoneNumber] = useState("");
     const [userVerificationCode, setUserVerificationCode] = useState("");
 
+    const [verifyMessage, setVerifyMessage] = useState(""); // 인증 결과 메시지
 
     const router = useRouter();
 
@@ -49,9 +50,9 @@ const FindIdForm = () => {
         });
 
         if (res.ok) {
-            alert("인증이 완료되었습니다 ✅");
+            setVerifyMessage("인증이 완료되었습니다!");
         } else {
-            alert("인증번호가 올바르지 않습니다 ❌");
+            setVerifyMessage("인증번호를 확인해주세요!");
         }
 
     } catch (error) {
@@ -157,7 +158,14 @@ const FindIdForm = () => {
                                 인증확인
                             </button>
                         </div>
-                    </div>                        
+
+                            {/* 결과 메시지 */}
+                        {verifyMessage && (
+                            <p className={styles.VerifyMessage}>{verifyMessage}</p>
+                        )}
+                    </div>    
+
+
                     
                     {/* 제출 버튼 */}
                     <button type="submit" className={styles.submitButton}>
