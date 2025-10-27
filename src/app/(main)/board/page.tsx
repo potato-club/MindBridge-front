@@ -10,6 +10,7 @@ const BoardList =() => {
       <Board />
       <BottomNav />
     </div>
+    
 };
 
 export default BoardList;

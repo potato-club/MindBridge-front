@@ -100,57 +100,65 @@ const FindIdForm = () => {
                 <div className={styles.Container}>
                 
                     {/* 이름입력 */}
-                    <div className={styles.UserName}>
+                    <div className={styles.User}>
                         <p>이름</p>
-                        <input 
-                        type="text" 
-                        value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
-                        placeholder="이름을 입력해주세요."
-                        />
+                        <div className={styles.UserName}>
+                            <input 
+                                type="text" 
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                                placeholder="이름을 입력해주세요."
+                                className={styles.UserPhone}
+                            />
+                        </div>
                     </div>
+                        
 
                     {/* 전화번호 + 인증번호 발송 버튼*/}
-                    <div className={styles.UserPhoneNumber}>
+                    <div className={styles.User}>
                         <p>전화번호</p>
-                        <input 
-                        type="tel"
-                        pattern="[0-9]*"
-                        inputMode="numeric"
-                        value={userPhoneNumber}
-                        onChange={(e) => setUserPhoneNumber(e.target.value)}
-                        placeholder="휴대폰 번호를 입력해주세요." 
-                        />
-
-                        <button 
-                        type="button"
-                        className={styles.sendButton}
-                        onClick={handleSendCode}
-                        >
-                            인증요청
-                        </button>
-                    </div>
-                    
-                    {/* 인증번호 입력 */}
-                    <div className={styles.UserVerificationCode}>
-                        <p>인증번호</p>
-                        <input 
-                            type="text"
+                        <div className={styles.UserRow}>
+                            <input 
+                            type="tel"
+                            pattern="[0-9]*"
                             inputMode="numeric"
-                            value={userVerificationCode}
-                            onChange={(e) => setUserVerificationCode(e.target.value)}
-                            placeholder="인증번호를 입력해주세요." 
-                        />
-
-                        <button 
-                        type="button"
-                        className={styles.sendButton}
-                        onClick={handleVerifyCode}
-                        >
-                            인증확인
-                        </button>
+                            value={userPhoneNumber}
+                            onChange={(e) => setUserPhoneNumber(e.target.value)}
+                            placeholder="휴대폰 번호를 입력해주세요." 
+                            className={styles.UserPhone}
+                            />
+                            <button 
+                            type="button"
+                            className={styles.sendButton}
+                            onClick={handleSendCode}
+                            >
+                                인증요청
+                            </button>
+                        </div>
                     </div>
 
+                                        {/* 전화번호 + 인증번호 발송 버튼*/}
+                    <div className={styles.User}>
+                        <p>인증번호</p>
+                        <div className={styles.UserRow}>
+                            <input 
+                                type="text"
+                                inputMode="numeric"
+                                value={userVerificationCode}
+                                onChange={(e) => setUserVerificationCode(e.target.value)}
+                                placeholder="인증번호를 입력해주세요." 
+                                className={styles.UserPhone}
+                            />
+                            <button 
+                            type="button"
+                            className={styles.sendButton}
+                            onClick={handleVerifyCode}
+                            >
+                                인증확인
+                            </button>
+                        </div>
+                    </div>                        
+                    
                     {/* 제출 버튼 */}
                     <button type="submit" className={styles.submitButton}>
                         아이디 찾기

@@ -1,7 +1,6 @@
 'use client';
 
-import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useSearchParams,useRouter } from "next/navigation";
 import styles from "./IDCheck.module.css";
 
 const IDCheckForm = () => {
@@ -12,34 +11,33 @@ const IDCheckForm = () => {
   const username = searchParams.get("userName");
   const userId = searchParams.get("userId");
 
-  const isMatch = username !== null && userId !== null;
-
-  useEffect(() => {
-    if ( username !== null && userId !== null ) {
-      if (!isMatch) {
-        alert("입력하신 정보를 확인해주세요.");
-        window.location.reload();
-      } 
-    }
-  }, [username, userId, isMatch]);
-
   return (
     <>
-      <header className={styles.headers}>아이디 확인</header>
+      <header className={styles.header}>
+        <h1>아이디 확인</h1>
+      </header>
       <form className={styles.Form}>
         <div className={styles.Container}>
-          
+          {/* 확인 이미지 삽압 */}
+          <div className={styles.img}>확인</div>
 
           {/* 문구 */}
-          {isMatch && (
-            <p className={styles.ResultText}>
-              <strong>{username}</strong>님의 아이디는{" "}
-              <strong>{userId}</strong>입니다.
+          <div className={styles.ResultText}>
+            {/* {username && userId && (
+              <p>
+                {username} 님의 아이디는{" "}
+                <strong>{userId}</strong> {" "}입니다.
+              </p>
+            )} */}
+            <p>
+              미나미 님의 아이디는{" "}
+              <strong>모나미</strong> {" "}입니다.
             </p>
-          )}
+          </div>
+          
             
           {/* 확인버튼(로그인 창으로 넘어감.) */}
-          {isMatch && (
+          
             <button
               type="button"
               className={styles.submitButton}
@@ -47,7 +45,6 @@ const IDCheckForm = () => {
             >
               확인
             </button>
-          )}
           
         </div>
       </form>

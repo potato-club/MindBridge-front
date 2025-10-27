@@ -14,7 +14,7 @@ const navLinks = [
 ];
 
 // 이 컴포넌트를 숨길 페이지 경로 목록
-const HIDE_NAV_PATHS = ['/signup', '/signup2'];
+const HIDE_NAV_PATHS = ['/signup', '/signup2', '/board/postDetail/', '/login'];
 
 const BottomNav = () => {
   const pathname = usePathname();

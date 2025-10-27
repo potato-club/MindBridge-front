@@ -1,8 +1,10 @@
 'use client';
 
-import { useState} from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import styles from "./Login.module.css";
+// import styles from "./Login2.module.css";
+import { useRouter } from "next/navigation";
+
 
 
 /* 로그인 폼 */
@@ -92,7 +94,7 @@ const LoginForm = () => {
                         {/* 회원가입 */}
                         <div className={styles.SignUp}>
                             <button type="button"
-                            onClick={() => router.push("/회원가입 페이지")}>회원가입</button>
+                            onClick={() => router.push("/signup")}>회원가입</button>
                         </div>
                     </div>
                 </div>

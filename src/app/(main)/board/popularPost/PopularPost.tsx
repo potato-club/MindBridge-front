@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image'; 
 import { useRouter } from 'next/navigation';
 import styles from './PopularPost.module.css'; 
-import { Post } from './post';
+import { Post } from '../mockData';
 
 type PopularPostsProps = {
   posts: Post[];
@@ -17,8 +17,8 @@ const PopularPosts: React.FC<PopularPostsProps> = ({ posts }) => {
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  const handlePostClick = (postId: number) => {
-    router.push(`/board/post/${postId}`); 
+  const handlePostClick = (post_id: number) => {
+    router.push(`/board/postDetail/${post_id}`); 
   };
   
   const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
@@ -65,23 +65,23 @@ const PopularPosts: React.FC<PopularPostsProps> = ({ posts }) => {
           <div className={styles.slideContainer}>
             {posts.map((post, index) => (
               <div 
-                key={post.id} 
+                key={post.post_id} 
                 className={styles.slide} 
-                onClick={() => handlePostClick(post.id)}
+                onClick={() => handlePostClick(post.post_id)}
                 ref={el => slideRefs.current[index] = el}
                 data-index={index}
               >
                 <h3 className={styles.postTitle}>{post.title}</h3>
                 <div className={styles.postWriter}>
-                  <span>{post.author}</span>
+                  <span>{post.user_id}</span>
                   <div className={styles.postStats}>
                     {/* --- 아이콘 height를 원래대로 되돌렸습니다 --- */}
                     <Image src="/images/main/show.png" alt="조회수" width={16} height={8}/>
-                    <p>{post.views}</p>
+                    <p>{post.view_count}</p>
                     <Image src="/images/main/like.png" alt="좋아요" width={16} height={16}/>
-                    <p>{post.likes}</p>
+                    <p>{post.like_count}</p>
                     <Image src="/images/main/comment.png" alt="댓글" width={16} height={16}/>
-                    <p>{post.comments}</p>
+                    <p>{post.comment_count}</p>
                   </div>
                 </div>
               </div>
