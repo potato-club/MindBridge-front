@@ -75,7 +75,7 @@ const PopularPosts: React.FC<PopularPostsProps> = ({ posts }) => {
                 <div className={styles.postWriter}>
                   <span>{post.user_id}</span>
                   <div className={styles.postStats}>
-                    {/* --- 아이콘 height를 원래대로 되돌렸습니다 --- */}
+    
                     <Image src="/images/main/show.png" alt="조회수" width={16} height={8}/>
                     <p>{post.view_count}</p>
                     <Image src="/images/main/like.png" alt="좋아요" width={16} height={16}/>
