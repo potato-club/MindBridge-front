@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from "react";
-import styles from "./Login.module.css";
+import { useState} from "react";
 import { useRouter } from "next/navigation";
+import styles from "./Login.module.css";
 
 
 
@@ -57,7 +57,7 @@ const LoginForm = () => {
                         <input type="text"
                             value={userId}
                             onChange={(e) => setUserId(e.target.value)}
-                            placeholder="아이디 입력" 
+                            placeholder="아이디를 입력해주세요." 
                         />
                     </div>
 
@@ -66,7 +66,7 @@ const LoginForm = () => {
                         <input type="password"
                             value={userPassword}
                             onChange={(e) => setUserPassword(e.target.value)}
-                            placeholder="비밀번호 입력" 
+                            placeholder="비밀번호 입력해주세요." 
                         />
                     </div> 
 
@@ -85,7 +85,7 @@ const LoginForm = () => {
                         {/* 페이지 이동 구현 중 */}
                         <div className={styles.FindIdAndPassword}>
                             <button type="button"
-                            onClick={() => router.push("/find")}> 
+                            onClick={() => router.push("/findidandpw")}> 
                                 아이디/비밀번호 찾기
                             </button>
                         </div>

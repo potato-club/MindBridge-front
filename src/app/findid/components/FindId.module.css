@@ -59,7 +59,7 @@
   flex: 1; /* 버튼 빼고 남은 공간을 꽉 채움 */
   padding: 12px;
   font-size: 14px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 
   width: 100%;
 }
