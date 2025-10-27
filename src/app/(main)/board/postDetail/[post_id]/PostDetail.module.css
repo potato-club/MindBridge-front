@@ -26,6 +26,16 @@
 
         }
 
+        .backButton{
+            width: 24px;
+            height: 24px;
+            background: url('/images/board/back.png') no-repeat center;
+            background-size: contain;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
         /* --- 2. 게시글 작성자 정보 (.body_top) --- */
         .body_top{
             display: flex;
@@ -107,11 +117,11 @@
             display: flex;
             justify-content: space-between; 
             align-items: center;
-            /* HR과의 간격 문제 해결 */
             margin: 10px 0 10px 0; 
         }
 
         .likeButton{
+            color: #1A1E20;
             display: flex;
             align-items: center;
             gap: 5px;

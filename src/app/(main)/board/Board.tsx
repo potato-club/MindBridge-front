@@ -192,7 +192,7 @@ const Board = () => {
         
       </div>
 
-      <button className={styles.fab} onClick={() => router.push('/write')}>
+      <button className={styles.fab} onClick={() => router.push('/board/postWrite')}>
         + 글쓰기
       </button>
     </div>

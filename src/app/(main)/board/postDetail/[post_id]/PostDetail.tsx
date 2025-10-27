@@ -2,21 +2,22 @@
 'use client';
 
 // Next.js 모듈 및 React 훅
-import Image from "next/image"; 
-import { useRouter, useParams } from "next/navigation"; 
+import Image from "next/image";
+import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import styles from './PostDetail.module.css';
 import { Post, categories, allPosts } from '@/app/(main)/board/mockData'; 
 
 
 const PostDetail = () => {
+    const router = useRouter(); 
     const params = useParams();
-    const category = params.category as string; 
+    const category = params.category as string;
     const postId = params.post_id as string;
 
     // 🚨 1. postId에 맞는 게시물 찾기
     const post = allPosts.find(p => p.post_id === postId);
-    
+
     // 게시물이 없을 경우 (404)를 가정하여 빈 객체로 임시 처리
     const currentPost: Post = post || { 
         post_id: '0', user_id: '', anonymous: false, nickname: '데이터 없음', 
@@ -25,13 +26,22 @@ const PostDetail = () => {
         like_count: 0, view_count: 0, comment_count: 0, 
         created_at: new Date().toISOString() as any, updated_at: new Date().toISOString() as any 
     };
+    
+    // ==========================================================
+    // ⭐️ 좋아요 기능 추가: State 정의 및 초기화
+    // ==========================================================
+    // 1. 현재 게시물의 좋아요 수를 상태로 관리합니다.
+    const [likeCount, setLikeCount] = useState(currentPost.like_count);
+    // 2. 현재 사용자의 좋아요 여부를 상태로 관리합니다. (초기값은 false로 가정)
+    const [isLiked, setIsLiked] = useState(false); 
+    // ==========================================================
+
 
     useEffect(() => {
         if (category && postId) {
             const fetchPost = async () => {
                 // 실제 API 호출 로직은 여기에 들어갑니다.
                 console.log(`Fetching post detail for: ${category}/${postId}`);
-                // const response = await fetch(`http://your.api.server/posts?category=${category}&id=${postId}`);
             };
             fetchPost();
         }
@@ -47,6 +57,44 @@ const PostDetail = () => {
         return `${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
     };
 
+    // 뒤로가기 핸들러
+    const handleGoBack = () => {
+        router.back();
+    };
+    
+    // ==========================================================
+    // ⭐️ 좋아요 버튼 클릭 핸들러
+    // ==========================================================
+     const handleLikeClick = () => {
+        
+        // 1. 다음 상태를 예측하여 변화량 계산
+        const willBeLiked = !isLiked;
+        // 좋아요를 누른다면 +1, 취소한다면 -1
+        const countChange = willBeLiked ? 1 : -1; 
+
+        // 2. isLiked 상태 업데이트
+        setIsLiked(willBeLiked); 
+
+        // 3. likeCount 상태 업데이트 (이전 상태를 기반으로 안전하게 계산)
+        setLikeCount(prevCount => {
+            const newCount = prevCount + countChange;
+
+            // Mock Data 업데이트 시뮬레이션
+            const postIndex = allPosts.findIndex(p => p.post_id === postId);
+            if (postIndex !== -1) {
+                allPosts[postIndex].like_count = newCount; 
+            }
+            
+            return newCount;
+        });
+        
+            
+            // 실제 API 호출: 
+            // const action = newIsLiked ? 'like' : 'unlike';
+            // fetch(`http://your.api.server/posts/${postId}/${action}`, { method: 'POST' });
+    };
+    // ==========================================================
+
 
     return(
     <>
@@ -58,13 +106,12 @@ const PostDetail = () => {
                 className={styles.top}>
                     {/* 뒤로가기 버튼 및 카테고리 이름 (중앙 정렬) */}
                     <div className={styles.top_left}>
-                        <Image 
-                            src="/images/board/back.png" 
-                            alt="뒤로가기 아이콘" 
-                            width={14} 
-                            height={14} 
-                            style={{ cursor: 'pointer' }}
-                        />
+                        <button 
+                            type="button" 
+                            className={styles.backButton} 
+                            onClick={handleGoBack}
+                        ></button>
+                      
                     </div>
                     
                     {/* 중앙 타이틀 */}
@@ -108,15 +155,19 @@ const PostDetail = () => {
                 </div>
 
                 <div className={styles.body_bottom}>
-                    <button className={styles.likeButton}>
+
+                      <button 
+                        className={styles.likeButton}
+                        onClick={handleLikeClick} 
+                    >
+                        {/* ⭐️ 좋아요 아이콘 다시 추가 */}
                         <Image 
-                            src='/images/board/like.png'
+                            src={isLiked ? '/images/board/like.png' : '/images/board/like.png'}
                             alt='좋아요 아이콘'
-                            width={20}
-                            height={18}
+                            width={20} // 적절한 크기 설정
+                            height={18} // 적절한 크기 설정
                         />
-                        {/* 🚨 데이터 연결 */}
-                        <p className={styles.likeCount}>{currentPost.like_count}</p>
+                        <p className={styles.likeCount}>좋아요 {likeCount}</p>
                     </button>
 
                     <button className={styles.bookmark}>
