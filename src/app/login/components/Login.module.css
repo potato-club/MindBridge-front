@@ -1,0 +1,80 @@
+
+
+/* 전체 컨테이너 */
+.Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    max-width: 400px;
+    height: 100vh;
+    max-height: 500px;
+    /* 휴대폰 기종에 따라 다르게 설정 */
+    margin: auto;
+    border-radius: 30px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+
+
+.header {
+    display: none;
+}
+
+.LogoAndAppName {
+    text-align: center;
+    margin-bottom: 30px;
+} 
+
+.AppName {
+    font-size: 28px;
+    font-weight: bold;
+    color: #3bc4ff;
+}
+
+.AppDescription {
+    font-size: 14px;
+    color: #888;
+    margin-top: 8px;
+}
+
+.UserId input,
+.UserPassword input {
+    width: 80%;
+    max-width: 320px;
+    padding: 12px;
+    margin-bottom: 15px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+
+.sendButton{
+    padding: 10px 16px;
+    background-color: #6868d5;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.UserVerificationCode input {
+    background-color: #6868d5;
+}
+
+/* 로그인 버튼 */
+/* 로그인 버튼 */
+
+
+
+
