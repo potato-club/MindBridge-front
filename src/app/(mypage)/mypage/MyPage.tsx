@@ -6,6 +6,8 @@ import styles from "./MyPage.module.css";
 
 
 const MyPageForm = () => {
+    const router = useRouter();
+
     return (
         <>
             <header className={styles.header}>마이페이지</header>
@@ -69,6 +71,7 @@ const MyPageForm = () => {
                             <button
                                 type="button"
                                 className={styles.backButton}
+                                onClick = {() => router.push('./mydelete')}
                             >
                                 &gt;
                             </button>                        

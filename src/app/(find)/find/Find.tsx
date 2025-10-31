@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import FindIdForm from "@/app/findid/components/FindId";
-import FindPWForm from "@/app/findpw/components/FindPW";
+import FindIdForm from "@/app/(find)/findid/FindId";
+import FindPWForm from "@/app/(find)/findpw/FindPW";
 import styles from "./Find.module.css";
 
 

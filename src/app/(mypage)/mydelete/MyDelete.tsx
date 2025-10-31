@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from "react";
-import styles from "./MyPageDeleteAccount.module.css";
+import styles from "./MyDelete.module.css";
 import { useRouter } from "next/navigation";
 
 /* 회원탈퇴 폼 */
-const MyPageDeleteAccountForm = () => {
+const MyDeleteForm = () => {
     const router = useRouter();
 
     const [open, setOpen] = useState(false);
@@ -13,7 +13,7 @@ const MyPageDeleteAccountForm = () => {
     const handleWithDraw = async () => {
         alert("회원 탈퇴가 완료되었습니다.");
         setOpen(false);
-        router.push("/"); // 탈퇴 후 탈퇴 메인 페이지로 이동
+        router.push("/메인페이지"); // 탈퇴 후 탈퇴 메인 페이지로 이동
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,7 +31,7 @@ const MyPageDeleteAccountForm = () => {
             <button
                 type="button"
                 className={styles.backButton}
-                onClick={() => router.push("/mypagedeleteaccount")}
+                onClick={() => router.push("/mypage")}
             >
                 &lt;
             </button>
@@ -117,4 +117,4 @@ const MyPageDeleteAccountForm = () => {
     );
 };
 
-export default MyPageDeleteAccountForm;
+export default MyDeleteForm;
