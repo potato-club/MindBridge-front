@@ -56,7 +56,7 @@ const PopularPosts: React.FC<PopularPostsProps> = ({ posts }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <Image src="/images/main/fire.png" alt="불꽃 아이콘" width={24} height={24}/>
+        <Image src="/images/board/fire.png" alt="불꽃 아이콘" width={24} height={24}/>
         <p>주간 인기 게시물</p>
       </div>
       
@@ -76,11 +76,11 @@ const PopularPosts: React.FC<PopularPostsProps> = ({ posts }) => {
                   <span>{post.user_id}</span>
                   <div className={styles.postStats}>
     
-                    <Image src="/images/main/show.png" alt="조회수" width={16} height={8}/>
+                    <Image src="/images/board/show.png" alt="조회수" width={16} height={8}/>
                     <p>{post.view_count}</p>
-                    <Image src="/images/main/like.png" alt="좋아요" width={16} height={16}/>
+                    <Image src="/images/board/like.png" alt="좋아요" width={16} height={16}/>
                     <p>{post.like_count}</p>
-                    <Image src="/images/main/comment.png" alt="댓글" width={16} height={16}/>
+                    <Image src="/images/board/comment.png" alt="댓글" width={16} height={16}/>
                     <p>{post.comment_count}</p>
                   </div>
                 </div>

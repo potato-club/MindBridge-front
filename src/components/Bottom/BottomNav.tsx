@@ -10,7 +10,7 @@ const navLinks = [
   { name: '게시판', path: '/board/all', img: '/images/board/board.png', activeImg: '/images/board/board-active.png' },
   { name: '채팅', path: '/chat', img: '/images/board/chat.png', activeImg: '/images/board/chat-active.png' },
   { name: '마일리지', path: '/mileage', img: '/images/board/miles.png', activeImg: '/images/board/miles-active.png' },
-  { name: '마이', path: '/my', img: '/images/board/my.png', activeImg: '/images/board/my-active.png' },
+  { name: '마이', path: '/mypage', img: '/images/board/my.png', activeImg: '/images/board/my-active.png' },
 ];
 
 // 이 컴포넌트를 숨길 페이지 경로 목록
@@ -29,7 +29,6 @@ const BottomNav = () => {
     return null;
   }
 
-  // 3. 보여줘야 할 페이지일 경우에만 네비게이션 바를 렌더링합니다.
   return (
     <nav className={styles.nav}>
       <div className={styles.navInner}>

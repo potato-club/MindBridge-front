@@ -141,7 +141,7 @@ const Board = () => {
 
       <div className={styles.postList}>
         {displayedPosts.map(post => (
-          // 🌟 게시글 클릭 핸들러 추가
+        
           <div 
             key={post.post_id} 
             className={styles.postItem}

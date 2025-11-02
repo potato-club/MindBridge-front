@@ -22,7 +22,7 @@ const Searchbox: React.FC<SearchboxProps> = ({ onSearch }) => {
   return (
     <form className={styles.searchContainer} onSubmit={handleSearch}>
         <Image
-          src="/images/main/search.png" 
+          src="/images/board/search.png" 
           alt="검색 아이콘"
           width={20}
           height={20}

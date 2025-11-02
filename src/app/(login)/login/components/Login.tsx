@@ -93,7 +93,7 @@ const LoginForm = () => {
                         {/* 회원가입 */}
                         <div className={styles.SignUp}>
                             <button type="button"
-                            onClick={() => router.push("/회원가입 페이지")}>회원가입</button>
+                            onClick={() => router.push("/signup")}>회원가입</button>
                         </div>
                     </div>
                 </div>

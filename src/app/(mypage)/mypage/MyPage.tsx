@@ -82,8 +82,6 @@ const MyPageForm = () => {
                             
                         </div>
                     </div>
-
-                    <div>하단바</div>
                 </div>
             </form>
         </>
