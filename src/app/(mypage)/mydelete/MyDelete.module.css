@@ -1,0 +1,171 @@
+/* 전체 컨테이너 */
+.Container {
+    padding: 20px;
+}
+
+/* 뒤로가기 버튼 */
+.backButton {
+    position: absolute;
+    left: 16px;
+    background: none;
+    border: none;
+    /* font-size: 22px; */
+    width: 24px;
+    height: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #212528;
+}
+
+.header {
+    justify-content: center;
+    display: flex;
+    font-size: 20px;
+    font-weight: 600;
+    color: #212528;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+
+/* 🔹 안내문 */
+.InfoText {
+  color: #212528;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.InfoText h1 {
+  font-weight: 700;
+}
+
+.Text {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 10px; 
+}
+
+.Warning {
+  color: #6868d5;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/* 🔹 버튼 영역 */
+.DeleteButtonContainer {
+  margin-top: 30px;
+}
+
+.DeleteButton {
+  position: fixed;   /* 화면에 고정 */
+  left: 50%;          /* 가로 가운데 정렬 */
+  transform: translateX(-50%);
+  
+  width: 90%;         /* 버튼 너비 - 화면의 90% */
+  max-width: 400px;   /* 너무 넓어지지 않도록 제한 */
+  height: 55px;
+  
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #6868d5;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.DeleteButton:hover {
+  background-color: #5a5ac1;
+}
+
+/* ===============================
+   🔸 모달 스타일
+================================= */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 30px 25px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.25s ease;
+}
+
+.modal h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.modal p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+/* 🔹 버튼들 */
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.cancelBtn {
+  flex: 1;
+  padding: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cancelBtn:hover {
+  background-color: #e9e9e9;
+}
+
+.confirmBtn {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background-color: #6868d5;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.confirmBtn:hover {
+  background-color: #5a5ac1;
+}
+
