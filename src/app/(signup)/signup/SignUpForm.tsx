@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "./SignUpForm.module.css";
 import { useRouter } from "next/navigation";
+import InputBox from "@/components/common/InputBox";
 
 const SignUpForm = () => {
 
@@ -21,7 +22,7 @@ const SignUpForm = () => {
 
     // 전화번호 인증 관련 상태
     const [verificationCode, setVerificationCode] = useState('');
-    const [isCodeSent, setIsCodeSent] = useState(false);
+    const [isCodeSent, setIsCodeSent] = useState('');
     const [verificationError, setVerificationError] = useState('');
     const [isPhoneVerified, setIsPhoneVerified] = useState(false);
 
@@ -96,6 +97,11 @@ const SignUpForm = () => {
     const handleSendCode = async (e: React.MouseEvent) => {
         e.preventDefault();
         setVerificationError('');
+
+        if (isCodeSent && !window.confirm("인증번호를 재전송하시겠습니까?")) {
+            return;
+        }
+
         try {
             const res = await fetch('/api/send-code', {
                 method: 'POST',
@@ -104,6 +110,9 @@ const SignUpForm = () => {
             });
             if (res.ok) {
                 setIsCodeSent(true);
+                setVerificationCode(''); 
+                setVerificationError('');
+                alert(isCodeSent ? '인증번호가 재전송되었습니다.' : '인증번호가 발송되었습니다.');
             } else {
                 setVerificationError('인증번호 발송에 실패했습니다.');
             }
@@ -132,6 +141,9 @@ const SignUpForm = () => {
         }
     };
 
+    const buttonText = isCodeSent ? '재전송' : '인증 요청';
+    const buttonClass = isCodeSent ? styles.resendButton : styles.sendButton;
+
     const handleNext = () => {
         if (!isUserIdChecked || isUserIdDuplicate || userIdError) {
             alert('아이디 중복검사를 완료해주세요.');
@@ -153,120 +165,98 @@ const SignUpForm = () => {
     };
 
     return (
-        <>
-            <form>
-                <div className={styles.wrapper_main}>
-                    <div className={styles.oButton}>
-                        <p className={styles.bodyText}>아이디</p>
-                        <div className={styles.inputBoxWrapper}>
-                            <input 
-                                type="text" 
-                                name="userid" 
-                                className={styles.buttonOBox} 
-                                placeholder="아이디를 입력해주세요."
-                                value={userid}
-                                onChange={handleUserIdChange}
-                                autoComplete="off"
-                            />
-                            <button 
-                                className={styles.doubleButton}
-                                onClick={handleCheckDuplicate}
-                                type="button"
-                                disabled={!!userIdError || !userid}
-                            >중복 확인</button>
-                        </div>
-                        {userIdError && <div style={{ color: 'red', marginTop: '5px', fontSize: 10 }}>{userIdError}</div>}
-                        {isUserIdChecked && !isUserIdDuplicate && !userIdError && ( <div style={{ color: 'green', marginTop: '5px', fontSize: 10 }}>사용 가능한 아이디입니다.</div> )}
-                        {isUserIdChecked && isUserIdDuplicate && !userIdError && ( <div style={{ color: 'red', marginTop: '5px', fontSize: 10 }}>이미 사용 중인 아이디입니다.</div> )}
-                    </div>
+        
+         
+       <>
+            <form className={styles.wrapper_main}>
+                <InputBox
+                label="아이디"
+                type="text"
+                name="userid"
+                placeholder="아이디를 입력해주세요."
+                value={userid}
+                onChange={handleUserIdChange}
+                buttonText="중복 확인"
+                onButtonClick={handleCheckDuplicate}
+                isButtonDisabled={!!userIdError || !userid}
+                errorMessage={userIdError}
+                successMessage={isUserIdChecked && !isUserIdDuplicate && !userIdError ? '사용 가능한 아이디입니다.' : undefined}
+            />
+
             
-                    <div className={styles.xButton}>
-                        <p className={styles.bodyText}>비밀번호</p>
-                        <input 
-                            type="password" 
-                            name="password" 
-                            className={styles.buttonXBox} 
-                            placeholder="비밀번호를 입력해주세요."
-                            value={password}
-                            onChange={handlePasswordChange}
-                            autoComplete="off"
-                        />
-                        {passwordError && <div style={{ color: 'red', marginTop: '5px', fontSize: 10 }}>{passwordError}</div>}
-                    </div>
-                    
-                    <div className={styles.xButton}>
-                        <p className={styles.bodyText}>비밀번호 확인</p>
-                        <input 
-                            type="password" 
-                            name="passwordCheck" 
-                            className={styles.buttonXBox} 
-                            placeholder="비밀번호를 다시 입력해주세요."
-                            value={passwordCheck}
-                            onChange={handlePasswordCheckChange}
-                            autoComplete="off"
-                        />
-                        {passwordCheckError && <div style={{ color: 'red', marginTop: '5px', fontSize: 10 }}>{passwordCheckError}</div>}
-                    </div>
-                    
-                    <div className={styles.xButton}>
-                        <p className={styles.bodyText}>이름</p>
-                        <input 
-                            type="text" 
-                            name="name" 
-                            className={styles.buttonXBox} 
-                            placeholder="이름을 입력해주세요."
-                            value={username}
-                            onChange={e => setName(e.target.value)}
-                        />
-                    </div>
-                 
-                    <div className={styles.oButton}>
-                        <p className={styles.bodyText}>전화번호</p>
-                        <input 
-                            type="text" 
-                            name="phonenumber"
-                            className={styles.buttonOBox}
-                            placeholder="전화번호를 입력해주세요."
-                            value={phonenumber}
-                            onChange={e => setPhoneNumber(e.target.value)}
-                            disabled={isPhoneVerified}
-                        />
-                        <button
-                            className={styles.doubleButton}
-                            onClick={handleSendCode}
-                            type="button"
-                            disabled={!phonenumber || isPhoneVerified}
-                        >인증요청</button>
-                    </div>
-                
-                    <div className={styles.oButton}>
-                        <p className={styles.bodyText}>인증번호</p>
-                        <input 
-                            type="text" 
-                            className={styles.buttonOBox} 
-                            placeholder="인증번호를 입력해주세요."
-                            value={verificationCode}
-                            onChange={e => setVerificationCode(e.target.value)}
-                            disabled={isPhoneVerified}
-                        />
-                        <button
-                            className={styles.doubleButton}
-                            onClick={handleVerifyCode}
-                            type="button"
-                            disabled={!verificationCode || isPhoneVerified}
-                        >인증확인</button>
-                        {verificationError && <div style={{ color: 'red', marginTop: '5px', fontSize: 10 }}>{verificationError}</div>}
-                        {isPhoneVerified && <div style={{ color: 'green', marginTop: '5px', fontSize: 10 }}>인증 완료</div>}
-                    </div>
-                
-                    <div className={styles.bottomButtonBox}>
-                        <button type="button" 
-                                onClick={handleNext} 
-                                className={styles.nextButton}>다음으로</button>
-                    </div>
-                </div>
-            </form>
+            <InputBox
+                label="비밀번호"
+                type="password"
+                name="password"
+                placeholder="비밀번호를 입력해주세요."
+                value={password}
+                onChange={handlePasswordChange}
+                errorMessage={passwordError}
+            />
+            
+          
+            <InputBox
+                label="비밀번호 확인"
+                type="password"
+                name="passwordCheck"
+                placeholder="비밀번호를 다시 입력해주세요."
+                value={passwordCheck}
+                onChange={handlePasswordCheckChange}
+                errorMessage={passwordCheckError}
+            />
+            
+           
+            <InputBox
+                label="이름"
+                type="text"
+                name="name"
+                placeholder="이름을 입력해주세요."
+                value={username}
+                onChange={e => setName(e.target.value)}
+            />
+
+         
+            <InputBox
+                label="전화번호"
+                type="number"
+                name="phonenumber"
+                placeholder="전화번호를 입력해주세요."
+                value={phonenumber}
+                onChange={e => setPhoneNumber(e.target.value)}
+                disabled={isPhoneVerified}
+
+                buttonText={isCodeSent ? "재전송" : "인증요청"}
+                onButtonClick={handleSendCode}
+
+                isButtonDisabled={!phonenumber || isPhoneVerified}
+            />
+
+            <InputBox
+                label="인증번호"
+                type="number"
+                name="authCode"
+                placeholder="인증번호를 입력해주세요."
+                value={verificationCode}
+                onChange={e => setVerificationCode(e.target.value)}
+
+                disabled={!isCodeSent || isPhoneVerified}
+
+                buttonText="인증확인"
+                onButtonClick={handleVerifyCode}
+                isButtonDisabled={!verificationCode || isPhoneVerified}
+                errorMessage={verificationError}
+                successMessage={isPhoneVerified ? '인증 완료' : undefined}
+            />
+   
+
+            <div className={styles.bottomButtonBox}>
+                <button type="button" 
+                        onClick={handleNext} 
+                        className={styles.nextButton}>다음으로</button>
+            </div>
+             </form>
         </>
+        
     );
 };
 

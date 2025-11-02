@@ -3,10 +3,8 @@
 import { useEffect, useState, useRef } from "react";
 import styles from "../signup/SignUpForm.module.css";
 import { useRouter } from "next/navigation";
+import InputBox from "@/components/common/InputBox";
 
-// ==================================================================
-// ▼▼▼ 드롭다운 UI와 기능을 담당하는 컴포넌트를 이 파일 안에 정의합니다. ▼▼▼
-// ==================================================================
 type Option = {
   value: string | number;
   label: string;
@@ -48,7 +46,7 @@ const CustomDropdown = ({ options, value, onChange, placeholder }: CustomDropdow
         <span className={selectedOption ? styles.selectedValue : styles.placeholder}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
-        <span className={`${styles.arrowIcon} ${isOpen ? styles.open : ''}`}></span>
+        <span className={`${styles.arrowDown} ${isOpen ? styles.open : ''}`}></span>
       </div>
 
       {isOpen && (
@@ -67,9 +65,6 @@ const CustomDropdown = ({ options, value, onChange, placeholder }: CustomDropdow
     </div>
   );
 };
-// ==================================================================
-// ▲▲▲ 여기까지가 커스텀 드롭다운 컴포넌트입니다. ▲▲▲
-// ==================================================================
 
 
 const genderOptions = [
@@ -85,10 +80,13 @@ const SignUpForm2 = () => {
     const [isNicknameChecked, setIsNicknameChecked] = useState(false);
     const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(false);
     const [gender, setGender] = useState('');
-    const [email, setEmail] = useState('');
 
     const router = useRouter();
 
+
+    const handleBirthChange = (selectedValue: string | number) => {
+        setBirth(selectedValue);
+    }
     // 닉네임 유효성 검사
     const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -125,10 +123,6 @@ const SignUpForm2 = () => {
             alert('닉네임을 올바르게 입력하고 중복 확인을 해주세요.');
             return;
         }
-        if (!email) {
-            alert('이메일을 입력해주세요.');
-            return;
-        }
         if (!gender) {
             alert('성별을 선택해주세요.');
             return;
@@ -152,8 +146,6 @@ const SignUpForm2 = () => {
             });
             if (res.ok) {
                 alert('회원가입이 완료되었습니다!');
-                // 원하는 페이지로 이동
-                // router.push('/login');
             } else {
                 const data = await res.json();
                 alert(data.message || '회원가입에 실패했습니다.');
@@ -175,37 +167,24 @@ const SignUpForm2 = () => {
         <>
             <form onSubmit={handleSubmit}>
                 <div className={styles.wrapper_main2}>
-                
 
-                    {/* 닉네임 섹션 */}
+                
                     <div className={styles.oButton}>
-                        <p className={styles.bodyText}>닉네임</p>
-                        <div className={styles.inpuBoxWrapper}>
-                            <input
+                            <InputBox
+                                label="닉네임"
                                 type="text"
                                 name="nickname"
                                 value={nickname}
-                                onChange={handleNicknameChange}
-                                className={styles.buttonOBox}
                                 placeholder="닉네임을 입력해주세요."
+                                onChange={handleNicknameChange}
+                                buttonText="중복 확인"
+                                onButtonClick={handleCheckNickname}
+                                isButtonDisabled={!!nicknameError || !nickname}
+                                errorMessage={nicknameError}
+                                successMessage={isNicknameChecked && !isNicknameDuplicate && !nicknameError ? '사용 가능한 닉네임입니다.' : undefined}
                             />
-                            <button
-                                type="button"
-                                className={styles.doubleButton}
-                                onClick={handleCheckNickname}
-                                disabled={!!nicknameError || !nickname}
-                            >중복 확인</button>
-                        </div>
-                        {nicknameError && <div style={{ color: 'red', marginTop: '5px', fontSize: 10 }}>{nicknameError}</div>}
-                        {isNicknameChecked && !isNicknameDuplicate && !nicknameError && (
-                            <div style={{ color: 'green', marginTop: '5px', fontSize: 10 }}>사용 가능한 닉네임입니다.</div>
-                        )}
-                        {isNicknameChecked && isNicknameDuplicate && !nicknameError && (
-                            <div style={{ color: 'red', marginTop: '5px', fontSize: 10 }}>이미 사용 중인 닉네임입니다.</div>
-                        )}
                     </div>
 
-                    {/* 성별 섹션 */}
                     <div className={styles.xButton}>
                         <p className={styles.bodyText}>성별</p>
                         <div>
@@ -225,18 +204,15 @@ const SignUpForm2 = () => {
                         </div>
                     </div>
 
-                    {/* 출생년도 드롭다운 */}
-                    <div className={styles.xButton}>
+                    <div className={styles.customDropdownBox}>
                         <p className={styles.bodyText}>나이</p>
                         <CustomDropdown
-                            options={yearOptions}
-                            value={birth}
-                            onChange={(selectedValue) => setBirth(selectedValue)}
-                            placeholder="태어난 년도를 선택해주세요."
-                        />
+                          options={yearOptions}
+                          value={birth}
+                          onChange={handleBirthChange} 
+                          placeholder="태어난 년도를 선택해주세요."
+                      />
                     </div>
-
-                    {/* 가입하기 버튼 */}
                     <div className={styles.bottomButtonBox2}>
                         <button type="submit" className={styles.nextButton}>가입하기</button>
                     </div>

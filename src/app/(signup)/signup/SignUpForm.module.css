@@ -10,14 +10,18 @@
 }
 
 .bodyText{
+    font-size: 15px;
+    font-weight: 600;
     color:black;
+    margin-top: 5%;
     margin-bottom: 10px;
     display: block;
 }
 
+
 /* div */
 .wrapper_main{
-    display: flex;             /* Flexbox 컨테이너로 설정 */
+    display: flex;       
     justify-content: center;
     flex-direction: column;
     position: relative;
@@ -46,14 +50,6 @@
     min-width: 320px;
 }
 
-.oButton{
-    align-items: center;
-    margin-bottom: 5%;
-}
-
-.xButton{
-    align-items: center;
-}
 
 .bottomButtonBox{
     position: fixed;
@@ -80,36 +76,8 @@
 
 
 /* 박스 */
-.buttonOBox{
-    color: #52585E;
-
-    border-color: none;
-    border-radius: 12px;
-    background-color: #F8FAFB;
-    
-    width: 65%;
-    height: 47px;
-    padding-left: 15px;
-}
-
-.buttonOBox:focus,
-.buttonXBox:focus{
-    outline: none;
-    border: 1px solid #888e93;
-}
-
-.buttonXBox{
-    color: #52585E;
-
-    border-color: none;
-    border-radius: 12px;
-    background-color: #F8FAFB;
 
 
-    width: 100%;
-    height: 47px;
-    padding-left: 15px;
-}
 
 .radioBox input[type=radio] {
     accent-color: #6868D5;
@@ -117,22 +85,42 @@
 }
 
 
-/* ================================================================ */
-/* ▼▼▼ 기존 .selectBox, .dropBox 삭제 후 아래 코드로 교체 ▼▼▼ */
-/* ================================================================ */
+
+/* 버튼 */
+
+.nextButton{
+    text-align: center;
+    font-weight: bold;
+
+    border:none;
+    border-radius: 12px;
+    background-color: #6868D5;
+
+    width: 100%;
+    height: 55px;
+    cursor: pointer;
+    text-align: center;
+    color:white;
+}
+
+.arrowDown{
+    width: 24px;
+    height: 24px;
+    background: url('/images/board/downArrow') no-repeat center;
+}
 
 .customDropdown {
+  margin-top: 1%;
   position: relative;
-  width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  width: 65%;
   background-color: #fff;
   border-radius: 12px;
-  border: 1px solid #EAEBEF; /* 기존 selectBox의 border 스타일 적용 */
+  border: 1px solid #EAEBEF;
 }
 
 .dropdownHeader {
-  padding: 0 15px; /* 기존 buttonOBox의 padding-left 적용 */
-  height: 47px; /* 기존 selectBox의 height 적용 */
+  padding: 0 15px;
+  height: 47px; 
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -140,36 +128,35 @@
 }
 
 .placeholder {
-  color: #52585E; /* 기존 selectBox의 color 적용 */
-  font-size: 15px; /* 기존 selectBox의 font-size 적용 */
+  color: #52585E; 
+  font-size: 15px; 
 }
 
 .selectedValue {
-  color: #1A1E20; /* 선택되었을 때의 색상 */
+  color: #1A1E20; 
   font-size: 15px;
 }
 
-.arrowIcon {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid #888;
-  transition: transform 0.2s ease-in-out;
+.arrowDown {
+  width: 20px;
+  height: 20px;
+  background: url("/images/board/downArrow.png") no-repeat center;
 }
 
-.arrowIcon.open {
-  transform: rotate(180deg);
+.arrowDown.open {
+  width: 20px;
+  height: 20px;
+  background: url("/images/board/upArrow.png") no-repeat center;
 }
 
 .dropdownOptions {
   position: absolute;
-  top: calc(100% + 4px);
   left: 0;
   right: 0;
   background-color: #fff;
+
   border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border-top:none;
   border: 1px solid #EAEBEF;
   max-height: 200px;
   overflow-y: auto;
@@ -185,40 +172,5 @@
 }
 
 .optionItem:hover {
-  background-color: #F8FAFB; /* 기존 buttonOBox의 background-color 적용 */
-}
-
-/* ================================================================ */
-/* ▲▲▲ 여기까지 교체 ▲▲▲ */
-/* ================================================================ */
-
-
-/* 버튼 */
-.doubleButton{
-    font: 70%;
-    font-weight: bold;
-    color: #6868D5;
-    text-align: center;
-
-    border: solid 1px #6868D5;
-    border-radius: 12px;
-
-    width: 30%;
-    height: 47px;
-    margin-left: 10px;
-}
-
-.nextButton{
-    text-align: center;
-    font-weight: bold;
-
-    border:none;
-    border-radius: 12px;
-    background-color: #6868D5;
-
-    width: 100%;
-    height: 55px;
-    cursor: pointer;
-    text-align: center;
-    color:white;
+  background-color: #F2F4F5;
 }

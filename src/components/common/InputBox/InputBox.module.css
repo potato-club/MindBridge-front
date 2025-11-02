@@ -1,0 +1,126 @@
+
+.oButton{
+    align-items: center;
+    margin-bottom: 5%;
+}
+
+
+.xButton{
+    align-items: center;
+}
+
+
+.inputBoxWrapper{
+    display: flex;
+    gap: 10px; 
+    align-items: center;
+}
+
+
+
+.buttonOBox{
+    color: #52585E;
+    border: none; 
+    border-radius: 12px;
+    background-color: #F8FAFB;
+    
+    width: 65%;
+    height: 47px;
+    padding-left: 15px;
+    flex-grow: 1; 
+}
+
+.buttonOBox:focus,
+.buttonXBox:focus{
+    outline: none;
+    border: 1px solid #888e93;
+}
+
+
+.buttonXBox{
+    color: #52585E;
+
+    border: none; 
+    border-radius: 12px;
+    background-color: #F8FAFB;
+
+    width: 100%;
+    height: 47px;
+    padding-left: 15px;
+}
+
+
+.doubleButton{
+    font-size: 15px;
+    font-weight: bold;
+    color: #6868D5;
+    text-align: center;
+
+    border: solid 1px #6868D5;
+    border-radius: 12px;
+
+    width: 30%;
+    height: 47px;
+    margin-left: 10px;
+    
+    flex-shrink: 0;
+}
+
+.doubleButton:disabled {
+   font-size: 15px;
+    font-weight: bold;
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #f0f0f0;
+    color: #888;
+    border-color: #888;
+}
+
+/* 메시지 스타일 */
+.message {
+    margin-top: 5px;
+    font-size: 10px;
+    padding-left: 5px;
+}
+
+.CustomDropdown {
+  margin-top: 1%;
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1px solid #EAEBEF;
+}
+
+.dropdownHeader {
+  padding: 0 15px;
+  height: 47px; 
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.placeholder {
+  color: #52585E; 
+  font-size: 15px; 
+}
+
+.selectedValue {
+  color: #1A1E20; 
+  font-size: 15px;
+}
+
+.arrowIcon {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #888;
+  transition: transform 0.2s ease-in-out;
+}
+
+.arrowIcon.open {
+  transform: rotate(180deg);
+}
+
