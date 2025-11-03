@@ -6,6 +6,7 @@ import { useSignupContext } from "@/app/context/SignupContext";
 import styles from "./SignUpForm.module.css";
 import { useRouter } from "next/navigation";
 import InputBox from "@/components/common/InputBox";
+import axios from "axios";
 
 const SignUpForm = () => {
 
@@ -46,6 +47,22 @@ const SignUpForm = () => {
         }
     };
 
+        // 아이디 중복 검사
+    const handleCheckDuplicate = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (loginIdError || !loginid) return;
+
+        // 실제 중복 검사 API 호출 필요
+        try {
+            const res = await axios.get('/api/check-duplicate');
+            // const data = await res.json(); // 실제 사용 시 주석 해제
+            setIsLoginIdChecked(true);
+            setLoginIdDuplicate(false); // 실제 사용 시 data.isDuplicate로 변경
+        } catch (err) {
+            setLoginIdError('중복 검사 중 오류 발생');
+        }
+    };
+
     // 비밀번호 유효성 검사
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -80,21 +97,7 @@ const SignUpForm = () => {
         }
     };
 
-    // 아이디 중복 검사
-    const handleCheckDuplicate = async (e: React.MouseEvent) => {
-        e.preventDefault();
-        if (loginIdError || !loginid) return;
 
-        // 실제 중복 검사 API 호출 필요
-        try {
-            const res = await fetch('/api/check-duplicate');
-            // const data = await res.json(); // 실제 사용 시 주석 해제
-            setIsLoginIdChecked(true);
-            setLoginIdDuplicate(false); // 실제 사용 시 data.isDuplicate로 변경
-        } catch (err) {
-            setLoginIdError('중복 검사 중 오류 발생');
-        }
-    };
 
     // 전화번호 인증요청
     const handleSendCode = async (e: React.MouseEvent) => {
@@ -106,22 +109,29 @@ const SignUpForm = () => {
         }
 
         try {
-            const res = await fetch('/api/send-code', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phonenumber }),
+            const res = await axios.post('/api/send-code', {
+                phonenumber
             });
-            if (res.ok) {
+
+            if (res.status === 200 || res.status === 201) {
                 setIsCodeSent(true);
                 setVerificationCode(''); 
                 setVerificationError('');
                 alert(isCodeSent ? '인증번호가 재전송되었습니다.' : '인증번호가 발송되었습니다.');
-            } else {
+            } 
+
+           } catch (error) {
+
                 setVerificationError('인증번호 발송에 실패했습니다.');
+
+
+                if (axios.isAxiosError(error) && error.response) {
+                    console.error("서버 응답 오류:", error.response.data);
+                    
+                } else {
+                    console.error("네트워크 오류:", error);
+                }
             }
-        } catch {
-            setVerificationError('인증번호 발송 중 오류 발생');
-        }
     };
 
     // 인증번호 확인
@@ -135,21 +145,23 @@ const SignUpForm = () => {
         }
 
         try {
-            const res = await fetch('/api/verify-code', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phonenumber, code: verificationCode }),
+            const res = await axios.post('/api/verify-code', {
+               phonenumber, 
+               code: verificationCode
             });
-            if (res.ok) {
-                setIsPhoneVerified(true);
-                alert('전화번호 인증이 완료되었습니다!');
-            } else {
-                const errorData = await res.json();
-                setVerificationError(errorData.message || '인증번호가 올바르지 않습니다.');
+
+            setIsPhoneVerified(true);
+            alert('전화번호 인증이 완료되었습니다!');
+
+          } catch (error) {
+    
+                if (axios.isAxiosError(error) && error.response) {
+                    const errorMessage = error.response.data.message || '인증번호가 올바르지 않습니다.';
+                    setVerificationError(errorMessage);
+                } else {
+                    setVerificationError('인증 확인 중 오류 발생');
+                }
             }
-        } catch {
-            setVerificationError('인증 확인 중 오류 발생');
-        }
     };
 
     const buttonText = isCodeSent ? '재전송' : '인증 요청';

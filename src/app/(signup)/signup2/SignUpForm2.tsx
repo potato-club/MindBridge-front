@@ -6,6 +6,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import InputBox from "@/components/common/InputBox";
 import { useSignupContext, SignupState, Gender} from '@/app/context/SignupContext';
+import axios from "axios";
 
 type Option = {
   value: string | number;
@@ -114,13 +115,25 @@ const SignUpForm2 = () => {
         if (nicknameError || !nickname) return;
         try {
             // 실제 API 주소로 변경 필요
-            const res = await fetch(`/api/check-nickname?nickname=${encodeURIComponent(nickname)}`);
-            const data = await res.json();
-            setIsNicknameChecked(true);
-            setIsNicknameDuplicate(data.isDuplicate); // 백엔드 응답에 맞게 수정
-        } catch {
-            setNicknameError('중복 확인 중 오류가 발생했습니다.');
-        }
+            const response = await axios.get('/api/check-nickname', {
+            params: { nickname } // 
+        });
+
+        const data = response.data; 
+
+        setIsNicknameChecked(true);
+        setIsNicknameDuplicate(data.isDuplicate); // 백엔드 응답에 맞게 수정
+
+        } catch (error) {
+          setIsNicknameChecked(true); 
+          setIsNicknameDuplicate(true); 
+          setNicknameError('닉네임 중복 확인 중 오류가 발생했습니다.');
+
+          if (axios.isAxiosError(error) && error.response) {
+              console.error("닉네임 중복확인 서버 오류:", error.response.data);
+             
+          }
+      }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -164,23 +177,24 @@ const SignUpForm2 = () => {
     };
 
         // 실제 회원가입 API 호출
-        try {
-            const res = await fetch('/api/signup', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(dataToSend),
-            });
+       try {
+            const res = await axios.post('/api/signup', dataToSend); 
 
-            if (res.ok) {
+            if (res.status === 200 || res.status === 201) {
                 alert('회원가입이 완료되었습니다!');
                 dispatch({ type: 'RESET_FORM' });
                 router.push('/login');
+            } 
+            
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                const data = error.response.data;
+                alert(data.message || '회원가입에 실패했습니다. (서버 응답 오류)');
+                console.error("회원가입 실패 상세:", data);
             } else {
-                const data = await res.json();
-                alert(data.message || '회원가입에 실패했습니다.');
+                alert('회원가입 요청 중 네트워크 오류가 발생했습니다.');
+                console.error(error);
             }
-        } catch {
-            alert('회원가입 요청 중 오류가 발생했습니다.');
         }
     };
 
