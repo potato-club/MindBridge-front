@@ -6,7 +6,7 @@ import styles from './BottomNav.module.css';
 
 // 네비게이션 링크 데이터
 const navLinks = [
-  { name: '메인', path: '/', img: '/images/board/house.png', activeImg: '/images/board/house-active.png' },
+  { name: '메인', path: '/main', img: '/images/board/house.png', activeImg: '/images/board/house-active.png' },
   { name: '게시판', path: '/board/all', img: '/images/board/board.png', activeImg: '/images/board/board-active.png' },
   { name: '채팅', path: '/chat', img: '/images/board/chat.png', activeImg: '/images/board/chat-active.png' },
   { name: '마일리지', path: '/mileage', img: '/images/board/miles.png', activeImg: '/images/board/miles-active.png' },

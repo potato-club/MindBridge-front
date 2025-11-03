@@ -2,8 +2,10 @@
 
 import { useEffect, useState, useRef } from "react";
 import styles from "../signup/SignUpForm.module.css";
+import React from "react";
 import { useRouter } from "next/navigation";
 import InputBox from "@/components/common/InputBox";
+import { useSignupContext, SignupState, Gender} from '@/app/context/SignupContext';
 
 type Option = {
   value: string | number;
@@ -74,12 +76,18 @@ const genderOptions = [
 ];
 
 const SignUpForm2 = () => {
-    const [birth, setBirth] = useState<string | number>('');
-    const [nickname, setNickname] = useState('');
+    const {state: signupState, dispatch} = useSignupContext();
+
+    const initialBirth = signupState.birth_date 
+    ? (signupState.birth_date instanceof Date ? signupState.birth_date.getFullYear() : '')
+    : '';
+
+    const [birth, setBirth] = useState<string | number>(initialBirth);
+    const [nickname, setNickname] = useState(signupState.nickname || '');
     const [nicknameError, setNicknameError] = useState('');
     const [isNicknameChecked, setIsNicknameChecked] = useState(false);
     const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(false);
-    const [gender, setGender] = useState('');
+    const [gender, setGender] = useState<string>(signupState.gender || '');
 
     const router = useRouter();
 
@@ -123,7 +131,7 @@ const SignUpForm2 = () => {
             alert('닉네임을 올바르게 입력하고 중복 확인을 해주세요.');
             return;
         }
-        if (!gender) {
+        if (!gender || gender === 'none') {
             alert('성별을 선택해주세요.');
             return;
         }
@@ -132,20 +140,41 @@ const SignUpForm2 = () => {
             return;
         }
 
+        dispatch({ 
+            type: 'UPDATE_FORM_DATA',
+            payload: {
+              nickname: nickname,
+              birth_date: new Date(String(birth)),
+              gender: gender as Gender,
+            }
+        });
+
+        const dataToSend = {
+
+          loginid: signupState.loginid,
+          password: signupState.password, 
+          username: signupState.username,
+          phonenumber: signupState.phonenumber,
+          verified: signupState.verified, 
+
+         
+          nickname: nickname,
+          birth_date: new Date(String(birth)).toISOString(), 
+          gender: gender,
+    };
+
         // 실제 회원가입 API 호출
         try {
             const res = await fetch('/api/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email,
-                    nickname,
-                    gender,
-                    birth,
-                }),
+                body: JSON.stringify(dataToSend),
             });
+
             if (res.ok) {
                 alert('회원가입이 완료되었습니다!');
+                dispatch({ type: 'RESET_FORM' });
+                router.push('/login');
             } else {
                 const data = await res.json();
                 alert(data.message || '회원가입에 실패했습니다.');

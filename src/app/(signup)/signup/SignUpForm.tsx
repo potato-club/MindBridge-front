@@ -1,16 +1,18 @@
 'use client';
 
 import { useState } from "react";
+import React from "react";
+import { useSignupContext } from "@/app/context/SignupContext";
 import styles from "./SignUpForm.module.css";
 import { useRouter } from "next/navigation";
 import InputBox from "@/components/common/InputBox";
 
 const SignUpForm = () => {
 
-    const [userid, setUserId] = useState('');
-    const [userIdError, setUserIdError] = useState('');
-    const [isUserIdChecked, setIsUserIdChecked] = useState(false);
-    const [isUserIdDuplicate, setIsUserIdDuplicate] = useState(false);
+    const [loginid, setLoginId] = useState('');
+    const [loginIdError, setLoginIdError] = useState('');
+    const [isLoginIdChecked, setIsLoginIdChecked] = useState(false);
+    const [isLoginIdDuplicate, setLoginIdDuplicate] = useState(false);
 
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
@@ -21,25 +23,26 @@ const SignUpForm = () => {
     const [phonenumber, setPhoneNumber] = useState('');
 
     // 전화번호 인증 관련 상태
-    const [verificationCode, setVerificationCode] = useState('');
-    const [isCodeSent, setIsCodeSent] = useState('');
-    const [verificationError, setVerificationError] = useState('');
-    const [isPhoneVerified, setIsPhoneVerified] = useState(false);
+    const [verificationCode, setVerificationCode] = useState<string>('');
+    const [isCodeSent, setIsCodeSent] = useState<boolean>(false);
+    const [verificationError, setVerificationError] = useState<string>('');
+    const [isPhoneVerified, setIsPhoneVerified] = useState<boolean>(false);
 
     const router = useRouter();
+    const {dispatch} = useSignupContext();
 
     // 아이디 유효성 검사
     const handleUserIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        setUserId(value);
-        setIsUserIdChecked(false);
+        setLoginId(value);
+        setIsLoginIdChecked(false);
 
         if (!/^[a-zA-Z0-9]*$/.test(value)) {
-            setUserIdError('아이디는 영문, 숫자만 사용할 수 있습니다.');
+            setLoginIdError('아이디는 영문, 숫자만 사용할 수 있습니다.');
         } else if (value.length < 4 || value.length > 16) {
-            setUserIdError('아이디는 4자 이상 16자 이하로 입력해주세요.');
+            setLoginIdError('아이디는 4자 이상 16자 이하로 입력해주세요.');
         } else {
-            setUserIdError('');
+            setLoginIdError('');
         }
     };
 
@@ -80,16 +83,16 @@ const SignUpForm = () => {
     // 아이디 중복 검사
     const handleCheckDuplicate = async (e: React.MouseEvent) => {
         e.preventDefault();
-        if (userIdError || !userid) return;
+        if (loginIdError || !loginid) return;
 
         // 실제 중복 검사 API 호출 필요
         try {
             const res = await fetch('/api/check-duplicate');
             // const data = await res.json(); // 실제 사용 시 주석 해제
-            setIsUserIdChecked(true);
-            setIsUserIdDuplicate(false); // 실제 사용 시 data.isDuplicate로 변경
+            setIsLoginIdChecked(true);
+            setLoginIdDuplicate(false); // 실제 사용 시 data.isDuplicate로 변경
         } catch (err) {
-            setUserIdError('중복 검사 중 오류 발생');
+            setLoginIdError('중복 검사 중 오류 발생');
         }
     };
 
@@ -122,9 +125,15 @@ const SignUpForm = () => {
     };
 
     // 인증번호 확인
-    const handleVerifyCode = async (e: React.MouseEvent) => {
+    const handleVerifyCode = async (e: React.MouseEvent<Element>) => {
         e.preventDefault();
         setVerificationError('');
+
+        if (!verificationCode) { 
+            setVerificationError('인증번호를 입력해주세요.');
+            return;
+        }
+
         try {
             const res = await fetch('/api/verify-code', {
                 method: 'POST',
@@ -133,8 +142,10 @@ const SignUpForm = () => {
             });
             if (res.ok) {
                 setIsPhoneVerified(true);
+                alert('전화번호 인증이 완료되었습니다!');
             } else {
-                setVerificationError('인증번호가 올바르지 않습니다.');
+                const errorData = await res.json();
+                setVerificationError(errorData.message || '인증번호가 올바르지 않습니다.');
             }
         } catch {
             setVerificationError('인증 확인 중 오류 발생');
@@ -145,7 +156,7 @@ const SignUpForm = () => {
     const buttonClass = isCodeSent ? styles.resendButton : styles.sendButton;
 
     const handleNext = () => {
-        if (!isUserIdChecked || isUserIdDuplicate || userIdError) {
+        if (!isLoginIdChecked || isLoginIdDuplicate || loginIdError) {
             alert('아이디 중복검사를 완료해주세요.');
             return;
         }
@@ -161,6 +172,18 @@ const SignUpForm = () => {
             alert('전화번호 인증을 완료해주세요.');
             return;
         }
+
+        dispatch({
+            type: 'UPDATE_FORM_DATA',
+            payload: {
+                loginid,
+                password,
+                username,
+                phonenumber,
+                verified: isPhoneVerified,
+            }
+        });
+
         router.push('/signup2');
     };
 
@@ -174,13 +197,13 @@ const SignUpForm = () => {
                 type="text"
                 name="userid"
                 placeholder="아이디를 입력해주세요."
-                value={userid}
+                value={loginid}
                 onChange={handleUserIdChange}
                 buttonText="중복 확인"
                 onButtonClick={handleCheckDuplicate}
-                isButtonDisabled={!!userIdError || !userid}
-                errorMessage={userIdError}
-                successMessage={isUserIdChecked && !isUserIdDuplicate && !userIdError ? '사용 가능한 아이디입니다.' : undefined}
+                isButtonDisabled={!!loginIdError || !loginid}
+                errorMessage={loginIdError}
+                successMessage={isLoginIdChecked && !isLoginIdDuplicate && !loginIdError ? '사용 가능한 아이디입니다.' : undefined}
             />
 
             
