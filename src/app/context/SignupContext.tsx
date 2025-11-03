@@ -9,10 +9,10 @@ export type SignupState = {
 
     //2페이지
     nickname: string;
-    birth_date: Date;
+    birthDate: Date;
     gender : Gender;
-    created_at: Date;
-    updated_at: Date;
+    createdAt: Date;
+    updatedAt: Date;
 };
 
 export enum Gender {
@@ -39,10 +39,10 @@ const initialState: SignupState = {
     verified: false,
     nickname: '',
     
-    birth_date: new Date(),
+    birthDate: new Date(),
     gender : Gender.NONE,
-    created_at: new Date(),
-    updated_at: new Date(), 
+    createdAt: new Date(),
+    updatedAt: new Date(), 
 };
 
 const signupReducer = (state: SignupState, action: SignupAction): SignupState => { 

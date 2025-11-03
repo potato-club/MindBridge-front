@@ -79,15 +79,17 @@ const genderOptions = [
 const SignUpForm2 = () => {
     const {state: signupState, dispatch} = useSignupContext();
 
-    const initialBirth = signupState.birth_date 
-    ? (signupState.birth_date instanceof Date ? signupState.birth_date.getFullYear() : '')
+    const initialBirth = signupState.birthDate 
+    ? (signupState.birthDate instanceof Date ? signupState.birthDate.getFullYear() : '')
     : '';
 
     const [birth, setBirth] = useState<string | number>(initialBirth);
+
     const [nickname, setNickname] = useState(signupState.nickname || '');
     const [nicknameError, setNicknameError] = useState('');
     const [isNicknameChecked, setIsNicknameChecked] = useState(false);
     const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(false);
+
     const [gender, setGender] = useState<string>(signupState.gender || '');
 
     const router = useRouter();
@@ -115,7 +117,7 @@ const SignUpForm2 = () => {
         if (nicknameError || !nickname) return;
         try {
             // 실제 API 주소로 변경 필요
-            const response = await axios.get('/api/check-nickname', {
+            const response = await axios.get('/api/auth/signup', {
             params: { nickname } // 
         });
 
@@ -157,7 +159,7 @@ const SignUpForm2 = () => {
             type: 'UPDATE_FORM_DATA',
             payload: {
               nickname: nickname,
-              birth_date: new Date(String(birth)),
+              birthDate: new Date(String(birth)),
               gender: gender as Gender,
             }
         });
@@ -176,15 +178,19 @@ const SignUpForm2 = () => {
           gender: gender,
     };
 
-        // 실제 회원가입 API 호출
+       
        try {
-            const res = await axios.post('/api/signup', dataToSend); 
+            const res = await axios.post('/api/auth/signup', dataToSend); 
 
-            if (res.status === 200 || res.status === 201) {
+            if ((res.status === 200 || res.status === 201) && res.data.success === true) {
                 alert('회원가입이 완료되었습니다!');
+
                 dispatch({ type: 'RESET_FORM' });
                 router.push('/login');
             } 
+            else if (res.status === 200 && res.data.success === false) {
+              alert(res.data.message || '회원가입 처리 중 오류가 발생했습니다.');
+          }
             
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {

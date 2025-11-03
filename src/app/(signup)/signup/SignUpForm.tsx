@@ -54,7 +54,7 @@ const SignUpForm = () => {
 
         // 실제 중복 검사 API 호출 필요
         try {
-            const res = await axios.get('/api/check-duplicate');
+            const res = await axios.get('/api/auth/signup');
             // const data = await res.json(); // 실제 사용 시 주석 해제
             setIsLoginIdChecked(true);
             setLoginIdDuplicate(false); // 실제 사용 시 data.isDuplicate로 변경
@@ -109,7 +109,7 @@ const SignUpForm = () => {
         }
 
         try {
-            const res = await axios.post('/api/send-code', {
+            const res = await axios.post('/api/auth/signup', {
                 phonenumber
             });
 
@@ -145,7 +145,7 @@ const SignUpForm = () => {
         }
 
         try {
-            const res = await axios.post('/api/verify-code', {
+            const res = await axios.post('/api/auth/signup', {
                phonenumber, 
                code: verificationCode
             });
