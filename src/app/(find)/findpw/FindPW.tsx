@@ -1,8 +1,9 @@
 'use client';
 
 import { useState} from "react";
-import { useRouter } from "next/navigation";
+import axios from "axios";
 import styles from "./FindPW.module.css";
+import { useRouter } from "next/navigation";
 
 /* 비밀번호 찾기 폼 */
 const FindPWForm = () => {
@@ -19,13 +20,12 @@ const FindPWForm = () => {
     const handleSendCode = async (e: React.MouseEvent<HTMLButtonElement>) => {
         // 백엔드 api요청.(인증번호 요청)
         try {
-            const res = await fetch("/api/send-code", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ phone: userPhoneNumber }),
+            const res = await axios.post("/api/send-code", {
+                phons: userPhoneNumber,
             });
 
-            if (res.ok) {
+            /* 백엔드 성공 가정(수정 필요) */
+            if (res.data.success) {
                 alert("인증번호가 발송되었습니다.");
             } else {
                 alert("입력하신 정보가 올바르지 않습니다.");
@@ -39,13 +39,13 @@ const FindPWForm = () => {
     /* 인증확인 */
     const handleVerifyCode = async () => {
         try {
-                const res = await fetch("/api/verify-code", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ phone: userPhoneNumber, code: userVerificationCode }),
+                const res = await axios.post("/api/verify-code", {
+                    phone: userPhoneNumber, 
+                    code: userVerificationCode,
                 });
                 
-                if (res.ok) {
+                /* 백엔드 성공 가정(수정 필요) */
+                if (res.data.success) {
                     setVerifyMessage("인증이 완료되었습니다.");
                 } else {
                     setVerifyMessage("인증번호가 올바르지 않습니다.");
@@ -61,18 +61,15 @@ const FindPWForm = () => {
         // 백엔드 api요쳥(인증번호 확인)
 
         try {
-            const res = await fetch("/api/find-password", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    id: userID,
-                    name: userName,
-                    phone: userPhoneNumber,
-                    code: userVerificationCode,
-                }),
+            const res = await axios.post("/api/find-password", {
+                id: userID,
+                name: userName,
+                phone: userPhoneNumber,
+                code: userVerificationCode,
+                
             });
 
-            if (res.ok) {
+            if (res.data.success) {
                 router.push("/PWReset");
             } else {
                 alert("정보가 올바르지 않거나 인증에 실패했습니다.");

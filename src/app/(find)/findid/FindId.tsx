@@ -1,8 +1,9 @@
 'use client';
 
-import { useState} from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import axios from "axios";
 import styles from "./FindId.module.css";
+import { useRouter } from "next/navigation";
 
 /* 아이디/비밀번호 찾기 폼 */
 const FindIdForm = () => {
@@ -14,17 +15,18 @@ const FindIdForm = () => {
 
     const router = useRouter();
 
+    /* 인증번호 발송 */
     const handleSendCode = async(e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         // api 구현(백엔드 요청)해야 함!
         try {
-            const res = await fetch("/api/send-code", {
-                method: "POST",
-                headers: {"Content-Type": "application/json" },
-                body: JSON.stringify({ phone: userPhoneNumber }),
+            const res = await axios.post("/api/send-code", {
+                phone: userPhoneNumber,
             });
 
-            if (res.ok) {
+
+            // 백엔드 성공 가정(수정 필요)
+            if (res.data.success) {
                 alert("인증번호가 발송되었습니다.");
             } else {
                 alert("개인정보가 틀렸습니다.");
@@ -40,16 +42,15 @@ const FindIdForm = () => {
     e.preventDefault();
     // api요청
     try {
-        const res = await fetch("/api/verify-code", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                phone: userPhoneNumber, 
-                code: userVerificationCode
-            }),
+        const res = await axios.post("/api/verify-code", {
+            phone: userPhoneNumber,
+            code: userVerificationCode,
+            
         });
 
-        if (res.ok) {
+
+        /* 백엔드 성공 가정(수정 필요) */
+        if (res.data.success) {
             setVerifyMessage("인증이 완료되었습니다!");
         } else {
             setVerifyMessage("인증번호를 확인해주세요!");
@@ -68,20 +69,16 @@ const FindIdForm = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch("/api/find-id", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: userName, 
-                    phone: userPhoneNumber,
-                    code: userVerificationCode,
-                }),
+            const res = await axios.post("/api/find-id", {
+                name: userName,
+                phone: userPhoneNumber,
+                code: userVerificationCode,
             });
 
-            if (res.ok) {
-                const data = await res.json();
+            /* 백엔드 성공 가정(수정 필요) */
+            if (res.data.userId) {
                 // IDCheck 페이지로 userId 전달.
-                router.push(`/IDCheck?userId=${encodeURIComponent(data.userId)}`);
+                router.push(`/IDCheck?userId=${encodeURIComponent(res.data.userId)}`);
             } else {
                 alert("아이디 찾기에 실패했습니다.");
             }

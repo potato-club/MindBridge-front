@@ -5,6 +5,7 @@ import styles from "./IDCheck.module.css";
 
 const IDCheckForm = () => {
   const searchParams = useSearchParams();
+  
   const router = useRouter();
 
   // URL에서 가져오기

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import axios from "axios";
 import styles from "./Login.module.css";
 import { useRouter } from "next/navigation";
 
@@ -12,30 +13,23 @@ const LoginForm = () => {
     const [userPassword, setUserPassword] = useState("");
 
     const router = useRouter();
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
             // 백엔드 API 로그인 요청이랄까...
-            const response = await fetch("백엔드 주소?",{
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: userId, password: userPassword }),
-        }); 
+            const response = await axios.post("https://your-backend-api/login", {
+                id: userId,
+                password: userPassword,
+            });
+    
 
-        if (!response.ok) {
-            throw new Error("로그인 실패"); 
-        }
-
-            const data = await response.json();
-            const accessToken = data.accessToken;
-
-            // 로컬 스토리지에 토큰 저장(아마도,,)
-            localStorage.setItem("accessToken", accessToken);
-
-            router.push("/Main"); // 메인페이지 연동해야함.
-        } catch (err) {
-            console.error(err);
+       //백엔드 응담 처리 시 다시 정리해야함.
+        
+            router.push("/"); // 로그인 성공 시 메인 페이지로 이동
+        } catch (err: any) {
+            console.error("로그인 에러:", err);
             alert("아이디와 비밀번호를 확인해주세요.");
         }
     };
