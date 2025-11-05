@@ -39,8 +39,8 @@
     margin-top: 8px;
 }
 
-.UserId,
-.UserPassword {
+.UserId ,
+.UserPassword  {
     width: 100%;
     max-width: 360px;
     padding: 14px;
@@ -51,15 +51,25 @@
     
     color:#444;
     font-size: 15px;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.UserId input:hover,
-.UserPassword input:hover {
+.UserId:hover,
+.UserPassword:hover {
+    border-color: black;
+}
+
+.UserId input,
+.UserPassword input {
     width: 100%;
-    max-width: 360px;
-    border-color: #3bc4ff;
-    outline: #444;
+    border: none;
+    font-size: 15px;
+    color: #444;
+}
+
+.UserId input:focus,
+.UserPassword input:focus {
+    outline: none;;
 }
 
 
@@ -92,25 +102,26 @@
 }
 
 
-.LoginFooter {
+.BtnContainer {
     display: flex;
     justify-content: space-between;
     width: 100%;
     max-width: 360px;
-    margin-top: 32px;
+    margin: 0 auto;
+    margin-top: 16px;
 }
 
-.FindIdAndPassword button,
+.Find button,
 .SignUp button {
-    background: none;
-    border: none;
+    padding: 1px 13px;
     font-size: 14px;
-    color: #555;
+    border: none;
     cursor: pointer;
-    transition: color 0.2s;
+    background: transparent;
+    color: #555;
 }
 
-.FindIdAndPassword button:hover,
+.Find button:hover,
 .SignUp button:hover {
     color: #333;
 }
@@ -124,7 +135,7 @@
         padding: 16px;
     }
 
-    .LoginFooter {
+    .BtnContainer {
         flex-direction: column;
         align-items: center;
         gap: 8px;

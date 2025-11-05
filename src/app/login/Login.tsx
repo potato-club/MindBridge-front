@@ -110,10 +110,10 @@ const LoginForm = () => {
                     </div> 
 
                     {/* 하단 영역 */}
-                    <div className={styles.LoginFooter}>
+                    <div className={styles.BtnContainer}>
                         {/* 아이디/비밀번호 찾기 */}
                         {/* 페이지 이동 구현 중 */}
-                        <div className={styles.FindIdAndPassword}>
+                        <div className={styles.Find}>
                             <button type="button"
                             onClick={() => router.push("/find")}> 
                                 아이디/비밀번호 찾기
