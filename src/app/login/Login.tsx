@@ -24,13 +24,49 @@ const LoginForm = () => {
                 password: userPassword,
             });
     
+            const accessToken = response.data?.accessToken || response.data?.token;
 
-       //백엔드 응담 처리 시 다시 정리해야함.
-        
+            if (!accessToken) {
+                console.error("로그인 실패: 액세스 토큰이 없습니다.");
+                alert("로그인에 실패하였습니다.");
+                return;
+            }
+
+            // 토큰을 로컬 스토리지에 저장
+            localStorage.setItem("accessToken", accessToken);
+
+            axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
+            alert("로그인에 성공하였습니다.");
             router.push("/"); // 로그인 성공 시 메인 페이지로 이동
-        } catch (err: any) {
-            console.error("로그인 에러:", err);
-            alert("아이디와 비밀번호를 확인해주세요.");
+
+        } catch (err: unknown) {
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    // 서버가 응답을 보낸 경우 (4xx, 5xx 등)
+                    console.error("서버 응답 에러:", err.response.data);
+
+                    if (err.response.status === 401) {
+                        alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+                    } else if (err.response.status === 404) {
+                        alert("해당 사용자가 존재하지 않습니다.");
+                    } else {
+                        alert("로그인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+                    }
+                } else if (err.request) {
+                    // 요청이 전송되었으나 서버 응답이 없는 경우
+                    console.error("서버 응답 없음:", err.request);
+                    alert("서버 응답이 없습니다. 네트워크를 확인해주세요.");
+                } else {
+                    // 요청 설정 중 에러가 발생한 경우
+                    console.error("요청 설정 에러:", err.message);
+                    alert("요청 중 문제가 발생했습니다.");
+                }
+            } else {
+                // Axios 외의 예외적인 에러 처리
+                console.error("예상치 못한 에러:", err);
+                alert("알 수 없는 오류가 발생했습니다.");
+            }
         }
     };
 
