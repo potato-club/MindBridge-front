@@ -7,9 +7,8 @@ import { useRouter } from "next/navigation";
 
 
 
-/* 로그인 폼 */
 const LoginForm = () => {
-    const [userId, setUserId] = useState("");
+    const [loginId, setLoginId] = useState("");
     const [password, setPassword] = useState("");
 
     const router = useRouter();
@@ -18,9 +17,10 @@ const LoginForm = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("/api/auth/login", {
-                id: userId,
-                password: password,
+            const response = await axios.post("/api/auth/login",
+            {
+               loginId,
+               password,
             });
     
             const accessToken = response.data?.accessToken || response.data?.token;
@@ -84,8 +84,8 @@ const LoginForm = () => {
                     {/* 아이디 */}
                     <div className={styles.UserId}>
                         <input type="text"
-                            value={userId}
-                            onChange={(e) => setUserId(e.target.value)}
+                            value={loginId}
+                            onChange={(e) => setLoginId(e.target.value)}
                             placeholder="아이디 입력" 
                         />
                     </div>
