@@ -1,0 +1,143 @@
+/* 전체 컨테이너 */
+.Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 420px;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: 24px;
+
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+/* 모바일에서 숨겨둠. */
+.header {
+    display: none;
+}
+
+.LogoAndAppName {
+    text-align: center;
+    margin-bottom: 15%;
+} 
+
+/* 로고 나중에 변경 */
+.AppName {
+    font-size: 28px;
+    font-weight: bold;
+    color: #3bc4ff;
+} 
+
+.AppDescription {
+    font-size: 14px;
+    color: #888;
+    margin-top: 8px;
+}
+
+.UserId ,
+.UserPassword  {
+    width: 100%;
+    max-width: 360px;
+    padding: 14px;
+    margin-bottom: 14px;
+    
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    
+    color:#444;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.UserId:hover,
+.UserPassword:hover {
+    border-color: black;
+}
+
+.UserId input,
+.UserPassword input {
+    width: 100%;
+    border: none;
+    font-size: 15px;
+    color: #444;
+}
+
+.UserId input:focus,
+.UserPassword input:focus {
+    outline: none;;
+}
+
+
+
+/* 로그인 버튼 */
+.LoginButton {
+    width: 100%;
+    max-width: 360px;
+    margin-top: 24px;
+}
+
+
+.LoginButton button {
+    width: 100%;
+    height: 52px;
+
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+
+    background: #6868d5;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.LoginButton button:hover {
+    background:#5858c0;
+}
+
+
+.BtnContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    margin-top: 16px;
+}
+
+.Find button,
+.SignUp button {
+    padding: 1px 13px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: #555;
+}
+
+.Find button:hover,
+.SignUp button:hover {
+    color: #333;
+}
+
+@media (max-width: 480px) {
+    .AppName {
+        font-size: 24px;
+    }
+
+    .Container {
+        padding: 16px;
+    }
+
+    .BtnContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+}
