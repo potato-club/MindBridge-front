@@ -71,19 +71,35 @@ const CustomDropdown = ({ options, value, onChange, placeholder }: CustomDropdow
 
 
 const genderOptions = [
-    { value: 'male', label: '  남성' },
-    { value: 'female', label: '  여성'},
-    { value: 'none' , label: '  비공개'}
+    { value: 'MALE', label: '  남성' },
+    { value: 'FEMALE', label: '  여성'},
+    { value: 'NONE' , label: '  비공개'}
 ];
 
 const SignUpForm2 = () => {
     const {state: signupState, dispatch} = useSignupContext();
 
-    const initialBirth = signupState.birthDate 
-    ? (signupState.birthDate instanceof Date ? signupState.birthDate.getFullYear() : '')
-    : '';
+    const [initialYear, initialMonth, initialDay] = signupState.birthDate
+      ? signupState.birthDate.split('-')
+      : ['', '', ''];
 
-    const [birth, setBirth] = useState<string | number>(initialBirth);
+
+    const monthOptions = Array.from({ length: 12 }, (_, i) => ({
+      value: String(i + 1).padStart(2, '0'), 
+      label: `${i + 1}월`
+    }));
+
+    const dayOptions = Array.from({ length: 31 }, (_, i) => ({
+      value: String(i + 1).padStart(2, '0'), 
+      label: `${i + 1}일`
+    }));
+
+
+
+    const [birthYear, setBirthYear] = useState<string | number>(initialYear || '');
+    const [birthMonth, setBirthMonth] = useState<string | number>( initialMonth || ''); 
+    const [birthDay, setBirthDay] = useState<string | number>( initialDay || '');     
+
 
     const [nickname, setNickname] = useState(signupState.nickname || '');
     const [nicknameError, setNicknameError] = useState('');
@@ -95,14 +111,13 @@ const SignUpForm2 = () => {
     const router = useRouter();
 
 
-    const handleBirthChange = (selectedValue: string | number) => {
-        setBirth(selectedValue);
-    }
     // 닉네임 유효성 검사
     const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setNickname(value);
+
         setIsNicknameChecked(false);
+        setIsNicknameDuplicate(false);
 
         // 한글, 영문, 숫자 2~10자
         if (!/^[가-힣a-zA-Z0-9]{2,10}$/.test(value)) {
@@ -114,29 +129,43 @@ const SignUpForm2 = () => {
 
     // 닉네임 중복확인
     const handleCheckNickname = async () => {
-        if (nicknameError || !nickname) return;
-        try {
-            // 실제 API 주소로 변경 필요
-            const response = await axios.get('/api/auth/signup', {
-            params: { nickname } // 
-        });
 
+    if (nicknameError || !nickname) return;
+
+    try {
+        const response = await axios.get('/api/auth/check-nickname', {
+            params: { nickname } 
+        });
+        
         const data = response.data; 
 
-        setIsNicknameChecked(true);
-        setIsNicknameDuplicate(data.isDuplicate); // 백엔드 응답에 맞게 수정
+        setIsNicknameChecked(true); 
+        
+        if (data.isDuplicate) {
+            setIsNicknameDuplicate(true);
+            setNicknameError('이미 사용 중인 닉네임입니다.');
+        } else {
+            setIsNicknameDuplicate(false);
+            setNicknameError(''); 
+        }
 
-        } catch (error) {
-          setIsNicknameChecked(true); 
-          setIsNicknameDuplicate(true); 
-          setNicknameError('닉네임 중복 확인 중 오류가 발생했습니다.');
+    } catch (error) {
+        setIsNicknameChecked(true); 
+        setIsNicknameDuplicate(true); 
+        setNicknameError('닉네임 중복 확인 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
 
-          if (axios.isAxiosError(error) && error.response) {
-              console.error("닉네임 중복확인 서버 오류:", error.response.data);
-             
-          }
-      }
-    };
+        if (axios.isAxiosError(error) && error.response) {
+            if (error.response.status === 409) {
+                 setIsNicknameDuplicate(true);
+                 setNicknameError(error.response.data.message || '이미 사용 중인 닉네임입니다. (서버 오류 코드 409)');
+            } else {
+                console.error("닉네임 중복확인 서버 오류:", error.response.data);
+            }
+        } else {
+            console.error("닉네임 중복확인 네트워크 오류:", error);
+        }
+    }
+};
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -146,27 +175,29 @@ const SignUpForm2 = () => {
             alert('닉네임을 올바르게 입력하고 중복 확인을 해주세요.');
             return;
         }
-        if (!gender || gender === 'none') {
+        if (!gender || gender === 'NONE') {
             alert('성별을 선택해주세요.');
             return;
         }
-        if (!birth) {
-            alert('출생년도를 선택해주세요.');
+         if (!birthYear || !birthMonth || !birthDay) {
+            alert('출생 년/월/일을 모두 선택해주세요.');
             return;
         }
+
+        const formattedBirthDate = `${birthYear}-${birthMonth}-${birthDay}`;
 
         dispatch({ 
             type: 'UPDATE_FORM_DATA',
             payload: {
               nickname: nickname,
-              birthDate: new Date(String(birth)),
+              birthDate: formattedBirthDate,
               gender: gender as Gender,
             }
         });
 
         const dataToSend = {
 
-          loginid: signupState.loginid,
+          loginId: signupState.loginId,
           password: signupState.password, 
           username: signupState.username,
           phonenumber: signupState.phonenumber,
@@ -174,7 +205,7 @@ const SignUpForm2 = () => {
 
          
           nickname: nickname,
-          birth_date: new Date(String(birth)).toISOString(), 
+          birthDate: formattedBirthDate, 
           gender: gender,
     };
 
@@ -221,7 +252,7 @@ const SignUpForm2 = () => {
                     <div className={styles.oButton}>
                             <InputBox
                                 label="닉네임"
-                                type="text"
+                                type="string"
                                 name="nickname"
                                 value={nickname}
                                 placeholder="닉네임을 입력해주세요."
@@ -252,16 +283,34 @@ const SignUpForm2 = () => {
                             ))}
                         </div>
                     </div>
-
-                    <div className={styles.customDropdownBox}>
-                        <p className={styles.bodyText}>나이</p>
-                        <CustomDropdown
-                          options={yearOptions}
-                          value={birth}
-                          onChange={handleBirthChange} 
-                          placeholder="태어난 년도를 선택해주세요."
+                <p className={styles.bodyText}>생년월일</p>
+                <div className={styles.birthBox}>
+                  
+                   <div className={styles.customDropdownBox}>
+                      <CustomDropdown
+                        options={yearOptions}
+                        value={birthYear}
+                        onChange={setBirthYear} 
+                        placeholder="년"
                       />
-                    </div>
+                  </div>
+                  <div className={styles.customDropdownBox}>
+                      <CustomDropdown
+                        options={monthOptions}
+                        value={birthMonth}
+                        onChange={setBirthMonth}
+                        placeholder="월"
+                      />
+                  </div><div className={styles.customDropdownBox}>
+                      <CustomDropdown
+                        options={dayOptions}
+                        value={birthDay}
+                        onChange={setBirthDay}
+                        placeholder="일"
+                      />
+                  </div>
+               </div>
+ 
                     <div className={styles.bottomButtonBox2}>
                         <button type="submit" className={styles.nextButton}>가입하기</button>
                     </div>

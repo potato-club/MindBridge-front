@@ -5,7 +5,7 @@ import styles from './InputBox.module.css';
 
 interface InputBoxProps {
     label: string; 
-    type: 'text' | 'password' | 'number';
+    type: 'string' | 'password' | 'number';
     name: string;
     placeholder: string;
     value: string;

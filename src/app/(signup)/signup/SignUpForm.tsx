@@ -10,7 +10,7 @@ import axios from "axios";
 
 const SignUpForm = () => {
 
-    const [loginid, setLoginId] = useState('');
+    const [loginId, setLoginId] = useState('');
     const [loginIdError, setLoginIdError] = useState('');
     const [isLoginIdChecked, setIsLoginIdChecked] = useState(false);
     const [isLoginIdDuplicate, setLoginIdDuplicate] = useState(false);
@@ -21,6 +21,7 @@ const SignUpForm = () => {
     const [passwordCheckError, setPasswordCheckError] = useState('');
 
     const [username, setName] = useState('');
+    
     const [phonenumber, setPhoneNumber] = useState('');
 
     // 전화번호 인증 관련 상태
@@ -48,18 +49,46 @@ const SignUpForm = () => {
     };
 
         // 아이디 중복 검사
-    const handleCheckDuplicate = async (e: React.MouseEvent) => {
-        e.preventDefault();
-        if (loginIdError || !loginid) return;
 
-        // 실제 중복 검사 API 호출 필요
+        const handleCheckDuplicate = async (e) => {
+        e.preventDefault();
+        if (loginIdError || !loginId) {
+            console.error('아이디를 올바르게 입력하거나 오류를 해결해주세요.');
+            return;
+        }
+
         try {
-            const res = await axios.get('/api/auth/signup');
-            // const data = await res.json(); // 실제 사용 시 주석 해제
+            const res = await axios.get('/api/auth/check-id', {
+                params: {
+                    loginId: loginId
+                }
+            });
+
+            const data = res.data; 
+
             setIsLoginIdChecked(true);
-            setLoginIdDuplicate(false); // 실제 사용 시 data.isDuplicate로 변경
+            
+ 
+            if (data.isDuplicate) {
+                setLoginIdDuplicate(true);
+                setLoginIdError('이미 사용 중인 아이디입니다.');
+            } else {
+                setLoginIdDuplicate(false);
+                setLoginIdError(''); // 오류 메시지 초기화
+            }
+            
         } catch (err) {
-            setLoginIdError('중복 검사 중 오류 발생');
+         
+            if (axios.isAxiosError(err) && err.response && err.response.status === 409) {
+                setLoginIdDuplicate(true);
+                setLoginIdError(err.response.data.message || '이미 사용 중인 아이디입니다.');
+            } else {
+            
+                setLoginIdError('중복 검사 중 오류 발생');
+                console.error('중복 검사 중 오류 발생:', err);
+            }
+            setIsLoginIdChecked(false); 
+            setLoginIdDuplicate(false);
         }
     };
 
@@ -98,8 +127,7 @@ const SignUpForm = () => {
     };
 
 
-
-    // 전화번호 인증요청
+   // 인증번호발송
     const handleSendCode = async (e: React.MouseEvent) => {
         e.preventDefault();
         setVerificationError('');
@@ -109,9 +137,9 @@ const SignUpForm = () => {
         }
 
         try {
-            const res = await axios.post('/api/auth/signup', {
-                phonenumber
-            });
+            const res = await axios.post('/api/sms/send',
+               { phonenumber }
+            );
 
             if (res.status === 200 || res.status === 201) {
                 setIsCodeSent(true);
@@ -119,6 +147,7 @@ const SignUpForm = () => {
                 setVerificationError('');
                 alert(isCodeSent ? '인증번호가 재전송되었습니다.' : '인증번호가 발송되었습니다.');
             } 
+
 
            } catch (error) {
 
@@ -145,12 +174,12 @@ const SignUpForm = () => {
         }
 
         try {
-            const res = await axios.post('/api/auth/signup', {
+            const res = await axios.post('/api/sms/verify', {
                phonenumber, 
                code: verificationCode
             });
-
-            setIsPhoneVerified(true);
+            
+            setIsPhoneVerified(false);
             alert('전화번호 인증이 완료되었습니다!');
 
           } catch (error) {
@@ -188,7 +217,7 @@ const SignUpForm = () => {
         dispatch({
             type: 'UPDATE_FORM_DATA',
             payload: {
-                loginid,
+                loginId,
                 password,
                 username,
                 phonenumber,
@@ -206,14 +235,14 @@ const SignUpForm = () => {
             <form className={styles.wrapper_main}>
                 <InputBox
                 label="아이디"
-                type="text"
+                type="string"
                 name="userid"
                 placeholder="아이디를 입력해주세요."
-                value={loginid}
+                value={loginId}
                 onChange={handleUserIdChange}
                 buttonText="중복 확인"
                 onButtonClick={handleCheckDuplicate}
-                isButtonDisabled={!!loginIdError || !loginid}
+                isButtonDisabled={!!loginIdError || !loginId}
                 errorMessage={loginIdError}
                 successMessage={isLoginIdChecked && !isLoginIdDuplicate && !loginIdError ? '사용 가능한 아이디입니다.' : undefined}
             />
@@ -243,7 +272,7 @@ const SignUpForm = () => {
            
             <InputBox
                 label="이름"
-                type="text"
+                type="string"
                 name="name"
                 placeholder="이름을 입력해주세요."
                 value={username}

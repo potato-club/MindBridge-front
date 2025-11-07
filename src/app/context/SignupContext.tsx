@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext } from 'react';
 
 export type SignupState = {
-    loginid: string;
+    loginId: string;
     password: string;
     username: string;
     phonenumber: string;
@@ -9,20 +9,21 @@ export type SignupState = {
 
     //2페이지
     nickname: string;
-    birthDate: Date;
+    birthDate: string;//날짜 타입
     gender : Gender;
-    createdAt: Date;
-    updatedAt: Date;
+    // createdAt: Date;
+    // updatedAt: Date;
 };
 
 export enum Gender {
     MALE = 'MALE',
-    FEMAILE = 'FEMALE',
+    FEMALE = 'FEMALE',
     NONE = 'NONE'
 }
 
+
 export type SignupAction = 
-    | { type: 'UPDATE_FORM_DATA'; payload: Partial<SignupState> } // Partial은 상태의 일부만 업데이트할 때 사용
+    | { type: 'UPDATE_FORM_DATA'; payload: Partial<SignupState> } 
     | { type: 'RESET_FORM' };
 
 
@@ -32,17 +33,17 @@ export type SignupContextType = {
 };
 
 const initialState: SignupState = {
-    loginid: '',
+    loginId: '',
     password: '',
     username: '',
     phonenumber: '',
     verified: false,
     nickname: '',
     
-    birthDate: new Date(),
+    birthDate: '',
     gender : Gender.NONE,
-    createdAt: new Date(),
-    updatedAt: new Date(), 
+    // createdAt: new Date(),
+    // updatedAt: new Date(), 
 };
 
 const signupReducer = (state: SignupState, action: SignupAction): SignupState => { 
