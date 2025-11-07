@@ -17,12 +17,13 @@ const SignUpForm = () => {
 
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [passwordCheck, setPasswordCheck] = useState('');
-    const [passwordCheckError, setPasswordCheckError] = useState('');
+    
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
     const [username, setName] = useState('');
     
-    const [phonenumber, setPhoneNumber] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
 
     // 전화번호 인증 관련 상태
     const [verificationCode, setVerificationCode] = useState<string>('');
@@ -107,22 +108,22 @@ const SignUpForm = () => {
         }
 
         // 비밀번호 확인과 일치 여부 검사
-        if (passwordCheck && value !== passwordCheck) {
-            setPasswordCheckError('비밀번호가 일치하지 않습니다.');
+        if (confirmPassword && value !== confirmPassword) {
+            setConfirmPasswordError('비밀번호가 일치하지 않습니다.');
         } else {
-            setPasswordCheckError('');
+            setConfirmPasswordError('');
         }
     };
 
     // 비밀번호 확인 유효성 검사
     const handlePasswordCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        setPasswordCheck(value);
+        setConfirmPassword(value);
 
         if (password && value !== password) {
-            setPasswordCheckError('비밀번호가 일치하지 않습니다.');
+            setConfirmPasswordError('비밀번호가 일치하지 않습니다.');
         } else {
-            setPasswordCheckError('');
+            setConfirmPasswordError('');
         }
     };
 
@@ -137,8 +138,8 @@ const SignUpForm = () => {
         }
 
         try {
-            const res = await axios.post('/api/sms/send',
-               { phonenumber }
+            const res = await axios.post('https://mindbridge.today/api/sms/send',
+               { phoneNumber }
             );
 
             if (res.status === 200 || res.status === 201) {
@@ -175,11 +176,11 @@ const SignUpForm = () => {
 
         try {
             const res = await axios.post('/api/sms/verify', {
-               phonenumber, 
+               phoneNumber, 
                code: verificationCode
             });
             
-            setIsPhoneVerified(false);
+            setIsPhoneVerified(true);
             alert('전화번호 인증이 완료되었습니다!');
 
           } catch (error) {
@@ -205,7 +206,7 @@ const SignUpForm = () => {
             alert('비밀번호를 올바르게 입력해주세요.');
             return;
         }
-        if (passwordCheckError || !passwordCheck) {
+        if (confirmPasswordError || !confirmPassword) {
             alert('비밀번호 확인이 일치하지 않습니다.');
             return;
         }
@@ -219,8 +220,9 @@ const SignUpForm = () => {
             payload: {
                 loginId,
                 password,
+                confirmPassword,
                 username,
-                phonenumber,
+                phoneNumber,
                 verified: isPhoneVerified,
             }
         });
@@ -264,9 +266,9 @@ const SignUpForm = () => {
                 type="password"
                 name="passwordCheck"
                 placeholder="비밀번호를 다시 입력해주세요."
-                value={passwordCheck}
+                value={confirmPassword}
                 onChange={handlePasswordCheckChange}
-                errorMessage={passwordCheckError}
+                errorMessage={confirmPasswordError}
             />
             
            
@@ -285,14 +287,14 @@ const SignUpForm = () => {
                 type="number"
                 name="phonenumber"
                 placeholder="전화번호를 입력해주세요."
-                value={phonenumber}
+                value={phoneNumber}
                 onChange={e => setPhoneNumber(e.target.value)}
                 disabled={isPhoneVerified}
 
                 buttonText={isCodeSent ? "재전송" : "인증요청"}
                 onButtonClick={handleSendCode}
 
-                isButtonDisabled={!phonenumber || isPhoneVerified}
+                isButtonDisabled={!phoneNumber || isPhoneVerified}
             />
 
             <InputBox

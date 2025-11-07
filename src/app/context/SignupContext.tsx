@@ -3,8 +3,9 @@ import React, { createContext, useReducer, useContext } from 'react';
 export type SignupState = {
     loginId: string;
     password: string;
+    confirmPassword: string;
     username: string;
-    phonenumber: string;
+    phoneNumber: string;
     verified: boolean;
 
     //2페이지
@@ -35,8 +36,9 @@ export type SignupContextType = {
 const initialState: SignupState = {
     loginId: '',
     password: '',
+    confirmPassword: '',
     username: '',
-    phonenumber: '',
+    phoneNumber: '',
     verified: false,
     nickname: '',
     

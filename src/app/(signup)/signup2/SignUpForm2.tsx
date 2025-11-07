@@ -110,7 +110,6 @@ const SignUpForm2 = () => {
 
     const router = useRouter();
 
-
     // 닉네임 유효성 검사
     const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -199,8 +198,9 @@ const SignUpForm2 = () => {
 
           loginId: signupState.loginId,
           password: signupState.password, 
+          confirmPassword: signupState.confirmPassword,
           username: signupState.username,
-          phonenumber: signupState.phonenumber,
+          phoneNumber: signupState.phoneNumber,
           verified: signupState.verified, 
 
          
