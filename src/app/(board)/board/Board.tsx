@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import styles from './Board.module.css';
-import Searchbox from "../components/Searchbox";
+import Searchbox from "@/components/searchBox/Searchbox";
 import PopularPosts from "./popularPost/PopularPost"; 
 import { 
     Post, 

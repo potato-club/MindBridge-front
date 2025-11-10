@@ -16,3 +16,66 @@
     font-size: 18px;
     font-weight: 600;
 }
+
+.dropBox {
+  position: relative;
+  width: 90%;
+  margin: 5%;
+}
+
+.dropdownHeader {
+   display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    
+    cursor: pointer;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1A1E20;
+}
+
+.categoryContainer {
+  overflow-x: auto; /* 가로 스크롤 가능하도록 */
+  margin-top: 5%;
+
+}
+
+.categoryContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.categoryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; 
+  gap: 0.5rem;
+  white-space: nowrap; 
+}
+
+.categoryItem {
+  border: none;
+  border-radius: 50px;
+  background-color: #f3f4f6;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+  padding: 8px 16px; 
+  flex-shrink: 0; 
+}
+
+.categoryItem:hover {
+  background-color: #e5e7eb;
+}
+
+.categoryItem.active {
+  background-color: #6868D5; 
+  color: white;
+  border-color: #6868D5;
+}

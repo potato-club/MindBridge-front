@@ -139,7 +139,7 @@ const SignUpForm = () => {
 
         try {
             const res = await axios.post('https://mindbridge.today/api/sms/send',
-               { phoneNumber }
+               { phoneNumber } 
             );
 
             if (res.status === 200 || res.status === 201) {
@@ -175,7 +175,8 @@ const SignUpForm = () => {
         }
 
         try {
-            const res = await axios.post('/api/sms/verify', {
+            const res = await axios.post('/api/sms/verify',
+            {
                phoneNumber, 
                code: verificationCode
             });
@@ -238,7 +239,7 @@ const SignUpForm = () => {
                 <InputBox
                 label="아이디"
                 type="string"
-                name="userid"
+                name="userId"
                 placeholder="아이디를 입력해주세요."
                 value={loginId}
                 onChange={handleUserIdChange}
@@ -285,7 +286,7 @@ const SignUpForm = () => {
             <InputBox
                 label="전화번호"
                 type="number"
-                name="phonenumber"
+                name="phoneNumber"
                 placeholder="전화번호를 입력해주세요."
                 value={phoneNumber}
                 onChange={e => setPhoneNumber(e.target.value)}

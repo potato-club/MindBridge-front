@@ -4,7 +4,7 @@
 
 import { useState, FormEvent } from 'react';
 import Image from 'next/image'; // next/image 모듈에서 Image 컴포넌트를 가져옵니다.
-import styles from '.././board/Board.module.css';
+import styles from '@/app/(board)/board/Board.module.css';
 
 // 부모 컴포넌트로부터 받을 props의 타입을 정의합니다.
 type SearchboxProps = {

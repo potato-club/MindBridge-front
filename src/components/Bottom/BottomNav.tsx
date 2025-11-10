@@ -14,14 +14,13 @@ const navLinks = [
 ];
 
 // 이 컴포넌트를 숨길 페이지 경로 목록
-const HIDE_NAV_PATHS = ['/signup', '/signup2', '/board/postDetail/', '/login'];
+const HIDE_NAV_PATHS = ['/signup', '/signup2', '/board/postDetail/', '/login','/board/postWrite'];
 
 const BottomNav = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  // 1. 현재 경로가 숨겨야 할 경로인지 확인합니다.
-  // '/signup/step2' 같은 하위 경로도 확인하기 위해 startsWith를 사용합니다.
+  // '/signup/step2' 같은 하위 경로도 확인하기 위해 startsWith를 사요ㅇ
   const shouldHideNav = HIDE_NAV_PATHS.some(path => pathname.startsWith(path));
 
   // 2. 숨겨야 하는 페이지라면 아무것도 표시하지 않습니다 (null).
@@ -33,8 +32,8 @@ const BottomNav = () => {
     <nav className={styles.nav}>
       <div className={styles.navInner}>
         {navLinks.map((link) => {
-          // 현재 경로가 해당 링크의 경로로 시작하는지 확인하여 활성화 상태를 결정합니다.
-          // 단, 메인('/') 경로는 정확히 일치할 때만 활성화합니다.
+          // 현재 경로가 해당 링크의 경로로 시작하는지 확인하여 활성화 상태를 결정
+          // 메인('/') 경로는 정확히 일치할 때만 활성화합니다.
           const isActive = (link.path !== '/' && pathname.startsWith(link.path)) || pathname === link.path;
 
           return (

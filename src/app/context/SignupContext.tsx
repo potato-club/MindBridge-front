@@ -12,8 +12,7 @@ export type SignupState = {
     nickname: string;
     birthDate: string;//날짜 타입
     gender : Gender;
-    // createdAt: Date;
-    // updatedAt: Date;
+  
 };
 
 export enum Gender {
@@ -44,8 +43,6 @@ const initialState: SignupState = {
     
     birthDate: '',
     gender : Gender.NONE,
-    // createdAt: new Date(),
-    // updatedAt: new Date(), 
 };
 
 const signupReducer = (state: SignupState, action: SignupAction): SignupState => { 
