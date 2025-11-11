@@ -5,7 +5,8 @@
     align-items: center;
 
     width: 100%;
-    min-height: 50dvh;
+    min-height: 40dvh;
+
     /* 휴대폰 기종에 따라 다르게 설정 */
     margin: 0 auto;
     padding: 4vw;
@@ -19,10 +20,6 @@
 
 .header {
   display: none;
-  font-size: 1.5rem;
-  color: #1a1e20;
-  margin-bottom: 2rem;
-  text-align: center;
 }
 
 
@@ -33,6 +30,26 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  color: #343a3f;
+}
+
+.User input {
+  flex: 1; 
+  padding: 0.75rem;
+  background-color: #f8fafb;
+  font-size: 0.95rem;
+  color: #666e76;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  outline: none;
+  box-sizing: border-box;
+
+
+}
+
+.User input:hover {
+  border-color: #000000;
 }
 
 
@@ -45,10 +62,8 @@
   height: 47px;
   font-size: 0.75rem;
 
-  color: #666e76;
-  background-color: #f2f4f5;
+  border-radius: 12px;
 
-  border-radius: 8px;
   outline: none;
   box-sizing: border-box;
 }
@@ -56,46 +71,39 @@
 /* input + button 묶음 */
 .UserRow {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 8px;               /* 간격 */
   width: 100%;
   height: 47px;
-  padding: 0.25rem;
-  background-color: #f2f4f5;
-  border-radius: 8px;
+  /* padding: 0.25rem; */
+
+
+  border-radius: 12px;
   box-sizing: border-box;
 
 }
 
-.UserPhone {
-  flex: 1; /* 버튼 빼고 남은 공간을 꽉 채움 */
 
-  padding: 0.75rem;
-  font-size: 0.95rem;
-  color: #666e76;
-  border-radius: 8px;
-  outline: none;
-  box-sizing: border-box;
 
-}
-
-.UserPhone:hover {
-  border-color: #3bc4ff;
-}
+/* .User input:hover,
+.UserRow input:focus {
+  border-color: #343a3f;
+} */
 
 
 
 .sendButton {
   width: 98px;
-  height: 100%;
+  height: 47px;
   font-size: 0.875rem;
   font-weight: 600;
   color: #6868d5;
   background-color: #FFF;
   border: 1px solid #6868d5;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  /* transition: all 0.2s ease; */
   white-space: nowrap;
 }
 
@@ -105,7 +113,7 @@
 }
 
 .VerifyMessage {
-  margin-top: 0.5rem;
+  margin-top: 0.9rem;
   font-size: 0.75rem;        /* 화면 크기에 따라 줄어듦 */
   color: #ff4d4f;
 }
@@ -114,12 +122,12 @@
 /* 버튼 */
 .submitButton {
   position: fixed;
-  bottom: env(safe-area-inset-bottom, 20px);      /* 화면 하단에서 20px 위 */
+  bottom: 20px;
   left: 50%;          /* 가로 가운데 정렬 */
   transform: translateX(-50%);
   
   width: 90%;         /* 버튼 너비 - 화면의 90% */
-  max-width: 400px;   /* 너무 넓어지지 않도록 제한 */
+  max-width: 370px;   /* 너무 넓어지지 않도록 제한 */
   height: 55px;
   
   font-size: 1rem;
@@ -127,7 +135,7 @@
   color: #fff;
   background-color: #6868d5;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
 }

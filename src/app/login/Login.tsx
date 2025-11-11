@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 /* 로그인 폼 */
 const LoginForm = () => {
     const [userId, setUserId] = useState("");
-    const [userPassword, setUserPassword] = useState("");
+    const [password, setUserPassword] = useState("");
 
     const router = useRouter();
 
@@ -20,8 +20,8 @@ const LoginForm = () => {
         try {
             // 백엔드 API 로그인 요청이랄까...
             const response = await axios.post("https://your-backend-api/login", {
-                id: userId,
-                password: userPassword,
+                userId,
+                password,
             });
     
             const accessToken = response.data?.accessToken || response.data?.token;
@@ -94,7 +94,7 @@ const LoginForm = () => {
                     {/* 비밀번호 */}
                     <div className={styles.UserPassword}>
                         <input type="password"
-                            value={userPassword}
+                            value={password}
                             onChange={(e) => setUserPassword(e.target.value)}
                             placeholder="비밀번호 입력" 
                         />

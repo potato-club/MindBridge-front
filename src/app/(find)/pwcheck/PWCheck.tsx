@@ -19,10 +19,10 @@ const PWCheckForm = () => {
                 <div className={styles.Container}>
 
                     {/* 확인 이미지 삽압 */}
-                    <div className={styles.img}>확인</div>
+                    <div className={styles.img}>확</div>
 
                     {/* 문구 */}
-                    <div className={styles.ResultText}>
+                    <div className={styles.resultText}>
                     {/* {username && (
                         <p className={styles.ResultText}>
                             <strong>{username}</strong>님의 비밀번호가 {"<br>"}

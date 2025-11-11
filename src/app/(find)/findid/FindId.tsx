@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 
 /* 아이디/비밀번호 찾기 폼 */
 const FindIdForm = () => {
-    const [userName, setUserName] = useState("");
-    const [userPhoneNumber, setUserPhoneNumber] = useState("");
-    const [userVerificationCode, setUserVerificationCode] = useState("");
+    const [username, setUserName] = useState("");
+    const [phonenumber, setUserPhoneNumber] = useState("");
+    const [verified, setUserVerified] = useState("");
 
     const [verifyMessage, setVerifyMessage] = useState(""); // 인증 결과 메시지
 
@@ -21,7 +21,8 @@ const FindIdForm = () => {
         // api 구현(백엔드 요청)해야 함!
         try {
             const res = await axios.post("/api/send-code", {
-                phone: userPhoneNumber,
+                username,
+                phonenumber,
             });
 
 
@@ -43,15 +44,15 @@ const FindIdForm = () => {
     // api요청
     try {
         const res = await axios.post("/api/verify-code", {
-            phone: userPhoneNumber,
-            code: userVerificationCode,
+            phonenumber,
+            verified,
             
         });
 
-
         /* 백엔드 성공 가정(수정 필요) */
         if (res.data.success) {
-            setVerifyMessage("인증이 완료되었습니다!");
+            setVerifyMessage("");
+            alert("인증이 완료되었습니다.");
         } else {
             setVerifyMessage("인증번호를 확인해주세요!");
         }
@@ -70,9 +71,9 @@ const FindIdForm = () => {
 
         try {
             const res = await axios.post("/api/find-id", {
-                name: userName,
-                phone: userPhoneNumber,
-                code: userVerificationCode,
+                username,
+                phonenumber,
+                verified,
             });
 
             /* 백엔드 성공 가정(수정 필요) */
@@ -103,10 +104,9 @@ const FindIdForm = () => {
                         <div className={styles.UserName}>
                             <input 
                                 type="text" 
-                                value={userName}
+                                value={username}
                                 onChange={(e) => setUserName(e.target.value)}
                                 placeholder="이름을 입력해주세요."
-                                className={styles.UserPhone}
                             />
                         </div>
                     </div>
@@ -120,10 +120,10 @@ const FindIdForm = () => {
                             type="tel"
                             pattern="[0-9]*"
                             inputMode="numeric"
-                            value={userPhoneNumber}
+                            value={phonenumber}
                             onChange={(e) => setUserPhoneNumber(e.target.value)}
                             placeholder="휴대폰 번호를 입력해주세요." 
-                            className={styles.UserPhone}
+                            
                             />
                             <button 
                             type="button"
@@ -142,10 +142,9 @@ const FindIdForm = () => {
                             <input 
                                 type="text"
                                 inputMode="numeric"
-                                value={userVerificationCode}
-                                onChange={(e) => setUserVerificationCode(e.target.value)}
+                                value={verified}
+                                onChange={(e) => setUserVerified(e.target.value)}
                                 placeholder="인증번호를 입력해주세요." 
-                                className={styles.UserPhone}
                             />
                             <button 
                             type="button"

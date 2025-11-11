@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 const FindPWForm = () => {
     
     const [userID, setUserId] = useState("");
-    const [userName, setUserName] = useState("");
     const [userPhoneNumber, setUserPhoneNumber] = useState("");
     const [userVerificationCode, setUserVerificationCode] = useState("");
     const [verifyMessage, setVerifyMessage] = useState(""); // 인증 결과 메시지
@@ -21,6 +20,7 @@ const FindPWForm = () => {
         // 백엔드 api요청.(인증번호 요청)
         try {
             const res = await axios.post("/api/send-code", {
+                id: userID,
                 phons: userPhoneNumber,
             });
 

@@ -1,40 +1,57 @@
 /* 전체 컨테이너 */
 .Container {
     position: relative;
-    padding: 4vw;
-    max-width: 420px;
+    width: 100%;
+    max-width: min(90vw, 420px);
     margin: 0 auto;
+    padding: 4vw;
     box-sizing: border-box
 }
+
+.header {
+    position: relative;
+    text-align: center;
+    padding-top: env(safe-area-inset-top, 16px);
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.header h1 {
+    font-size: 1rem;
+    color: #1a1e20;
+    margin: 0;
+}
+
+
 
 /* 뒤로가기 버튼 */
 .backButton {
     position: absolute;
-    top: env(safe-area-inset-top, 16px);
+    top: clac(env(safe-area-inset-top, 0px) + 16px);
     left: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 24px;
+    height: 24px;
+    font-size: 22px;
+    font-weight: bold;
+    
     background: none;
     border: none;
-    width: 32px;
-    height: 32px;
-    font-size: 22px;
-    cursor: pointer;
     color: #212528;
+    cursor: pointer;
+
 }
 
-.header {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    font-size: 1.5rem;
-    color: #1a1e20;
-    margin-top:16px;
-    margin-bottom: 24px;
-}
 
 /* 탭 버튼 영역 */
 .tabWrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 362px;
 
@@ -42,7 +59,7 @@
     margin: 0 auto;
 
     background-color: #f2f4f5;
-
+    color: #666E76;
     border-radius: 12px;
     overflow: hidden;
 }
@@ -50,24 +67,26 @@
 .tab {
     flex: 1;
     display: flex;
-    /* 추가 */
     align-items: center;
     justify-content: center;
     font-size: 1rem;
+    width: 100%;
+    max-width: 175px;
+    height: 100%;
+    max-height: 44px;
     
-    color: #1a1e20;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+    color:#666E76;
 
-.tab:hover {
-    background-color: #e5e5e5;
+    background-color: #f2f4f5;
+    cursor: pointer;
+    border: none;
+
+    border-radius: 12px;
 }
 
 .active {
     background-color: #fff;
-    font-weight: bold;
+    color: #212528;
 }
 
 /* 콘텐츠 영역 */
@@ -79,19 +98,7 @@
     box-sizing: border-box;     
 }
 
-/* 기본 콘텐츠 (숨겨짐) */
-.tabContent {
+.Form {
     width: 100%;
-    opacity: 0;
-    transform: translateY(10px);
-    position: absolute;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-/* 활성화된 콘텐츠 */
-.tabContent.active {
-    opacity: 1;
-    transform: translateY(0);
-    position: relative;
 }
 

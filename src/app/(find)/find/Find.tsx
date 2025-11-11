@@ -23,11 +23,12 @@ const FindForm = () => {
                 <button
                     type="button"
                     className={styles.backButton}
-                    onClick={() => router.push("/findpw")}
+                    // 메인 페이지 연동 후 수정
+                    onClick={() => router.push("/Main")}
                 >
                     &lt;
                 </button>
-                <h1><strong>아이디 찾기 / 비밀번호 찾기 페이지</strong></h1>
+                <h1><strong>아이디/비밀번호 찾기</strong></h1>
             </header>
             <form className={styles.Form}>
                 <div className={styles.Container}>
