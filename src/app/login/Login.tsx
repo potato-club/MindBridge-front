@@ -9,8 +9,8 @@ import { useRouter } from "next/navigation";
 
 /* 로그인 폼 */
 const LoginForm = () => {
-    const [userId, setUserId] = useState("");
-    const [password, setUserPassword] = useState("");
+    const [loginId, setLoginId] = useState("");
+    const [password, setPassword] = useState("");
 
     const router = useRouter();
 
@@ -19,8 +19,8 @@ const LoginForm = () => {
 
         try {
             // 백엔드 API 로그인 요청이랄까...
-            const response = await axios.post("https://your-backend-api/login", {
-                userId,
+            const response = await axios.post("https://mindbridge.today/api/auth/login", {
+                loginId,
                 password,
             });
     
@@ -38,7 +38,8 @@ const LoginForm = () => {
             axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
             alert("로그인에 성공하였습니다.");
-            router.push("/"); // 로그인 성공 시 메인 페이지로 이동
+            // console.log(accessToken);
+            router.push("/"); // 로그인 성공 시 메인 페이지로 이동(수정해야함.)
 
         } catch (err: unknown) {
             if (axios.isAxiosError(err)) {
@@ -85,8 +86,8 @@ const LoginForm = () => {
                     {/* 아이디 */}
                     <div className={styles.UserId}>
                         <input type="text"
-                            value={userId}
-                            onChange={(e) => setUserId(e.target.value)}
+                            value={loginId}
+                            onChange={(e) => setLoginId(e.target.value)}
                             placeholder="아이디 입력" 
                         />
                     </div>
@@ -95,7 +96,7 @@ const LoginForm = () => {
                     <div className={styles.UserPassword}>
                         <input type="password"
                             value={password}
-                            onChange={(e) => setUserPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="비밀번호 입력" 
                         />
                     </div> 
