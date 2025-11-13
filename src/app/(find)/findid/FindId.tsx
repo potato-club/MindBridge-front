@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 /* 아이디/비밀번호 찾기 폼 */
 const FindIdForm = () => {
     const [username, setUserName] = useState("");
-    const [phonenumber, setUserPhoneNumber] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [verified, setUserVerified] = useState("");
 
     const [verifyMessage, setVerifyMessage] = useState(""); // 인증 결과 메시지
@@ -22,7 +22,7 @@ const FindIdForm = () => {
         try {
             const res = await axios.post("/api/send-code", {
                 username,
-                phonenumber,
+                phoneNumber,
             });
 
 
@@ -44,7 +44,7 @@ const FindIdForm = () => {
     // api요청
     try {
         const res = await axios.post("/api/verify-code", {
-            phonenumber,
+            phoneNumber,
             verified,
             
         });
@@ -72,7 +72,7 @@ const FindIdForm = () => {
         try {
             const res = await axios.post("/api/find-id", {
                 username,
-                phonenumber,
+                phoneNumber,
                 verified,
             });
 
@@ -120,7 +120,7 @@ const FindIdForm = () => {
                             type="tel"
                             pattern="[0-9]*"
                             inputMode="numeric"
-                            value={phonenumber}
+                            value={phoneNumber}
                             onChange={(e) => setUserPhoneNumber(e.target.value)}
                             placeholder="휴대폰 번호를 입력해주세요." 
                             

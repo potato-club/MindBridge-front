@@ -8,7 +8,7 @@ const PWCheckForm = () => {
     const router = useRouter();
 
     // URL에서 가져오기
-    const username = searchParams.get("userName");
+    const userName = searchParams.get("username");
 
     return (
         <>
@@ -25,7 +25,7 @@ const PWCheckForm = () => {
                     <div className={styles.resultText}>
                     {/* {username && (
                         <p className={styles.ResultText}>
-                            <strong>{username}</strong>님의 비밀번호가 {"<br>"}
+                            <strong>{userName}</strong>님의 비밀번호가 {"<br>"}
                             변경 되었습니다.
                         </p>
                     )} */}

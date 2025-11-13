@@ -9,8 +9,8 @@ const IDCheckForm = () => {
   const router = useRouter();
 
   // URL에서 가져오기
-  const username = searchParams.get("userName");
-  const userId = searchParams.get("userId");
+  const UserName = searchParams.get("username");
+  const LoginId = searchParams.get("loginId");
 
   return (
     <>
@@ -26,8 +26,8 @@ const IDCheckForm = () => {
           <div className={styles.resultText}>
             {/* {username && userId && (
               <p>
-                {username} 님의 아이디는{" "}
-                <strong>{userId}</strong> {" "}입니다.
+                {UserName} 님의 아이디는{" "}
+                <strong>{LoginId}</strong> {" "}입니다.
               </p>
             )} */}
             <p>
@@ -46,7 +46,6 @@ const IDCheckForm = () => {
             >
               확인
             </button>
-          
         </div>
       </form>
     </>

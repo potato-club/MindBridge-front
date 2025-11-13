@@ -35,7 +35,7 @@ const MyDeleteForm = () => {
             >
                 &lt;
             </button>
-            회원탈퇴
+            <h1>회원탈퇴</h1>
         </header>
         <form className={styles.Form} onSubmit={handleSubmit}>
             <div className={styles.Container}> 

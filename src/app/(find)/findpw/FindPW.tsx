@@ -8,8 +8,9 @@ import { useRouter } from "next/navigation";
 /* 비밀번호 찾기 폼 */
 const FindPWForm = () => {
     
-    const [userID, setUserId] = useState("");
-    const [userPhoneNumber, setUserPhoneNumber] = useState("");
+    const [loginId, setLoginId] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+
     const [userVerificationCode, setUserVerificationCode] = useState("");
     const [verifyMessage, setVerifyMessage] = useState(""); // 인증 결과 메시지
 
@@ -20,8 +21,8 @@ const FindPWForm = () => {
         // 백엔드 api요청.(인증번호 요청)
         try {
             const res = await axios.post("/api/send-code", {
-                id: userID,
-                phons: userPhoneNumber,
+                loginId,
+                phoneNumber,
             });
 
             /* 백엔드 성공 가정(수정 필요) */
@@ -40,7 +41,7 @@ const FindPWForm = () => {
     const handleVerifyCode = async () => {
         try {
                 const res = await axios.post("/api/verify-code", {
-                    phone: userPhoneNumber, 
+                    phoneNumber, 
                     code: userVerificationCode,
                 });
                 
@@ -62,9 +63,8 @@ const FindPWForm = () => {
 
         try {
             const res = await axios.post("/api/find-password", {
-                id: userID,
-                name: userName,
-                phone: userPhoneNumber,
+                loginId,
+                phoneNumber,
                 code: userVerificationCode,
                 
             });
@@ -96,8 +96,8 @@ const FindPWForm = () => {
                         <div className={styles.UserId}>
                             <input 
                                 type="text"
-                                value={userID}
-                                onChange={(e) => setUserId(e.target.value)}
+                                value={loginId}
+                                onChange={(e) => setLoginId(e.target.value)}
                                 placeholder="아이디를 입력하세요." 
                                 className={styles.UserPhone}
 
@@ -115,8 +115,8 @@ const FindPWForm = () => {
                                 type="tel"
                                 inputMode="numeric"
                                 pattern="[0-9]*"
-                                value={userPhoneNumber}
-                                onChange={(e) => setUserPhoneNumber(e.target.value)}
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
                                 placeholder="전화번호를 입력하세요." 
                                 className={styles.UserPhone}
                             />
