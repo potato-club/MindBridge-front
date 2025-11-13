@@ -12,10 +12,10 @@
 }
 
 .submitButton{
-    color: #A5AAAF;
-    font-size: 18px;
-    font-weight: 600;
+  color: #1A1E20; 
+  cursor: pointer;
 }
+
 
 .dropBox {
   position: relative;
@@ -79,3 +79,34 @@
   color: white;
   border-color: #6868D5;
 }
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.titleInput {
+    width: 90%;
+    height: 50px;
+    border-bottom: 1px solid #F2F4F5;
+    padding: 10px;
+
+    font-size: 24px;
+    outline: none;
+}
+
+.contentInput{
+    width: 90%;
+    border: none;
+    padding: 10px;
+
+    font-size: 16px;
+
+    outline: none;
+    resize: none;
+    overflow-y: hidden;
+}
+

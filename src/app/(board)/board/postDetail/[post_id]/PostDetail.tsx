@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import styles from './PostDetail.module.css';
-import { Post, categories, allPosts } from '@/app/(main)/board/mockData'; 
+import { Post, categories, allPosts } from '@/app/(board)/board/mockData'; 
 
 
 const PostDetail = () => {

@@ -138,8 +138,10 @@ const SignUpForm = () => {
         }
 
         try {
-            const res = await axios.post('https://mindbridge.today/api/sms/send',
-               { phoneNumber } 
+            const res = await axios.post('/api/sms/send',
+               {
+                 phoneNumber 
+             } 
             );
 
             if (res.status === 200 || res.status === 201) {
