@@ -94,7 +94,7 @@ const PostWrite = () => {
             category: selected,
             title: title,
             content: content,
-            anonymous: setAnonymous
+            anonymous: anonymous
         };
         
       
@@ -157,7 +157,7 @@ const PostWrite = () => {
 
     const handleSubmit = () => {
 
-        // 1. 유효성 검사
+
         if (selected === 'none' || selected === 'all') {
             showAlertModal('게시판 카테고리를 선택해 주세요.'); 
             return; 

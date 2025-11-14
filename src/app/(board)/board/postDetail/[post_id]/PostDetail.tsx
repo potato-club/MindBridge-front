@@ -5,6 +5,8 @@ import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import styles from './PostDetail.module.css';
 import { Post, categories, allPosts } from '@/app/(board)/board/mockData'; 
+import Modal from '@/components/modal/CustomModal';
+import axios from "axios";
 
 
 const PostDetail = () => {
@@ -28,6 +30,14 @@ const PostDetail = () => {
     const [likeCount, setLikeCount] = useState(currentPost.like_count);
 
     const [isLiked, setIsLiked] = useState(false); 
+
+    const [commentInput, setCommentInput] = useState<string>('');
+
+    const [modalMessage, setModalMessage] = useState<string>('');
+    const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+    const [onConfirmAction, setOnConfirmAction] = useState<(() => void) | undefined>(undefined);
+    const [isConfirmModal, setIsConfirmModal] = useState<boolean>(false); 
+    
 
   
 
@@ -77,6 +87,48 @@ const PostDetail = () => {
        
     };
 
+       const showAlertModal = (message: string) => {
+        setModalMessage(message);
+        setIsConfirmModal(false);
+        setOnConfirmAction(undefined);
+        setIsModalVisible(true);
+    };
+
+    const handleCommentSubmit = async () => {
+        if (!commentInput.trim()) {
+            showAlertModal("댓글 내용을 입력해주세요");
+            return;
+        }
+
+        const accessToken = localStorage.getItem("accessToken");
+        if (!accessToken) {
+            showAlertModal("로그인이 필요합니다");
+            router.push('/login');
+            return;
+        }
+
+        const commentData = {
+            postId: postId,
+            content: commentInput,
+            isAnonymous: false
+        };
+
+        try {
+            await axios.post(
+                '/api', commentData,{
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                    },
+                });
+    alert("댓글이 성공적으로 작성되었습니다.");
+        setCommentInput(''); 
+        
+    } catch (error) {
+        console.error("댓글 작성 실패:", error);
+        showAlertModal("댓글 작성에 실패했습니다.");
+        
+    }
+};
 
 
     return(
@@ -203,6 +255,13 @@ const PostDetail = () => {
                     type="text" 
                     placeholder="댓글을 입력해주세요." 
                     className={styles.comment_input}
+                    value={commentInput}
+                    onChange={(e) => setCommentInput(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleCommentSubmit();
+                        }
+                    }}
                 />
                 <Image
                     src="/images/board/send.png"
@@ -210,12 +269,23 @@ const PostDetail = () => {
                     width={24}
                     height={24}
                     style={{ cursor: 'pointer' }}
+                    onClick={handleCommentSubmit}
                 />
             </div>
 
         </div> 
+
+        <Modal 
+        message={modalMessage}
+        onClose={() => setIsModalVisible(false)} 
+        isVisible={isModalVisible}
+        isConfirmModal={false} 
+        onConfirm={() => setIsModalVisible(false)}
+    />
+    
+</>
         
-    </>
+
 );
 };
 
