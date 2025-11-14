@@ -6,6 +6,8 @@ import styles from './PostWrite.module.css';
 import { categories } from "@/app/(board)/board/mockData";
 import Image from "next/image";
 import Modal from "@/components/modal/CustomModal";
+import axios from 'axios'; 
+
 
 
 const PostWrite = () => {
@@ -18,6 +20,7 @@ const PostWrite = () => {
     const [isOpen, setIsOpen] = useState(false); 
     const [title, setTitle] = useState<string>('');
     const [content, setContent] = useState<string>('');
+    const [anonymous, setAnonymous] = useState<boolean>(false);
 
 
     const [modalMessage, setModalMessage] = useState<string>('');
@@ -30,6 +33,7 @@ const PostWrite = () => {
     const contentRef = useRef<HTMLTextAreaElement>(null);
     
     const router = useRouter();
+
 
     useEffect(() => {
         if (contentRef.current) {
@@ -75,16 +79,57 @@ const PostWrite = () => {
     const selectedCategoryName = availableCategories.find(c => c.category === selected)?.name || '게시판 선택';
 
 
-    const handleActualSubmit = () => {
+    
+ const handleActualSubmit = async () => {
+        
+        const accessToken = localStorage.getItem("accessToken");
+        
+        if (!accessToken) {
+            showAlertModal('로그인이 필요합니다. 다시 로그인해주세요.');
+             router.push('/login');            
+             return;
+        }
+
         const postData = {
             category: selected,
             title: title,
-            content: content
+            content: content,
+            anonymous: setAnonymous
         };
         
-        console.log('--- 최종 제출 데이터 ---:', postData);
-   
-        router.push(`/board/${selected}`);
+      
+        try {
+            const response = await axios.post(
+                `/posts`, 
+                postData,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`, 
+                    },
+                }
+            );
+
+     
+            console.log('게시글 작성 성공:', response.data);
+            router.push(`/board/${selected}`); 
+            
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                const status = error.response.status;
+                
+                if (status === 401 || status === 403) {
+                    showAlertModal('인증에 실패했습니다. (토큰 만료 혹은 권한 부족) 다시 로그인해주세요.');
+                   
+                    router.push('/login');
+                } else {
+                    const errorMessage = error.response.data.message || '게시글 작성 중 알 수 없는 오류가 발생했습니다.';
+                    showAlertModal(`작성 실패: ${errorMessage}`);
+                }
+            } else {
+                console.error('API 호출 중 오류 발생:', error);
+                showAlertModal('네트워크 연결 상태를 확인해주세요.');
+            }
+        }
     };
     
     const handleActualGoBack = () => {
@@ -109,8 +154,10 @@ const PostWrite = () => {
         setIsOpen(false);
     };
 
+
     const handleSubmit = () => {
-        
+
+        // 1. 유효성 검사
         if (selected === 'none' || selected === 'all') {
             showAlertModal('게시판 카테고리를 선택해 주세요.'); 
             return; 
@@ -129,10 +176,10 @@ const PostWrite = () => {
      
         showConfirmModal(
             "글을 업로드하시겠습니까?", 
-            handleActualSubmit        
+            handleActualSubmit    
         );
+ 
     };
-
 
     return(
 <>
@@ -203,6 +250,18 @@ const PostWrite = () => {
                 className={styles.contentInput} 
                 placeholder="고민을 입력해보세요" 
             />
+    </div>
+
+    <div className={styles.anonymousBox}>
+        <label className={styles.anonymousLabel}>
+            <input
+                type="checkbox"
+                checked={anonymous} 
+                onChange={(e) => setAnonymous(e.target.checked)}
+                className={styles.anonymousCheckbox}
+            />
+            <span className={styles.anonymousText}>익명</span>
+        </label>
     </div>
 
  <Modal 

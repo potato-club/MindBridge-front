@@ -110,3 +110,22 @@
     overflow-y: hidden;
 }
 
+.anonymousBox{
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+}
+
+.anonymousLabel{
+  color: #42464B;
+}
+
+.anonymousCheckbox{
+  accent-color: #42464B;
+}
+
+.anonymousText{
+  font-size: 16px;
+  margin-left: 5px;
+}
+

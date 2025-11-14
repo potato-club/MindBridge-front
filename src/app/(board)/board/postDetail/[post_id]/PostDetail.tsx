@@ -29,6 +29,8 @@ const PostDetail = () => {
 
     const [isLiked, setIsLiked] = useState(false); 
 
+  
+
 
     useEffect(() => {
         if (category && postId) {
@@ -55,7 +57,6 @@ const PostDetail = () => {
      const handleLikeClick = () => {
         
         const willBeLiked = !isLiked;
-        // 좋아요를 누른다면 +1, 취소한다면 -1
         const countChange = willBeLiked ? 1 : -1; 
 
     
@@ -65,7 +66,6 @@ const PostDetail = () => {
         setLikeCount(prevCount => {
             const newCount = prevCount + countChange;
 
-            // Mock Data 업데이트 시뮬레이션
             const postIndex = allPosts.findIndex(p => p.post_id === postId);
             if (postIndex !== -1) {
                 allPosts[postIndex].like_count = newCount; 
@@ -74,10 +74,7 @@ const PostDetail = () => {
             return newCount;
         });
         
-            
-            // 실제 API 호출: 
-            // const action = newIsLiked ? 'like' : 'unlike';
-            // fetch(`http://your.api.server/posts/${postId}/${action}`, { method: 'POST' });
+       
     };
 
 
