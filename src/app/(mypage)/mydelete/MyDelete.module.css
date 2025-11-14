@@ -23,7 +23,6 @@
 }
 
 
-
 /* 뒤로가기 버튼 */
 .backButton {
     position: absolute;
@@ -54,30 +53,31 @@
 /* 🔹 안내문 */
 .InfoText {
   color: #212528;
-  font-size: 16px;
-  margin-bottom: 40px;
+  font-size: 0.95rem;
+  margin-bottom: 10%;
 }
 
 .InfoText h1 {
-  font-weight: 700;
+  font-weight: 600;
+  margin-bottom: 5%;
 }
 
 .Text {
   color: #848c95;
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 10px; 
+  font-size: 0.8rem;
+  margin-bottom: 0.5%; 
 }
 
 .Warning {
   color: #6868d5;
   font-size: 0.75rem;
-  margin-top: 20px;
+  margin-top: 1%;
+  margin-bottom: 20%;
 }
 
 /* 🔹 버튼 영역 */
 .DeleteButtonContainer {
-  margin-top: 30px;
+  margin-top: 30%;
 }
 
 .DeleteButton {
@@ -85,26 +85,23 @@
   left: 50%;          /* 가로 가운데 정렬 */
   transform: translateX(-50%);
   
-  width: 90%;         /* 버튼 너비 - 화면의 90% */
-  max-width: 400px;   /* 너무 넓어지지 않도록 제한 */
-  height: 55px;
+  width: 100%;         /* 버튼 너비 - 화면의 90% */
+  max-width: 370px;
+  height: 100%;
+  max-height: 55px;
   
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
-  background: #6868d5;
   color: #fff;
-  cursor: pointer;
+  background-color: #6868d5;
+  border: none;
+  border-radius: 12px;
   transition: background 0.2s ease-in-out;
 }
 
-.DeleteButton:hover {
-  background-color: #5a5ac1;
-}
 
 /* ===============================
-   🔸 모달 스타일
+  🔸 모달 스타일
 ================================= */
 
 .overlay {
@@ -118,71 +115,70 @@
   justify-content: center;
   align-items: center;
   z-index: 999;
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn 0.1s ease;
 }
 
 .modal {
   background-color: #fff;
   padding: 30px 25px;
   border-radius: 16px;
-  width: 90%;
-  max-width: 360px;
+  width: 100%;
+  max-width: 300px;
+  height: 100%;
+  max-height: 178px;
   text-align: center;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   animation: slideUp 0.25s ease;
 }
 
 .modal h2 {
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 700;
   color: #333;
-  margin-bottom: 10px;
+  margin-bottom: 5%;
 }
 
 .modal p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 25px;
-  line-height: 1.5;
+  font-size: 0.8rem;
+  color: #848c95;
+  margin-bottom: 10%;
 }
 
 /* 🔹 버튼들 */
 .buttons {
   display: flex;
-  justify-content: space-around;
-  gap: 12px;
+  justify-content: space-between;
 }
 
 .cancelBtn {
-  flex: 1;
-  padding: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f7f7f7;
-  color: #333;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
+  padding: 5% 0%;
+  border-radius: 12px;
+  width: 50%;
+  max-width: 130px;
+  height: 100%;
+  max-height: 50px;
 
-.cancelBtn:hover {
-  background-color: #e9e9e9;
+  background-color: #f2f4f5;
+  color: #333;
+  font-size: 1rem;
+
+  margin-right: 2%
 }
 
 .confirmBtn {
-  flex: 1;
-  padding: 10px 0;
-  border: none;
-  border-radius: 8px;
+  padding: 5% 0%;
+  border-radius: 12px;
+  width: 50%;
+  max-width: 130px;
+  height: 100%;
+  max-height: 50px;
+
   background-color: #6868d5;
   color: white;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
+  font-size: 1rem;
+
+  margin-left: 2%;
+
 }
 
-.confirmBtn:hover {
-  background-color: #5a5ac1;
-}
 
