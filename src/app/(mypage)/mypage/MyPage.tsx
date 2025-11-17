@@ -4,6 +4,9 @@ import { useState} from "react";
 import { useRouter } from "next/navigation";
 import styles from "./MyPage.module.css";
 
+import MyBottomForm from "@/app/(mypage)/mybottom/MyBottom";
+
+
 
 const MyPageForm = () => {
     const router = useRouter();
@@ -23,10 +26,12 @@ const MyPageForm = () => {
 
                     <div className={styles.UserActions}>
                         <div className={styles.UserActionItem}>
-                            내가 작성한 글
+                            내가 쓴 글
                             <button
                                 type="button"
                                 className={styles.backButton}
+                                onClick = {() => router.push('./myposts')}
+
                             >
                                 &gt;
                             </button>
@@ -37,6 +42,7 @@ const MyPageForm = () => {
                             <button
                                 type="button"
                                 className={styles.backButton}
+                                onClick = {() => router.push('./mybooks')}
                             >
                                 &gt;
                             </button>
@@ -44,11 +50,11 @@ const MyPageForm = () => {
                         
                         <div className={styles.UserActionItem}>
 
-                            좋아요한 글
-                            
+                            좋아요
                             <button
                                 type="button"
                                 className={styles.backButton}
+                                onClick = {() => router.push('./mylikes')}
                             >
                                 &gt;
                             </button>
@@ -83,7 +89,9 @@ const MyPageForm = () => {
                         </div>
                     </div>
 
-                    <div>하단바</div>
+                    <div className={styles.myBottom}>
+                        {<MyBottomForm />}
+                    </div>
                 </div>
             </form>
         </>

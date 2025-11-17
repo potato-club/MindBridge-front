@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./MyDelete.module.css";
 import { useRouter } from "next/navigation";
 
+
 /* 회원탈퇴 폼 */
 const MyDeleteForm = () => {
     const router = useRouter();
@@ -76,14 +77,13 @@ const MyDeleteForm = () => {
                 </div>
 
 
-
-
                 {/* 탈퇴 버튼 */}
                 <div className={styles.DeleteButtonContainer}>
                     <button type="submit" className={styles.DeleteButton}>
                         탈퇴하기
                     </button>
                 </div>  
+
             </div>
         </form>
 

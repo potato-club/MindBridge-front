@@ -33,8 +33,8 @@
 }
 
 .UserProfilePic {
-  width: 100px;
-  height: 100px;
+  width: 40%;
+  height: 40%;
   border-radius: 50%;
   background-color: #ddd;
   display: flex;
@@ -45,28 +45,33 @@
 }
 
 .UserName {
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 /* 마일리지 */
 .UserMileage {
   width: 100%;
-  max-width: 400px;
+  max-width: 363px;
+  height: 100%;
+  max-height: 81.08px;
   background-color: #6868d5;
   padding: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 5%;
   border-radius: 8px;
   text-align: center;
 }
 
 /* 액션 리스트 */
 .UserActions {
-  width: 100%;
-  max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+
+  width: 100%;
+  max-width: 402px;
+  height: 100%;
+  max-height: 324px;
+
 }
 
 .UserActionItem {
@@ -76,7 +81,6 @@
   color: #212528;
   background-color: #fff;
   padding: 12px 16px;
-  border-radius: 8px;
   font-size: 16px;
   font-weight: 550;
   cursor: pointer;
@@ -85,10 +89,20 @@
 
 
 .backButton {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 24px;
+    height: 24px;
+    font-size: 22px;
+    font-weight: bold;
+    
+    background: none;
+    border: none;
+    color: #ced4db;
+    cursor: pointer;
+
 }
 
 /* 로그아웃 */
@@ -106,13 +120,3 @@
   cursor: pointer;
 }
 
-/* 하단바 */
-.BottomBar {
-  margin-top: auto;
-  width: 100%;
-  max-width: 400px;
-  background-color: #eee;
-  padding: 15px;
-  text-align: center;
-  border-radius: 8px;
-}
