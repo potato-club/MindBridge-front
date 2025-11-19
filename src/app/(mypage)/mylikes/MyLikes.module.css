@@ -1,31 +1,52 @@
-/* 전체 폼 영역 */
-.Form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-  background-color: #fafafa;
-  min-height: 100vh;
-}
-
-/* 상단 헤더 */
-.header {
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-align: center;
-  padding: 1.2rem 0;
-  width: 100%;
-  background-color: #fff;
-  border-bottom: 1px solid #e0e0e0;
-  color: #222;
-}
-
-/* 컨테이너 */
+/* 전체 컨테이너 */
 .Container {
+    position: relative;
+    width: 100%;
+    max-width: min(90vw, 420px);
+    margin: 0 auto;
+    padding: 4vw;
+    box-sizing: border-box
+}
+
+.header {
+    position: relative;
+    text-align: center;
+    padding-top: env(safe-area-inset-top, 16px);
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.header h1 {
+    font-size: 1rem;
+    color: #1a1e20;
+    margin: 0;
+}
+
+
+/* 뒤로가기 버튼 */
+.backButton {
+    position: absolute;
+    top: clac(env(safe-area-inset-top, 0px) + 16px);
+    left: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 24px;
+    height: 24px;
+    font-size: 22px;
+    font-weight: bold;
+    
+    background: none;
+    border: none;
+    color: #212528;
+    cursor: pointer;
+
+}
+
+.Form {
   width: 100%;
-  max-width: 800px;
-  margin-top: 1.5rem;
 }
 
 /* 게시글 목록 */
@@ -37,25 +58,32 @@
 
 /* 게시글 카드 */
 .postItem {
+  /* display: flex; */
+  align-content:  column;
+  flex-direction: column;
+
+  width:100%;
+  max-width: 400px;
+  height: 100%;
+  max-height: 78px;
+
   background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  padding: 1.2rem 1.5rem;
-  transition: all 0.2s ease;
-  border: 1px solid #f0f0f0;
+  border-line-color: #f2f4f5;
 }
 
-.postItem:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-}
+
 
 /* 제목 */
 .postTitle {
-  font-size: 1.2rem;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  max-height: 78px;
+
+  font-size: 1rem;
   font-weight: 600;
   color: #333;
-  margin-bottom: 0.5rem;
+  /* margin-bottom: 0.2rem; */
   line-height: 1.4;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -64,51 +92,55 @@
 
 /* 본문 */
 .postContent {
-  font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 0.8rem;
+  font-size: 0.75rem;
+  color: #abb5bd;
+  margin-bottom: 4%;
   line-height: 1.5;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* 두 줄까지만 표시 */
+  /* display: -webkit-box; */
+  -webkit-line-clamp: 1; /* 두 줄까지만 표시 */
   -webkit-box-orient: vertical;
 }
 
-/* 닉네임, 날짜 */
+/* 날짜 */
 .postMeta {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 0.85rem;
-  color: #888;
-  margin-top: 0.6rem;
+  align-items: flex-end;
+  font-size: 0.75rem;
+  color: #abb5bd;
+  margin-top: 0.3rem;
 }
 
 /* 통계 (조회수, 좋아요, 댓글) */
 .postStats {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 0.4rem;
 }
 
 .postStats img {
-  vertical-align: middle;
+  vertical-align: bottom;
+
+  width: 100%;
+  max-width: 25px;
+  height: 100%;
+  max-height: 17px;
+
 }
 
 .postStats p {
   margin: 0;
-  font-size: 0.8rem;
-  color: #555;
+  font-size: 0.75rem;
+  color: #abb5bd;
 }
 
-/* 반응형 */
+/* 반응형
 @media (max-width: 600px) {
-  .Container {
-    padding: 0 0.5rem;
-  }
+  
 
-  .postItem {
+  /* .postItem {
     padding: 1rem;
   }
 
@@ -118,5 +150,5 @@
 
   .postContent {
     font-size: 0.9rem;
-  }
-}
+  } 
+} */

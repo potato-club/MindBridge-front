@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./MyPosts.module.css";
 
+import MyBottomForm from "../mybottom/page";
+
 interface Post {
     post_id: string;
     title: string;
@@ -43,8 +45,8 @@ const MyPostsForm = () => {
                 post_id: "1",
                 title: "프로젝트가 너무 어려어요",
                 content: "지금 하는 프로젝트가 너무 어려워요.",
-                nickname:"",
                 created_at: "02-01",
+                nickname:"",
                 view_count: 120,
                 like_count: 8,
                 comment_count: 4,
@@ -53,8 +55,8 @@ const MyPostsForm = () => {
                 post_id: "2",
                 title: "프로젝트가 너무 어려어요",
                 content: "지금 하는 프로젝트가 너무 어려워요.",
-                nickname:"",
                 created_at: "02-02",
+                nickname:"",
                 view_count: 210,
                 like_count: 15,
                 comment_count: 6,
@@ -88,10 +90,6 @@ const MyPostsForm = () => {
 
                 <div className={styles.Container}>
                     {/* 내가 쓴 글 목록이 여기에 표시됩니다. */}
-                    {/* <div className={styles.PostsList}>
-                        <p className={styles.postItem}>vmfhrxmrk sjadjfudnjdy</p>
-                        <p className={styles.postItem}>vmfhrxmrk sjadjfudnjdy</p>
-                    </div> */}
 
                     <div className={styles.PostsList}>
 
@@ -132,6 +130,10 @@ const MyPostsForm = () => {
                         ) : (
                             <p>작성한 글이 없습니다.</p>
                         )}
+                    </div>
+
+                    <div className={styles.myBottom}>
+                        {<MyBottomForm />}
                     </div>
                 </div>
             </form>
