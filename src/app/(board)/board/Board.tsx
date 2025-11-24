@@ -6,12 +6,10 @@ import { useRouter, usePathname } from "next/navigation";
 import styles from './Board.module.css';
 import Searchbox from "@/components/searchBox/Searchbox";
 import PopularPosts from "./popularPost/PopularPost"; 
-import { 
-    Post, 
-    categories,
-    allPosts,   
-    getPopularPosts 
-} from "./mockData";
+import {Post} from "@/types/post"
+import {categories} from "@/data/postData"
+import { getPopularPosts } from "@/utils/popularPost";
+import axios from 'axios'; 
 
 
 const POSTS_PER_PAGE = 10; 
@@ -21,6 +19,7 @@ const Board = () => {
   const router = useRouter();
   const pathname = usePathname();
   
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
 
   const [selected, setSelected] = useState<string>('all');
   const [popularPosts, setPopularPosts] = useState<Post[]>([]);
@@ -28,12 +27,42 @@ const Board = () => {
   const [displayedPosts, setDisplayedPosts] = useState<Post[]>([]);
 
 
+  // API 호출 함수 정의 
+  const fetchPosts = async (): Promise<Post[]> => {
+    try {
+  
+        
+        // const response = await axios.get<Post[]>('/api/posts'); 
+        // return response.data;
+
+        const storedPostsString = localStorage.getItem('MOCK_POSTS');
+        const storedPosts: Post[] = storedPostsString ? JSON.parse(storedPostsString) : [];
+        return storedPosts;
+        
+    } catch (error) {
+        console.error("게시물 로드 중 오류 발생:", error);
+        return []; // 오류 발생 시 빈 배열 반환
+    }
+  };
+
+
+  // fetchPosts 호출
   useEffect(() => {
-    const topPosts = getPopularPosts(allPosts);
-    setPopularPosts(topPosts);
-  }, []);
+    const loadData = async () => {
+        const data = await fetchPosts(); 
+
+        setAllPosts(data); 
+        
+       
+        const topPosts = getPopularPosts(data);
+        setPopularPosts(topPosts);
+    };
+    
+    loadData();
+  }, []); 
 
 
+  
   useEffect(() => {
     const pathSegments = pathname.split('/');
     const currentCategory = pathSegments[pathSegments.length - 1];
@@ -59,10 +88,11 @@ const Board = () => {
 
 
     return filtered.sort((a, b) => {
-      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+     
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
 
-  }, [selected]);
+  }, [selected, allPosts]); 
 
 
   useEffect(() => {
@@ -143,26 +173,26 @@ const Board = () => {
         {displayedPosts.map(post => (
         
           <div 
-            key={post.post_id} 
+            key={post.id} 
             className={styles.postItem}
-            onClick={() => handlePostClick(post.post_id)} 
+            onClick={() => handlePostClick(post.id)} 
             style={{ cursor: 'pointer' }} 
           >
             <h2 className={styles.postTitle}>{post.title}</h2>
-            <p className={styles.postContent}>{post.content}</p>
+            <p className={styles.postContent}>{post.contents}</p>
             <div className={styles.postMeta}>
               <span>{post.nickname}</span>
-              <span>{new Date(post.created_at).toLocaleDateString('ko-KR').slice(0, -1)}</span>
+              <span>{new Date(post.createdAt).toLocaleDateString('ko-KR').slice(0, -1)}</span>
               <div className={styles.postStats}>
                
                   <Image src="/images/board/show.png" alt="조회수" width={16} height={8}/> 
-                  <p>{post.view_count}</p>
+                  <p>{post.viewCount}</p>
                 
                   <Image src="/images/board/like.png" alt="좋아요" width={16} height={8}/> 
-                  <p>{post.like_count}</p>
+                  <p>{post.likeCount}</p>
                 
                   <Image src="/images/board/comment.png" alt="댓글 수" width={16} height={8}/> 
-                  <p>{post.comment_count}</p>
+                  <p>{post.commentCount}</p>
               </div>
             </div>
           </div>

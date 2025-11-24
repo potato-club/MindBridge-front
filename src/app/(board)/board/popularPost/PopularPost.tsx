@@ -4,7 +4,8 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image'; 
 import { useRouter } from 'next/navigation';
 import styles from './PopularPost.module.css'; 
-import { Post } from '../mockData';
+import { Post } from '@/types/post';
+import { getPopularPosts } from '@/utils/popularPost';
 
 type PopularPostsProps = {
   posts: Post[];
@@ -65,23 +66,23 @@ const PopularPosts: React.FC<PopularPostsProps> = ({ posts }) => {
           <div className={styles.slideContainer}>
             {posts.map((post, index) => (
               <div 
-                key={post.post_id} 
+                key={post.id} 
                 className={styles.slide} 
-                onClick={() => handlePostClick(post.post_id)}
+                onClick={() => handlePostClick(post.id)}
                 ref={el => slideRefs.current[index] = el}
                 data-index={index}
               >
                 <h3 className={styles.postTitle}>{post.title}</h3>
                 <div className={styles.postWriter}>
-                  <span>{post.user_id}</span>
+                  <span>{post.userId}</span>
                   <div className={styles.postStats}>
     
                     <Image src="/images/board/show.png" alt="조회수" width={16} height={8}/>
-                    <p>{post.view_count}</p>
+                    <p>{post.viewCount}</p>
                     <Image src="/images/board/like.png" alt="좋아요" width={16} height={16}/>
-                    <p>{post.like_count}</p>
+                    <p>{post.likeCount}</p>
                     <Image src="/images/board/comment.png" alt="댓글" width={16} height={16}/>
-                    <p>{post.comment_count}</p>
+                    <p>{post.commentCount}</p>
                   </div>
                 </div>
               </div>

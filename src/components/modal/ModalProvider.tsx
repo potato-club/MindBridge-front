@@ -4,7 +4,7 @@
 
 import React, { useState } from 'react';
 import CustomModal from './CustomModal'; 
-import { ModalContext } from '@/app/context/ModalContext'; 
+import { ModalContext } from '@/context/ModalContext'; 
 
 export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import React from "react";
-import { useSignupContext } from "@/app/context/SignupContext";
+import { useSignupContext } from "@/context/SignupContext";
 import styles from "./SignUpForm.module.css";
 import { useRouter } from "next/navigation";
 import InputBox from "@/components/common/InputBox";

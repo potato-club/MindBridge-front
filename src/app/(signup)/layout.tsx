@@ -2,7 +2,7 @@
 
 
 import React from 'react'; 
-import { SignupProvider } from '@/app/context/SignupContext'; 
+import { SignupProvider } from '@/context/SignupContext'; 
 import styles from "./signup/SignUpForm.module.css";
 
 export default function SignUpLayout({

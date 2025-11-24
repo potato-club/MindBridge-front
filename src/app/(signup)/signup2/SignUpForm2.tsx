@@ -5,7 +5,8 @@ import styles from "../signup/SignUpForm.module.css";
 import React from "react";
 import { useRouter } from "next/navigation";
 import InputBox from "@/components/common/InputBox";
-import { useSignupContext, SignupState, Gender} from '@/app/context/SignupContext';
+import { useSignupContext} from '@/context/SignupContext';
+import {Gender,SignupState} from "@/types/signup";
 import axios from "axios";
 
 type Option = {

@@ -1,5 +1,5 @@
 'use client';
-import LoginForm from "./login/Login";
+import LoginForm from "./Login";
 
 
 export default LoginForm;

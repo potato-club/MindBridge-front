@@ -3,10 +3,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from './PostWrite.module.css';
-import { categories } from "@/app/(board)/board/mockData";
 import Image from "next/image";
 import Modal from "@/components/modal/CustomModal";
 import axios from 'axios'; 
+import { categories } from "@/data/postData";
 
 
 
@@ -93,44 +93,78 @@ const PostWrite = () => {
         const postData = {
             category: selected,
             title: title,
-            content: content,
+            contents: content,
             anonymous: anonymous
         };
         
       
         try {
-            const response = await axios.post(
-                `/posts`, 
-                postData,
-                {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`, 
-                    },
-                }
-            );
+            await new Promise(resolve => setTimeout(resolve, 300)); 
+
+        // 1. 기존 Mock 데이터 로드 (없으면 빈 배열)
+        const existingPostsString = localStorage.getItem('MOCK_POSTS');
+        const existingPosts = JSON.parse(existingPostsString || '[]');
+        
+        // 2. 새 게시글 객체 생성 (임시 ID와 날짜를 부여)
+        const newPost = {
+            ...postData,
+            id: Date.now().toString(), // 임시 고유 ID 생성
+            userId: 'mock-user-1',
+            nickname: anonymous ? '익명' : '테스트유저', // 임시 닉네임 설정
+            likeCount: 0,
+            viewCount: 0,
+            commentCount: 0,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        };
+
+        // 새 데이터를 목록 맨 앞에 추가하고 저장
+        existingPosts.unshift(newPost);
+        localStorage.setItem('MOCK_POSTS', JSON.stringify(existingPosts));
+
+        console.log('게시글 작성 성공 (Mock, localStorage 저장됨):', newPost);
+        
+        // 성공 후 목록 페이지로 이동
+        router.push(`/board/${selected}`); 
+        
+    } catch (error) {
+
+        console.error('Mock 작성 중 오류 발생:', error);
+        showAlertModal('작성 처리 중 알 수 없는 오류가 발생했습니다.');
+    }
+};
+    //         const response = await axios.post(
+    //             `/posts`, 
+    //             postData,
+    //             {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${accessToken}`, 
+    //                 },
+    //             }
+    //         );
 
      
-            console.log('게시글 작성 성공:', response.data);
-            router.push(`/board/${selected}`); 
+    //         console.log('게시글 작성 성공:', response.data);
+    //         router.push(`/board/${selected}`); 
             
-        } catch (error) {
-            if (axios.isAxiosError(error) && error.response) {
-                const status = error.response.status;
+    //     } catch (error) {
+    //         if (axios.isAxiosError(error) && error.response) {
+    //             const status = error.response.status;
                 
-                if (status === 401 || status === 403) {
-                    showAlertModal('인증에 실패했습니다. (토큰 만료 혹은 권한 부족) 다시 로그인해주세요.');
+    //             if (status === 401 || status === 403) {
+    //                 showAlertModal('인증에 실패했습니다. (토큰 만료 혹은 권한 부족) 다시 로그인해주세요.');
                    
-                    router.push('/login');
-                } else {
-                    const errorMessage = error.response.data.message || '게시글 작성 중 알 수 없는 오류가 발생했습니다.';
-                    showAlertModal(`작성 실패: ${errorMessage}`);
-                }
-            } else {
-                console.error('API 호출 중 오류 발생:', error);
-                showAlertModal('네트워크 연결 상태를 확인해주세요.');
-            }
-        }
-    };
+    //                 router.push('/login');
+    //             } else {
+    //                 const errorMessage = error.response.data.message || '게시글 작성 중 알 수 없는 오류가 발생했습니다.';
+    //                 showAlertModal(`작성 실패: ${errorMessage}`);
+    //             }
+    //         } else {
+    //             console.error('API 호출 중 오류 발생:', error);
+    //             showAlertModal('네트워크 연결 상태를 확인해주세요.');
+    //         }
+    //     }
+    // };
     
     const handleActualGoBack = () => {
         window.history.back();
