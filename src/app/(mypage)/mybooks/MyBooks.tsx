@@ -17,6 +17,7 @@ interface Post {
     view_count: number;
     like_count: number;
     comment_count: number;
+    isBookmarked: boolean;
 }
 
 const MyBooksForm = () => {
@@ -36,7 +37,15 @@ const MyBooksForm = () => {
     //     fetchMyBooks();
     // }, []);
 
-    
+    const toggleBookmark = (postId: string) => {
+        setPosts((prev) =>
+            prev.map((post) =>
+            post.post_id === postId
+                ? { ...post, isBookmarked: !post.isBookmarked }
+                : post
+            )
+        );
+    };
     
         useEffect(() => {
             const mockPosts: Post[] = [
@@ -49,6 +58,7 @@ const MyBooksForm = () => {
                     view_count: 120,
                     like_count: 8,
                     comment_count: 4,
+                    isBookmarked: true,
                 },
                 {
                     post_id: "2",
@@ -59,6 +69,7 @@ const MyBooksForm = () => {
                     view_count: 210,
                     like_count: 15,
                     comment_count: 6,
+                    isBookmarked: false,
                 },
             ];
     
@@ -97,8 +108,25 @@ const MyBooksForm = () => {
                                     key={post.post_id}
                                     className={styles.postItem}
                                     onClick={() => handlePostClick(post.post_id)}
-                                    style={{ cursor: 'pointer' }}
                                 >
+
+                                    <button
+                                    className={styles.bookmarkButton}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        toggleBookmark(post.post_id);
+                                    }}
+                                    >
+                                        <Image
+                                        src={
+                                            post.isBookmarked
+                                            ? "/images/board/bookmark-fill.png"
+                                            : "/images/board/bookmark.png"
+                                        }
+                                        alt='북마크' width={20} height={20}
+                                        />
+                                    </button>
+
                                     <h2 className={styles.postTitle}>{post.title}</h2>
                                     <p className={styles.postContent}>{post.content}</p>
                                     <div className={styles.postMeta}>

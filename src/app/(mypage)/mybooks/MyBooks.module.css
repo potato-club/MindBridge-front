@@ -58,7 +58,8 @@
 
 /* 게시글 카드 */
 .postItem {
-  /* display: flex; */
+  position: relative;
+  display: flex;
   align-content:  column;
   flex-direction: column;
 
@@ -68,7 +69,22 @@
   max-height: 78px;
 
   background-color: #fff;
-  border-line-color: #f2f4f5;
+  border-bottom: #f2f4f5;
+}
+
+.bookmarkButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+
+  top: 2%;
+  right: 2%;
+}
+
+.bookmarkButton img {
+  display: block;
 }
 
 

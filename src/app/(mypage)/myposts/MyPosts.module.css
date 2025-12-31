@@ -58,8 +58,8 @@
 
 /* 게시글 카드 */
 .postItem {
-  /* display: flex; */
-  align-content:  column;
+  position: relative;
+  display: flex;
   flex-direction: column;
 
   width:100%;
@@ -68,8 +68,24 @@
   max-height: 78px;
 
   background-color: #fff;
-  border-line-color: #f2f4f5;
 }
+
+.moreWrapper {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+.moreButton {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 1% 2%;
+
+  color:#abb5bd;
+}
+
 
 
 
@@ -82,8 +98,8 @@
 
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
-  /* margin-bottom: 0.2rem; */
+  color: #212528;
+
   line-height: 1.4;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -99,7 +115,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   /* display: -webkit-box; */
-  -webkit-line-clamp: 1; /* 두 줄까지만 표시 */
+  -webkit-line-clamp: 1; /*  한줄 까지만 표시 */
   -webkit-box-orient: vertical;
 }
 
@@ -135,20 +151,3 @@
   font-size: 0.75rem;
   color: #abb5bd;
 }
-
-/* 반응형
-@media (max-width: 600px) {
-  
-
-  /* .postItem {
-    padding: 1rem;
-  }
-
-  .postTitle {
-    font-size: 1rem;
-  }
-
-  .postContent {
-    font-size: 0.9rem;
-  } 
-} */

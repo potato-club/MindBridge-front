@@ -17,6 +17,7 @@ interface Post {
     view_count: number;
     like_count: number;
     comment_count: number;
+    isLiked: boolean;
 }
 
 const MyLikesForm = () => {
@@ -37,6 +38,17 @@ const MyLikesForm = () => {
     //     fetchMyPosts();
     // }, []);
 
+
+    const toggleLike = (postId: string) => {
+        setPosts((prev) =>
+            prev.map((post) =>
+            post.post_id === postId
+                ? { ...post, isLiked: !post.isLiked }
+                : post
+            )
+        );
+    };
+
         useEffect(() => {
             const mockPosts: Post[] = [
                 {
@@ -48,6 +60,7 @@ const MyLikesForm = () => {
                     view_count: 120,
                     like_count: 8,
                     comment_count: 4,
+                    isLiked: true,
                 },
                 {
                     post_id: "2",
@@ -58,6 +71,7 @@ const MyLikesForm = () => {
                     view_count: 210,
                     like_count: 15,
                     comment_count: 6,
+                    isLiked: false,
                 },
             ];
     
@@ -96,8 +110,10 @@ const MyLikesForm = () => {
                                     key={post.post_id}
                                     className={styles.postItem}
                                     onClick={() => handlePostClick(post.post_id)}
-                                    style={{ cursor: 'pointer' }}
                                 >
+
+
+
                                     <h2 className={styles.postTitle}>{post.title}</h2>
                                     <p className={styles.postContent}>{post.content}</p>
                                     <div className={styles.postMeta}>

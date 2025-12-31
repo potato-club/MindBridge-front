@@ -102,9 +102,38 @@ const MyPostsForm = () => {
                                     onClick={() => handlePostClick(post.post_id)}
                                     style={{ cursor: 'pointer' }}
                                 >
+                                    <div className={styles.moreWrapper}>
+                                        <button
+                                        type="button"
+                                        className={styles.moreButton}
+                                        onClick={(e) =>  {
+                                            e.stopPropagation();
+                                            setPosts(prev =>
+                                                prev.map(p =>
+                                                    p.post_id === post.post_id
+                                                    ? { ...p, openMenu: !p.openMenu }
+                                                    : { ...p, openMenu: false }
+                                                )
+                                            )
+                                        }}
+                                        >
+                                        ⋮
+                                        </button>
+
+                                        {/* {post.openMenu && (
+                                            <div className={styles.moreMenu}>
+                                                <div className={styles.menuItem}>수정하기</div>
+                                                <div className={styles.menuItem}>삭제하기</div>
+                                                <div className={styles.menuItem}>닫기</div>
+                                            </div>
+                                        )} */}
+                                    </div>
+                                    
+
+
                                     <h2 className={styles.postTitle}>{post.title}</h2>
                                     <p className={styles.postContent}>{post.content}</p>
-
+    
                                     <div className={styles.postMeta}>
                                         <span>{post.nickname}</span>
                                         <span>
