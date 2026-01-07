@@ -12,14 +12,11 @@ const MyPageForm = () => {
     const router = useRouter();
 
     const [open, setOpen] = useState(false);
-    const handleWithDraw = async () => {
-        alert("마일리지를 획득해 보세요!");
-        setOpen(false);
-        router.push('/mypage');
-    };
-
+    
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        alert("마일리지를 획득해 보세요.")
+
         setOpen(true);
     };
 
@@ -34,7 +31,12 @@ const MyPageForm = () => {
                         <h2 className={styles.UserName}>홍길동</h2>
                     </div>
 
-                    <div className={styles.UserMileage}>마일리지</div>
+                    <div 
+                    className={styles.UserMileage}
+                    onClick={() => setOpen(true)}
+                    >
+                        마일리지
+                    </div>
 
                     <div className={styles.UserActions}>
                         <div className={styles.UserActionItem}>
@@ -110,8 +112,14 @@ const MyPageForm = () => {
 
                         {/* 🔸 모달 (open === true일 때만 표시) */}
             {open && (
-                <div className={styles.overlay}>
-                    <div className={styles.modal}>
+                <div 
+                className={styles.overlay}
+                // onClick={() => setOpen(false)}
+                >
+                    <div 
+                    className={styles.modal}
+                    // onClick={(e) => e.stopPropagation()}
+                    >
                         <h2>마일리지 획득 방법</h2>
 
                         <h4>1. 채팅 고민 해결 참여</h4>
@@ -129,15 +137,8 @@ const MyPageForm = () => {
                         <div className={styles.buttons}>
                             <button
                                 type="button"
-                                className={styles.cancelBtn}
-                                onClick={() => setOpen(false)}
-                            >
-                                닫기
-                            </button>
-                            <button
-                                type="button"
                                 className={styles.confirmBtn}
-                                onClick={handleWithDraw}
+                                onClick={() => setOpen(false)}
                             >
                                 확인
                             </button>
