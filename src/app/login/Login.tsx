@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import axios from "axios";
-import styles from "./Login.module.css";
 import { useRouter } from "next/navigation";
-
+import * as S from './Login.styles';
 
 
 /* 로그인 폼 */
@@ -73,62 +72,56 @@ const LoginForm = () => {
 
     return (
         <>
-            <header className={styles.header}>로그인</header>
-            <form className={styles.Form} onSubmit={handleSubmit}>
-                <div className={styles.Container}>
+        <S.Container>
+            <S.Header>로그인</S.Header>
+            <S.Form onSubmit={handleSubmit}>
+                <div>
 
                     {/* 어플명 or 로고 + 설명 */}
-                    <div className={styles.LogoAndAppName}>
-                        <h2 className={styles.AppName}>MindBridge</h2>
-                        <p className={styles.AppDescription}>당신의 마음을 이어주는 다리</p>
-                    </div>
+                    <S.LogoAndAppName>
+                        <S.AppName>MindBridge</S.AppName>
+                        <S.AppDescription>당신의 마음을 이어주는 다리</S.AppDescription>
+                    </S.LogoAndAppName>
 
                     {/* 아이디 */}
-                    <div className={styles.UserId}>
-                        <input type="text"
+                    <S.InputWrapper>
+                        <S.Input type="text"
                             value={loginId}
                             onChange={(e) => setLoginId(e.target.value)}
                             placeholder="아이디 입력" 
                         />
-                    </div>
+                    </S.InputWrapper>
 
                     {/* 비밀번호 */}
-                    <div className={styles.UserPassword}>
-                        <input type="password"
+                    <S.InputWrapper>
+                        <S.Input type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="비밀번호 입력" 
                         />
-                    </div> 
-
+                    </S.InputWrapper>
                     
-
                     {/* 로그인 버튼 */}
-                    <div className={styles.LoginButton}>
-                        <button type="submit">
-                            <p className={styles.LoginButtonText}>로그인</p>
-                        </button>
-                    </div> 
+                    <S.LoginButtonWrapper>
+                        <S.LoginButton type="submit">
+                            로그인
+                        </S.LoginButton>
+                    </S.LoginButtonWrapper> 
 
                     {/* 하단 영역 */}
-                    <div className={styles.BtnContainer}>
-                        {/* 아이디/비밀번호 찾기 */}
-                        {/* 페이지 이동 구현 중 */}
-                        <div className={styles.Find}>
-                            <button type="button"
-                            onClick={() => router.push("/find")}> 
-                                아이디/비밀번호 찾기
-                            </button>
-                        </div>
+                    <S.BtnContainer>
+                        <S.TextButton onClick={() => router.push("/find")}>
+                            아이디/비밀번호 찾기
+                        </S.TextButton>
 
-                        {/* 회원가입 */}
-                        <div className={styles.SignUp}>
-                            <button type="button"
-                            onClick={() => router.push("/회원가입 페이지")}>회원가입</button>
-                        </div>
-                    </div>
+                        <S.TextButton onClick={() => router.push("/회원가입 페이지")}>
+                            회원가입
+                        </S.TextButton>
+                    </S.BtnContainer>
+
                 </div>
-            </form>
+            </S.Form>
+        </S.Container>
         </>
     );
 

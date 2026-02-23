@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import axios from "axios";
-import styles from "./PWReset.module.css";
 import { useRouter } from "next/navigation";
+import * as S from "./PWReset.styles";
 
 const PWResetForm = () => {
 
@@ -55,25 +55,24 @@ const PWResetForm = () => {
 
     return (
         <>
-            <header className={styles.header}>
-                <button
+            <S.Header>
+                <S.BackButton
                     type="button"
-                    className={styles.backButton}
                     onClick={() => router.push("/findpw")}
                 >
                     &lt;
-                </button>
+                </S.BackButton>
 
                 <h1><strong>비밀번호 변경</strong></h1>
-            </header>
+            </S.Header>
 
-            <form className={styles.Form} onSubmit={handleSubmit}>
-                <div className={styles.Container}>
+            <S.Form onSubmit={handleSubmit}>
+                <S.Container>
                         {/* 새 비밀번호 */}
 
-                        <div className={styles.Password}>
+                        <S.Password>
                             <p>새 비밀번호</p>
-                            <div className={styles.newPassword}>
+                            <S.NewPassword>
                                 <input 
                                 type="password"
                                 value={newPassword}
@@ -81,49 +80,47 @@ const PWResetForm = () => {
                                 placeholder="새 비밀번호를 입력하세요."
                                 required
                                 />
-                            </div> 
-                        </div>
+                            </S.NewPassword> 
+                        </S.Password>
 
                         {/* 새 비밀번호 확인 */}
-                        <div className={styles.Password}>
+                        <S.Password>
                             <p>새 비밀번호 확인</p>
-                            <div className={styles.PasswordCheck}>
+                            <S.PasswordCheck>
                                 <input 
                                 type="text"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 placeholder="비밀번호를 다시 입력하세요."
                                 />
-                                <button
+                                <S.SendButton
                                 type="submit"
-                                className={styles.sendButton}
                                 // onClick={handleSendCode}
                                 >
                                     변경확인
-                                </button>
-                            </div>
+                                </S.SendButton>
+                            </S.PasswordCheck>
                             {/* 결과 메시지 */}
                             {verifyMessage && (
-                                <p className={styles.VerifyMessage}>{verifyMessage}</p>
+                                <S.VerifyMessage>{verifyMessage}</S.VerifyMessage>
                             )}
-                        </div>
+                        </S.Password>
                     
 
                     
                     
 
                     {/* 확인버튼(로그인 창으로 넘어감.) */}
-                    <button
+                    <S.SubmitButton
                         type="submit"
-                        className={styles.submitButton}
                         onClick={() => router.push("/pwcheck")}
                         disabled={!isFormVaild}
                     >
                         비밀번호 변경
-                    </button>
+                    </S.SubmitButton>
 
-                </div>
-            </form>
+                </S.Container>
+            </S.Form>
         </>
     );
 };

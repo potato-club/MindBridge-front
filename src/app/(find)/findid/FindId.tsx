@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import axios from "axios";
-import styles from "./FindId.module.css";
 import { useRouter } from "next/navigation";
+import * as S from "./FindId.styles";
 
 /* 아이디/비밀번호 찾기 폼 */
 const FindIdForm = () => {
     const [username, setUserName] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [phoneNumber, setUserPhoneNumber] = useState("");
     const [verified, setUserVerified] = useState("");
 
     const [verifyMessage, setVerifyMessage] = useState(""); // 인증 결과 메시지
@@ -92,31 +92,30 @@ const FindIdForm = () => {
 
     return (
         <>
-            <header className={styles.header}>
+            <S.Header>
                 <h1>아이디 찾기 페이지</h1>
-            </header>
-            <form className={styles.Form} onSubmit={handleSubmit}>
-                <div className={styles.Container}>
-                
+            </S.Header>
+            <S.Form onSubmit={handleSubmit}>
+                <S.Container>
                     {/* 이름입력 */}
-                    <div className={styles.User}>
+                    <S.User>
                         <p>이름</p>
-                        <div className={styles.UserName}>
-                            <input 
+                        <S.UserName>
+                            <S.Input 
                                 type="text" 
                                 value={username}
                                 onChange={(e) => setUserName(e.target.value)}
                                 placeholder="이름을 입력해주세요."
                             />
-                        </div>
-                    </div>
+                        </S.UserName>
+                    </S.User>
                         
 
                     {/* 전화번호 + 인증번호 발송 버튼*/}
-                    <div className={styles.User}>
+                    <S.User>
                         <p>전화번호</p>
-                        <div className={styles.UserRow}>
-                            <input 
+                        <S.UserRow>
+                            <S.Input 
                             type="tel"
                             pattern="[0-9]*"
                             inputMode="numeric"
@@ -125,50 +124,48 @@ const FindIdForm = () => {
                             placeholder="휴대폰 번호를 입력해주세요." 
                             
                             />
-                            <button 
+                            <S.SendButton
                             type="button"
-                            className={styles.sendButton}
                             onClick={handleSendCode}
                             >
                                 인증요청
-                            </button>
-                        </div>
-                    </div>
+                            </S.SendButton>
+                        </S.UserRow>
+                    </S.User>
 
                                         {/* 전화번호 + 인증번호 발송 버튼*/}
-                    <div className={styles.User}>
+                    <S.User>
                         <p>인증번호</p>
-                        <div className={styles.UserRow}>
-                            <input 
+                        <S.UserRow>
+                            <S.Input 
                                 type="text"
                                 inputMode="numeric"
                                 value={verified}
                                 onChange={(e) => setUserVerified(e.target.value)}
                                 placeholder="인증번호를 입력해주세요." 
                             />
-                            <button 
+                            <S.SendButton
                             type="button"
-                            className={styles.sendButton}
                             onClick={handleVerifyCode}
                             >
                                 인증확인
-                            </button>
-                        </div>
+                            </S.SendButton>
+                        </S.UserRow>
 
                             {/* 결과 메시지 */}
                         {verifyMessage && (
-                            <p className={styles.VerifyMessage}>{verifyMessage}</p>
+                            <S.VerifyMessage>{verifyMessage}</S.VerifyMessage>
                         )}
-                    </div>    
+                    </S.User>    
 
 
                     
                     {/* 제출 버튼 */}
-                    <button type="submit" className={styles.submitButton}>
+                    <S.SubmitButton>
                         아이디 찾기
-                    </button>
-                </div>
-            </form>
+                    </S.SubmitButton>
+                </S.Container>
+            </S.Form>
         </>
     );
 };

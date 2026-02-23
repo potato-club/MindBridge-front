@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams,useRouter } from "next/navigation";
-import styles from "./IDCheck.module.css";
+import * as S from "./IDCheck.styles";
 
 const IDCheckForm = () => {
   const searchParams = useSearchParams();
@@ -14,16 +14,16 @@ const IDCheckForm = () => {
 
   return (
     <>
-      <header className={styles.header}>
+      <S.Header>
         <h1>아이디 확인</h1>
-      </header>
-      <form className={styles.Form}>
-        <div className={styles.Container}>
+      </S.Header>
+      <S.Form>
+        <S.Container>
           {/* 확인 이미지 삽압 */}
-          <div className={styles.img}>확</div>
+          <S.IMG>확</S.IMG>
 
-          {/* 문구 */}
-          <div className={styles.resultText}>
+          {/* 문구(백엔드 연동 후 style 수정.) */}
+          <S.ResultText>
             {/* {username && userId && (
               <p>
                 {UserName} 님의 아이디는{" "}
@@ -34,20 +34,19 @@ const IDCheckForm = () => {
               미나미 님의 아이디는{" "}
               <strong>모나미</strong> {" "}입니다.
             </p>
-          </div>
+          </S.ResultText>
           
             
           {/* 확인버튼(로그인 창으로 넘어감.) */}
           
-            <button
+            <S.SubmitButton
               type="button"
-              className={styles.submitButton}
               onClick={() => router.push("/login")}
             >
               확인
-            </button>
-        </div>
-      </form>
+            </S.SubmitButton>
+        </S.Container>
+      </S.Form>
     </>
   );
 };

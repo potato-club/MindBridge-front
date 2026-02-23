@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import FindIdForm from "@/app/(find)/findid/FindId";
 import FindPWForm from "@/app/(find)/findpw/FindPW";
-import styles from "./Find.module.css";
+import * as S from "./Find.styles";  
 
 
 
@@ -19,46 +19,48 @@ const FindForm = () => {
 
     return (
         <>
-            <header className={styles.header}>
-                <button
+            <S.Header>
+                <S.BackButton
                     type="button"
-                    className={styles.backButton}
                     // 메인 페이지 연동 후 수정
                     onClick={() => router.push("/Main")}
                 >
                     &lt;
-                </button>
-                <h1><strong>아이디/비밀번호 찾기</strong></h1>
-            </header>
-            <form className={styles.Form}>
-                <div className={styles.Container}>
+                </S.BackButton>
+                <S.HeaderTitle>
+                    <strong>아이디/비밀번호 찾기</strong>
+                </S.HeaderTitle>
+            </S.Header>
+
+            <S.Form>
+                <S.Container>
 
                     {/* 탭 */}
-                    <div className={styles.tabWrapper}>
+                    <S.TabWrapper>
 
-                        <button
+                        <S.Tab
                             type="button"
-                            className={`${styles.tab} ${activeTab === "id" ? styles.active : ""}`}
+                            active={activeTab === "id"}
                             onClick={() => setActiveTab("id")}
                         >
                         아이디 찾기
-                        </button>
+                        </S.Tab>
 
-                        <button
+                        <S.Tab
                             type="button"
-                            className={`${styles.tab} ${activeTab === "password" ? styles.active : ""}`}
+                            active={activeTab === "password"}
                             onClick={() => setActiveTab("password")}
                         >
                         비밀번호 찾기
-                        </button>
-                    </div>
+                        </S.Tab>
+                    </S.TabWrapper>
 
                     {/* 탭 콘텐츠 */}
-                    <div className={styles.contentWrapper}>
+                    <S.ContentWrapper>
                         {activeTab === "id" ? <FindIdForm /> : <FindPWForm />}
-                    </div>
-                </div>
-            </form>
+                    </S.ContentWrapper>
+                </S.Container>
+            </S.Form>
         </>
     );
 };

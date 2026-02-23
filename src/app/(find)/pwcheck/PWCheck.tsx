@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams, useRouter } from "next/navigation";
-import styles from "./PWCheck.module.css";
+import * as S from "./PWCheck.styles";
 
 const PWCheckForm = () => {
     const searchParams = useSearchParams();
@@ -12,17 +12,17 @@ const PWCheckForm = () => {
 
     return (
         <>
-            <header className={styles.header}>
+            <S.Header>
                 <h1>비밀번호</h1>
-            </header>
-            <form className={styles.Form}>    
-                <div className={styles.Container}>
+            </S.Header>
+            <S.Form>    
+                <S.Container>
 
                     {/* 확인 이미지 삽압 */}
-                    <div className={styles.img}>확</div>
+                    <S.IMG>확</S.IMG>
 
                     {/* 문구 */}
-                    <div className={styles.resultText}>
+                    <S.ResulText>
                     {/* {username && (
                         <p className={styles.ResultText}>
                             <strong>{userName}</strong>님의 비밀번호가 {"<br>"}
@@ -33,18 +33,17 @@ const PWCheckForm = () => {
                             미나미 님의 비밀번호가{" "}
                             변경되었습니다.
                         </p>
-                    </div>
+                    </S.ResulText>
 
                     {/* 확인버튼(로그인 창으로 넘어감.) */}
-                    <button
+                    <S.SubmitButton
                         type="button"
-                        className={styles.submitButton}
                         onClick={() => router.push("/login")}
                     >
                         확인
-                    </button>
-                </div>
-            </form>
+                    </S.SubmitButton>
+                </S.Container>
+            </S.Form>
         </>
     );
 };
