@@ -2,9 +2,10 @@
 
 import { useState} from "react";
 import { useRouter } from "next/navigation";
-import styles from "./MyPage.module.css";
+// import styles from "./MyPage.module.css";
 
 import MyBottomForm from "@/app/(mypage)/mybottom/MyBottom";
+import * as S from "./MyPage.styles";
 
 
 
@@ -22,102 +23,95 @@ const MyPageForm = () => {
 
     return (
         <>
-            <header className={styles.header}>마이페이지</header>
-            <form className={styles.Form}>
-                <div className={styles.Container}>
+            <S.Header>마이페이지</S.Header>
+            <S.Form>
+                <S.Container>
 
-                    <div className={styles.UserInfo}>
-                        <p className={styles.UserProfilePic}>프로필사진</p>
-                        <h2 className={styles.UserName}>홍길동</h2>
-                    </div>
+                    <S.UserInfo>
+                        <S.UserProfilePic>프로필사진</S.UserProfilePic>
+                        <S.UserName>홍길동</S.UserName>
+                    </S.UserInfo>
 
-                    <div 
-                    className={styles.UserMileage}
+                    <S.UserMileage
                     onClick={() => setOpen(true)}
                     >
                         마일리지
-                    </div>
+                    </S.UserMileage>
 
-                    <div className={styles.UserActions}>
-                        <div className={styles.UserActionItem}>
+                    <S.UserActions>
+                        <S.UserActionItem>
                             내가 쓴 글
-                            <button
+                            <S.BackButton
                                 type="button"
-                                className={styles.backButton}
                                 onClick = {() => router.push('./myposts')}
 
                             >
                                 &gt;
-                            </button>
-                        </div>
+                            </S.BackButton>
+                        </S.UserActionItem>
 
-                        <div className={styles.UserActionItem}>
+                        <S.UserActionItem>
                             북마크
-                            <button
+                            <S.BackButton
                                 type="button"
-                                className={styles.backButton}
                                 onClick = {() => router.push('./mybooks')}
                             >
                                 &gt;
-                            </button>
-                        </div>
+                            </S.BackButton>
+                        </S.UserActionItem>
                         
-                        <div className={styles.UserActionItem}>
-
+                        <S.UserActionItem>
                             좋아요
-                            <button
+                            <S.BackButton
                                 type="button"
-                                className={styles.backButton}
                                 onClick = {() => router.push('./mylikes')}
                             >
                                 &gt;
-                            </button>
-                        </div>
+                            </S.BackButton>
+                        </S.UserActionItem>
 
-                        <div className={styles.UserActionItem}>
 
+
+                        {/* 알림설정 회의하고 다시 작성 */}
+                        <S.UserActionItem>
                             알림 설정
-                            <button
+                            <S.BackButton
                                 type="button"
-                                className={styles.backButton}
+                                onClick = {() => router.push('./mysettings')}
                             >
                                 &gt;
-                            </button>
-                        </div>
+                            </S.BackButton>
+                        </S.UserActionItem>
                         
-                        <div className={styles.UserActionItem}>
-
+                        <S.UserActionItem>
                             회원 탈퇴
-                            <button
+                            <S.BackButton           
                                 type="button"
-                                className={styles.backButton}
                                 onClick = {() => router.push('./mydelete')}
                             >
                                 &gt;
-                            </button>                        
-                        </div>
+                            </S.BackButton>                        
+                        </S.UserActionItem>
 
-                        <div className={styles.Logout}>
+                        <S.Logout>
                             로그아웃
                             
-                        </div>
-                    </div>
+                        </S.Logout>
+                    </S.UserActions>
 
-                    <div className={styles.myBottom}>
+                    <S.MyBottomContainer>
                         {<MyBottomForm />}
-                    </div>
-                </div>
-            </form>
+                    </S.MyBottomContainer>
+                </S.Container>
+            </S.Form>
 
 
                         {/* 🔸 모달 (open === true일 때만 표시) */}
             {open && (
-                <div 
-                className={styles.overlay}
+                <S.Overlay
                 // onClick={() => setOpen(false)}
                 >
-                    <div 
-                    className={styles.modal}
+                    <S.Model
                     // onClick={(e) => e.stopPropagation()}
                     >
                         <h2>마일리지 획득 방법</h2>
@@ -134,17 +128,16 @@ const MyPageForm = () => {
                         <h4>4. 하루 한 번 랜덤 돌리기</h4>
                         <p>---------</p>
 
-                        <div className={styles.buttons}>
-                            <button
+                        <S.Buttons>
+                            <S.ComfirmButton
                                 type="button"
-                                className={styles.confirmBtn}
                                 onClick={() => setOpen(false)}
                             >
                                 확인
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                            </S.ComfirmButton>
+                        </S.Buttons>
+                    </S.Model>
+                </S.Overlay>
             )}
         </>
 

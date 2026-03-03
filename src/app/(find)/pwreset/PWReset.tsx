@@ -73,11 +73,11 @@ const PWResetForm = () => {
                         <S.Password>
                             <p>새 비밀번호</p>
                             <S.NewPassword>
-                                <input 
+                                <S.Input 
                                 type="password"
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
-                                placeholder="새 비밀번호를 입력하세요."
+                                placeholder="새 비밀번호를 입력해주세요."
                                 required
                                 />
                             </S.NewPassword> 
@@ -87,11 +87,11 @@ const PWResetForm = () => {
                         <S.Password>
                             <p>새 비밀번호 확인</p>
                             <S.PasswordCheck>
-                                <input 
+                                <S.Input 
                                 type="text"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
-                                placeholder="비밀번호를 다시 입력하세요."
+                                placeholder="새 비밀번호를 다시 입력해주세요."
                                 />
                                 <S.SendButton
                                 type="submit"

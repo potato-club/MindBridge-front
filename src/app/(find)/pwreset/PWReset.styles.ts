@@ -36,6 +36,8 @@ export const BackButton = styled.button`
 
 export const Form = styled.form`
     width: 100%;
+    display: flex;
+    justify-content: center;
 `;
 
 export const Container = styled.div`
@@ -69,30 +71,14 @@ export const Password = styled.div`
     gap: 0.5rem;
     
     color: #343a3f;
-    
-    input {
-        flex: 1;
-        width: 100%;
-        padding: 0.75rem;
-        background-color: #f8fafb;
-        font-size: 0.95rem;
-        color: #666e76;
-        border: 1px solid transparent;
-        border-radius: 12px;
-        outline: none;
-        box-sizing: border-box;
-        
-        &:hover {
-            border-color:#000000;
-        }
-    }
+
 `;
 
 /* 새 비밀번호 input wrapper */
 export const NewPassword = styled.div`
-    displat: flex;
+    display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     
     width: 100%;
     height: 47px;
@@ -115,6 +101,25 @@ export const PasswordCheck = styled.div`
     border-radius: 12px;
     box-sizing: border-box;
 `;
+
+export const Input = styled.input`
+    flex: 1;
+    padding: 0.75rem;
+    background-color: #f8fafb;
+    font-size: 0.95rem;
+    
+    color: #666e76;
+    
+    border: 1px solid transparent;
+    border-radius: 12px;
+    outline: none;
+    box-sizing: border-box;
+    
+    &:hover {
+        border-color: #000000;
+    }
+`;
+
 
 export const SendButton = styled.button`
     width: 98px;

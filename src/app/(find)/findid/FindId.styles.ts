@@ -44,25 +44,6 @@ export const User = styled.div`
     color: #343a3f;
 `;
 
-export const Input = styled.input`
-    flex: 1;
-    padding: 0.75rem;
-    background-color: #f8fafb;
-    font-size: 0.95rem;
-
-    color: #666e76;
-
-    border: 1px solid transparent;
-    border-radius: 12px;
-    outline: none;
-    box-sizing: border-box;
-    
-    &:hover {
-        border-color: #000000;
-    }
-
-`;
-
 export const UserName = styled.div`
     display: flex;
     align-items: center;
@@ -89,6 +70,29 @@ export const UserRow = styled.div`
     border-radius: 12px;
     box-sizing: border-box;
 `;
+
+export const Input = styled.input`
+    flex: 1;
+    padding: 0.75rem;
+    background-color: #f8fafb;
+    font-size: 0.95rem;
+
+    color: #666e76;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+    outline: none;
+    box-sizing: border-box;
+    
+    &:hover {
+        border-color: #000000;
+    }
+
+`;
+
+
+
+
 
 /* SendButton 이걸로 통일 */
 export const SendButton = styled.button`

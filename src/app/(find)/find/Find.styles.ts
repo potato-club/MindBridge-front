@@ -41,7 +41,7 @@ export const Form = styled.form`
 export const Container = styled.div`
     postion: relative;
     width: 100%;
-    max-width: min(90vw, 420px);
+    max-width: min(90vw, 430px);
     margin: 0 auto;
     padding: 4vw;
     box-sizing: border-box;
