@@ -4,8 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./MyPosts.module.css";
-
+import * as S from "./MyPosts.styles";
 import MyBottomForm from "../mybottom/page";
 
 interface Post {
@@ -17,6 +16,7 @@ interface Post {
     view_count: number;
     like_count: number;
     comment_count: number;
+    openMenu?: boolean;
 }
 
 const MyPostsForm = () => {
@@ -24,6 +24,16 @@ const MyPostsForm = () => {
     const router = useRouter();
     const [posts, setPosts] = useState<Post[]>([]);
 
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+
+        return `${month}.${day}`;
+    };
+
+    // API 호출 (나중에 사용)
     // useEffect(() => {
     //     const fetchMYPosts = async () =>{
     //         try {
@@ -43,11 +53,11 @@ const MyPostsForm = () => {
         const mockPosts: Post[] = [
             {
                 post_id: "1",
-                title: "프로젝트가 너무 어려어요",
-                content: "지금 하는 프로젝트가 너무 어려워요.",
+                title: "프로젝트가 너무 어려워요",
+                content: "지금 하는 프로젝트가 너무 어려워요ㅜㅜㅜㅜㅜ",
                 created_at: "02-01",
                 nickname:"",
-                view_count: 120,
+                view_count: 1,
                 like_count: 8,
                 comment_count: 4,
             },
@@ -75,37 +85,36 @@ const MyPostsForm = () => {
 
     return (
         <>
-            <form className={styles.Form}>
+            <S.Form>
                 
-            <header className={styles.header}>
-                <button
+            <S.Header>
+                <S.BackButton
                 type="button"
-                className={styles.backButton}
                 onClick={() => router.push("/mypage")}
                 >
                     &lt;
-                </button>
-                <h1><strong>내가 쓴 글</strong></h1>
-            </header>
+                </S.BackButton>
+                    <S.HeaderTitle>
+                        <strong>내가 쓴 글</strong>
+                    </S.HeaderTitle>
+            </S.Header>
 
-                <div className={styles.Container}>
+                <S.Container>
                     {/* 내가 쓴 글 목록이 여기에 표시됩니다. */}
 
-                    <div className={styles.PostsList}>
+                    <S.PostsList>
 
                         {displayPosts.length > 0 ? (
                             displayPosts.map((post) => (
 
-                                <div
+                                <S.PostItem
                                     key={post.post_id}
-                                    className={styles.postItem}
                                     onClick={() => handlePostClick(post.post_id)}
-                                    style={{ cursor: 'pointer' }}
+                                    style={{ cursor: "pointer" }}
                                 >
-                                    <div className={styles.moreWrapper}>
-                                        <button
+                                    <S.MoreWrapper>
+                                        <S.MoreButton
                                         type="button"
-                                        className={styles.moreButton}
                                         onClick={(e) =>  {
                                             e.stopPropagation();
                                             setPosts(prev =>
@@ -118,7 +127,8 @@ const MyPostsForm = () => {
                                         }}
                                         >
                                         ⋮
-                                        </button>
+                                        
+                                        </S.MoreButton>
 
                                         {/* {post.openMenu && (
                                             <div className={styles.moreMenu}>
@@ -127,22 +137,26 @@ const MyPostsForm = () => {
                                                 <div className={styles.menuItem}>닫기</div>
                                             </div>
                                         )} */}
-                                    </div>
+                                    </S.MoreWrapper>
                                     
 
 
-                                    <h2 className={styles.postTitle}>{post.title}</h2>
-                                    <p className={styles.postContent}>{post.content}</p>
+                                    <S.PostTitle>
+                                        {post.title}
+                                    </S.PostTitle>
+                                    
+                                    <S.PostContent>
+                                        {post.content}
+                                    </S.PostContent>
     
-                                    <div className={styles.postMeta}>
-                                        <span>{post.nickname}</span>
+                                    <S.PostMeta>
+
+                                        {/* 날짜 */}
                                         <span>
-                                            {new Date(post.created_at)
-                                            .toLocaleDateString('ko-KR')
-                                            .slice(0, -1)}
+                                            {formatDate(post.created_at)}
                                         </span>
 
-                                        <div className={styles.postStats}>
+                                        <S.PostStats>
 
                                             <Image src="/images/board/show.png" alt="" width={16} height={8}/> 
                                             <p>{post.view_count}</p>
@@ -152,20 +166,21 @@ const MyPostsForm = () => {
 
                                             <Image src="/images/board/comment.png" alt="" width={16} height={8}/> 
                                             <p>{post.comment_count}</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                        </S.PostStats>
+                                    </S.PostMeta>
+                                </S.PostItem>
+
                             ))
                         ) : (
                             <p>작성한 글이 없습니다.</p>
                         )}
-                    </div>
+                    </S.PostsList>
 
-                    <div className={styles.myBottom}>
+                    {/* <div className={styles.myBottom}>
                         {<MyBottomForm />}
-                    </div>
-                </div>
-            </form>
+                    </div> */}
+                </S.Container>
+            </S.Form>
         </>
     );
 };

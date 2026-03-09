@@ -4,6 +4,12 @@ export const Header = styled.header`
     display: none;
 `;
 
+export const Form = styled.form`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -12,7 +18,6 @@ export const Container = styled.div`
     
     width: 100%;
     padding: 4vw;
-    border-radius: 30px;
     background-color: #ffffff;
     font-family: 'Noto Sans KR', sans-serif;
 
@@ -22,44 +27,98 @@ export const Container = styled.div`
 
 export const UserInfo = styled.div`
     display: flex;
-    flex-direrction: column;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    margin: 10% ;
     color: #212528;
 `;
 
 export const UserProfilePic = styled.div`
-    width: 40%;
-    height: 40%;
-    border-radius: 50%;
-    background-color: #ddd;
-
     display: flex;
     justify-content: center;
     align-items: center;
 
-    font-size: 14px;
-    margin-bottom: 10px;
+    width: 100%;
+    max-width: 124px;
+    height: 100%;
+    max-height: 124px;
+    margin-bottom: 30%;
+
+    border-radius: 50%;
+    background-color: #ddd;
+
+    font-size: 80px;
 `;
 
-export const UserName = styled.h2`
-    font-size: 1rem;
-    font-weight: bold;
+export const UserName = styled.button`
+    font-size: 1.3rem;
+    font-weight: 600;
 `;
 
 export const UserMileage = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     width: 100%;
     max-width: 363px;
     height: 100%;
     max-height: 81.08px;
 
-    padding: 81.08px;
     background-color: #6868d5;
-    padding: 12px;
+    padding: 4% 4%; 
+    margin: 2% 2%;
     margin-bottom: 5%;
 
     border-radius: 12px;
-    text-align: center;
+
+    cursor: pointer;
+`;
+
+export const MileageItem = styled.div`
+    display: flex;  
+    flex-direction: column;
+`;
+
+export const MileageText = styled.span`
+    width: 100%;
+    max-width: 48px;
+    color: #fff;
+    font-size: 0.8rem;
+    margin-left: 2%;
+`;
+
+export const MileagePoint = styled.h1`
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    margin-left: 2%;
+
+`;
+
+export const MileageIcon = styled.div`
+    display: flex;  
+    align-items: center;
+`;
+
+export const MileageButton = styled.button`
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    background: none;
+    border: none;
+    color: #ced4db;
+    cursor: pointer;
 `;
 
 export const UserActions = styled.div`
@@ -80,16 +139,18 @@ export const UserActionItem = styled.div`
     color: #212538;
     background-color: #fff;
 
-    padding: 12px 16px;
+    padding: 4% 2%;
+    margin-left: 2%;
+    margin-right: 2%;
     font-size: 16px;
-    font-weight: 550;
+    font-weight: 575;
     cursor: pointer;
 
     transition: background-color 0.1s ease;
 `;
 
 export const BackButton = styled.button`
-    display: display;
+    display: flex;
     align-items: center;
     justify-content: center;
 
@@ -97,9 +158,9 @@ export const BackButton = styled.button`
     height: 24px;
 
     font-size: 22px;
-    font-weight: bold;
+    font-weight: 500;
 
-    backgropund: none;
+    background: none;
     border: none;
     color: #ced4db;
     cursor: pointer;
@@ -107,16 +168,18 @@ export const BackButton = styled.button`
 
 export const Logout = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     
     color: #212528;
-    font-weight: 550;
-    font-size: 16px;
-    
     background-color: #fff;
-    padding: 12px 16px;
-    border-radius: 8px;
+
+    padding: 4% 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    font-size: 16px;
+    font-weight: 575;
     cursor: pointer;
 
     transition: background-color 0.1s ease;
@@ -140,50 +203,58 @@ export const Overlay =  styled.div`
     z-index: 999;
 `;
 
-export const Model = styled.div`
+export const Modal = styled.div`
     background-color: #fff;
-    padding: 30px 25px;
+    padding: 30px 30px;
     
-    border-radius: 16px;
+    border-radius: 12px;
     width: 100%;
     max-width: 300px;
     height: 100%;
     max-height: 393px;
     
-    text-align: center;
+    
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 `;
 
 export const ModalTitle = styled.h2`
+    text-align: center;
+
     font-size: 1rem;
     font-weight: 700;
-    color: #495157;
+    color: #212528;
     margin-bottom: 5%;
 `;
 
-export const ModelText = styled.p`
-    font-size: 0.8rem;
-    color: #848c95;
-    margin-bottom: 10%;
+export const ModalSubtitle = styled.h4`
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #495157;
 `;
 
-export const Buttons = styled.button`
-    display: flex;
-    justify-content: center;
+
+export const ModalText = styled.p`
+    font-size: 0.8rem;
+    color: #848c95;
+    margin-bottom: 4%;
 `;
 
 export const ComfirmButton = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap-top: 10%;
     border-radius: 12px;
-    width: 50%;
+    width: 100%;
     max-width: 262px;
     height: 100%;
     max-height: 50px;
 
+
     background-color: #6868d5;
     color: #fff;
-    font-size: 1rem;
-
-    margin-left: 2%;
+    font-size: 0.85rem;
     border: none;
     cursor: pointer;
 

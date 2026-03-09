@@ -8,6 +8,12 @@ export const Header = styled.header`
     margin-bottom: 24px;
 `;
 
+export const HeaderTitle = styled.h1`
+    font-size: 1rem;
+    color: #1a1e20;
+    margin: 0;
+`;
+
 export const BackButton = styled.button`
     position: absolute;
     top: calc(env(safe-area-inset-top, 0px) + 16px);
@@ -28,11 +34,7 @@ export const BackButton = styled.button`
     cursor: poionter;
 `;
 
-export const HeaderTitle = styled.h1`
-    font-size: 1rem;
-    color: #1a1e20;
-    margin: 0;
-`;
+
 
 export const Form = styled.form`
     width: 100%;
